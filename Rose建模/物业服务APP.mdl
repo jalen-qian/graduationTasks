@@ -2430,11 +2430,1562 @@
 	global     	TRUE
 	subsystem  	"Component View"
 	quidu      	"58F888E60353"
-	logical_models 	(list unit_reference_list)
+	logical_models 	(list unit_reference_list
+	    (object Class "APP用户"
+		quid       	"58F9B43A00C7"
+		stereotype 	"Actor")
+	    (object Mechanism @112
+		logical_models 	(list unit_reference_list
+		    (object Object "$UNNAMED$33"
+			quid       	"58F9B45C02B2"
+			collaborators 	(list link_list
+			    (object Link
+				quid       	"58F9B596028C"
+				supplier   	"APP首页"
+				quidu      	"58F9B584007E"
+				messages   	(list Messages
+				    (object Message "消息"
+					quid       	"58F9B5960297"
+					frequency  	"Aperiodic"
+					synchronization 	"Simple"
+					dir        	"FromClientToSupplier"
+					sequence   	"1"
+					ordinal    	0
+					quidu      	"000000000000"
+					creation   	FALSE)
+				    (object Message "注册成功"
+					quid       	"58F9B95C0132"
+					frequency  	"Aperiodic"
+					synchronization 	"Return"
+					dir        	"ToClientFromSupplier"
+					sequence   	"2.1"
+					ordinal    	5
+					quidu      	"000000000000"
+					creation   	FALSE))))
+			class      	"Logical View::APP用户"
+			quidu      	"58F9B43A00C7"
+			persistence 	"Transient"
+			creationObj 	TRUE
+			multi      	FALSE)
+		    (object Object "APP首页"
+			quid       	"58F9B584007E"
+			collaborators 	(list link_list
+			    (object Link
+				quid       	"58F9B78901CF"
+				supplier   	"输入注册信息"
+				quidu      	"58F9B70801A6"
+				messages   	(list Messages
+				    (object Message "注册信息"
+					quid       	"58F9B78901D0"
+					frequency  	"Aperiodic"
+					synchronization 	"Simple"
+					dir        	"FromClientToSupplier"
+					sequence   	"1.1"
+					ordinal    	1
+					quidu      	"000000000000"
+					creation   	FALSE))))
+			persistence 	"Transient"
+			creationObj 	FALSE
+			multi      	FALSE)
+		    (object Object "输入注册信息"
+			quid       	"58F9B70801A6"
+			collaborators 	(list link_list
+			    (object Link
+				quid       	"58F9B8D3004B"
+				supplier   	"后台验证"
+				quidu      	"58F9B89C00DB"
+				messages   	(list Messages
+				    (object Message "提交信息"
+					quid       	"58F9B8D3004C"
+					frequency  	"Aperiodic"
+					synchronization 	"Simple"
+					dir        	"FromClientToSupplier"
+					sequence   	"1.1.1"
+					ordinal    	2
+					quidu      	"000000000000"
+					creation   	FALSE))))
+			persistence 	"Transient"
+			creationObj 	FALSE
+			multi      	FALSE)
+		    (object Object "后台验证"
+			quid       	"58F9B89C00DB"
+			collaborators 	(list link_list
+			    (object Link
+				quid       	"58F9B91B01DB"
+				supplier   	"MySql数据库"
+				quidu      	"58F9B90201BF"
+				messages   	(list Messages
+				    (object Message "存储"
+					quid       	"58F9B91B01DC"
+					frequency  	"Aperiodic"
+					synchronization 	"Simple"
+					dir        	"FromClientToSupplier"
+					sequence   	"1.1.1.1"
+					ordinal    	3
+					quidu      	"000000000000"
+					creation   	FALSE))))
+			persistence 	"Transient"
+			creationObj 	FALSE
+			multi      	FALSE)
+		    (object Object "MySql数据库"
+			quid       	"58F9B90201BF"
+			collaborators 	(list link_list
+			    (object Link
+				quid       	"58F9B9460133"
+				supplier   	"APP首页"
+				quidu      	"58F9B584007E"
+				messages   	(list Messages
+				    (object Message "注册成功"
+					quid       	"58F9B9460134"
+					frequency  	"Aperiodic"
+					synchronization 	"Return"
+					dir        	"FromClientToSupplier"
+					sequence   	"2"
+					ordinal    	4
+					quidu      	"000000000000"
+					creation   	FALSE))))
+			persistence 	"Transient"
+			creationObj 	FALSE
+			multi      	FALSE)))
+	    (object Mechanism @113
+		logical_models 	(list unit_reference_list
+		    (object Object "APP首页"
+			quid       	"58F9BE8A02AA"
+			collaborators 	(list link_list
+			    (object Link
+				quid       	"58F9BF0901C3"
+				supplier   	"服务端验证"
+				quidu      	"58F9BEA100CB"
+				messages   	(list Messages
+				    (object Message "用户登录信息"
+					quid       	"58F9BF0901C4"
+					frequency  	"Aperiodic"
+					synchronization 	"Simple"
+					dir        	"FromClientToSupplier"
+					sequence   	"1.1"
+					ordinal    	1
+					quidu      	"000000000000"
+					creation   	FALSE)
+				    (object Message "登录信息有效"
+					quid       	"58F9BF50012A"
+					frequency  	"Aperiodic"
+					synchronization 	"Return"
+					dir        	"ToClientFromSupplier"
+					sequence   	"1.1.2"
+					ordinal    	4
+					quidu      	"000000000000"
+					creation   	FALSE)))
+			    (object Link
+				quid       	"58F9BF830062"
+				supplier   	"报修页面"
+				quidu      	"58F9BE9600F2"
+				messages   	(list Messages
+				    (object Message "点击报修"
+					quid       	"58F9BF830063"
+					frequency  	"Aperiodic"
+					synchronization 	"Simple"
+					dir        	"FromClientToSupplier"
+					sequence   	"2"
+					ordinal    	5
+					quidu      	"000000000000"
+					creation   	FALSE))))
+			persistence 	"Transient"
+			creationObj 	FALSE
+			multi      	FALSE)
+		    (object Object "报修页面"
+			quid       	"58F9BE9600F2"
+			collaborators 	(list link_list
+			    (object Link
+				quid       	"58F9BF9A03C9"
+				supplier   	"服务端验证"
+				quidu      	"58F9BEA100CB"
+				messages   	(list Messages
+				    (object Message "填入报修信息"
+					quid       	"58F9BF9A03CA"
+					frequency  	"Aperiodic"
+					synchronization 	"Simple"
+					dir        	"FromClientToSupplier"
+					sequence   	"2.1"
+					ordinal    	6
+					quidu      	"000000000000"
+					creation   	FALSE)
+				    (object Message "报修成功"
+					quid       	"58F9BFD90009"
+					frequency  	"Aperiodic"
+					synchronization 	"Return"
+					dir        	"ToClientFromSupplier"
+					sequence   	"2.1.2"
+					ordinal    	9
+					quidu      	"000000000000"
+					creation   	FALSE)))
+			    (object Link
+				quid       	"58F9BFEA008A"
+				supplier   	"$UNNAMED$34"
+				quidu      	"58F9BE82039A"
+				messages   	(list Messages
+				    (object Message "报修成功"
+					quid       	"58F9BFEA008B"
+					frequency  	"Aperiodic"
+					synchronization 	"Return"
+					dir        	"FromClientToSupplier"
+					sequence   	"2.2"
+					ordinal    	10
+					quidu      	"000000000000"
+					creation   	FALSE))))
+			persistence 	"Transient"
+			creationObj 	FALSE
+			multi      	FALSE)
+		    (object Object "服务端验证"
+			quid       	"58F9BEA100CB"
+			collaborators 	(list link_list
+			    (object Link
+				quid       	"58F9BF20029B"
+				supplier   	"MySql数据库"
+				quidu      	"58F9BEAB037B"
+				messages   	(list Messages
+				    (object Message "存储"
+					quid       	"58F9BFAC0311"
+					frequency  	"Aperiodic"
+					synchronization 	"Simple"
+					dir        	"FromClientToSupplier"
+					sequence   	"2.1.1"
+					ordinal    	7
+					quidu      	"000000000000"
+					creation   	FALSE)
+				    (object Message "存储成功"
+					quid       	"58F9BFC60080"
+					frequency  	"Aperiodic"
+					synchronization 	"Return"
+					dir        	"ToClientFromSupplier"
+					sequence   	"2.1.1.1"
+					ordinal    	8
+					quidu      	"000000000000"
+					creation   	FALSE)
+				    (object Message "验证数据库"
+					quid       	"58F9BF20029C"
+					frequency  	"Aperiodic"
+					synchronization 	"Simple"
+					dir        	"FromClientToSupplier"
+					sequence   	"1.1.1"
+					ordinal    	2
+					quidu      	"000000000000"
+					creation   	FALSE)
+				    (object Message "信息正确"
+					quid       	"58F9BF3C03A3"
+					frequency  	"Aperiodic"
+					synchronization 	"Return"
+					dir        	"ToClientFromSupplier"
+					sequence   	"1.1.1.1"
+					ordinal    	3
+					quidu      	"000000000000"
+					creation   	FALSE))))
+			persistence 	"Transient"
+			creationObj 	FALSE
+			multi      	FALSE)
+		    (object Object "MySql数据库"
+			quid       	"58F9BEAB037B"
+			persistence 	"Transient"
+			creationObj 	FALSE
+			multi      	FALSE)
+		    (object Object "$UNNAMED$34"
+			quid       	"58F9BE82039A"
+			collaborators 	(list link_list
+			    (object Link
+				quid       	"58F9BECB013C"
+				supplier   	"APP首页"
+				quidu      	"58F9BE8A02AA"
+				messages   	(list Messages
+				    (object Message "消息1"
+					quid       	"58F9BECB013D"
+					frequency  	"Aperiodic"
+					synchronization 	"Simple"
+					dir        	"FromClientToSupplier"
+					sequence   	"1"
+					ordinal    	0
+					quidu      	"000000000000"
+					creation   	FALSE))))
+			class      	"Logical View::APP用户"
+			quidu      	"58F9B43A00C7"
+			persistence 	"Transient"
+			creationObj 	TRUE
+			multi      	FALSE)))
+	    (object Mechanism @114
+		logical_models 	(list unit_reference_list)))
 	logical_presentations 	(list unit_reference_list
 	    (object ClassDiagram "Main"
 		quid       	"58F888E60358"
 		title      	"Main"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list
+		    (object ClassView "Class" "Logical View::APP用户" @115
+			ShowCompartmentStereotypes 	TRUE
+			location   	(270, 120)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@115
+			    location   	(270, 280)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	343
+			    justify    	0
+			    label      	"APP用户")
+			icon       	"Actor"
+			icon_style 	"Icon"
+			line_color 	3342489
+			quidu      	"58F9B43A00C7"
+			annotation 	8
+			autoResize 	TRUE)))
+	    (object ClassDiagram "APP类图"
+		quid       	"58F9B3D9007F"
+		title      	"APP类图"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list
+		    (object ClassView "Class" "Logical View::APP用户" @116
+			ShowCompartmentStereotypes 	TRUE
+			location   	(422, 338)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@116
+			    location   	(422, 498)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	351
+			    justify    	0
+			    label      	"APP用户")
+			icon       	"Actor"
+			icon_style 	"Icon"
+			line_color 	3342489
+			quidu      	"58F9B43A00C7"
+			annotation 	8
+			autoResize 	TRUE)))
+	    (object InteractionDiagram "注册时序图"
+		mechanism_ref 	@112
+		quid       	"58F9B34D00B8"
+		title      	"注册时序图"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	0
+		items      	(list diagram_item_list
+		    (object InterObjView "$UNNAMED$33" @117
+			location   	(379, 303)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	TRUE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@117
+			    location   	(379, 328)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	324
+			    justify    	0
+			    label      	"")
+			icon       	"Actor"
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"58F9B45C02B2"
+			width      	300
+			height     	870
+			icon_height 	150
+			icon_width 	108
+			icon_y_offset 	0
+			annotation 	1
+			Focus_Of_Control 	(object Focus_Of_Control "" @118
+			    location   	(379, 383)
+			    line_color 	3342489
+			    InterObjView 	@117
+			    height     	113
+			    y_coord    	23
+			    Nested     	FALSE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @119
+			    location   	(379, 983)
+			    line_color 	3342489
+			    InterObjView 	@117
+			    height     	90
+			    y_coord    	0
+			    Nested     	FALSE))
+		    (object InterObjView "APP首页" @120
+			location   	(1013, 225)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	TRUE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@120
+			    location   	(1013, 225)
+			    fill_color 	13434879
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	282
+			    justify    	0
+			    label      	"APP首页")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"58F9B584007E"
+			width      	300
+			height     	948
+			icon_height 	0
+			icon_width 	0
+			icon_y_offset 	0
+			annotation 	1
+			Focus_Of_Control 	(object Focus_Of_Control "" @121
+			    location   	(1013, 406)
+			    line_color 	3342489
+			    InterObjView 	@120
+			    height     	195
+			    y_coord    	105
+			    Nested     	FALSE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @122
+			    location   	(1013, 878)
+			    line_color 	3342489
+			    InterObjView 	@120
+			    height     	105
+			    y_coord    	15
+			    Nested     	FALSE))
+		    (object InterObjView "输入注册信息" @123
+			location   	(1600, 225)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	TRUE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@123
+			    location   	(1600, 225)
+			    fill_color 	13434879
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	282
+			    justify    	0
+			    label      	"输入注册信息")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"58F9B70801A6"
+			width      	300
+			height     	948
+			icon_height 	0
+			icon_width 	0
+			icon_y_offset 	0
+			annotation 	1
+			Focus_Of_Control 	(object Focus_Of_Control "" @124
+			    location   	(1600, 511)
+			    line_color 	3342489
+			    InterObjView 	@123
+			    height     	195
+			    y_coord    	105
+			    Nested     	FALSE))
+		    (object InterObjView "后台验证" @125
+			location   	(2003, 225)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	TRUE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@125
+			    location   	(2003, 225)
+			    fill_color 	13434879
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	282
+			    justify    	0
+			    label      	"后台验证")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"58F9B89C00DB"
+			width      	300
+			height     	948
+			icon_height 	0
+			icon_width 	0
+			icon_y_offset 	0
+			annotation 	1
+			Focus_Of_Control 	(object Focus_Of_Control "" @126
+			    location   	(2003, 616)
+			    line_color 	3342489
+			    InterObjView 	@125
+			    height     	195
+			    y_coord    	105
+			    Nested     	FALSE))
+		    (object InterObjView "MySql数据库" @127
+			location   	(2550, 225)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	TRUE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@127
+			    location   	(2550, 225)
+			    fill_color 	13434879
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	282
+			    justify    	0
+			    label      	"MySql数据库")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"58F9B90201BF"
+			width      	300
+			height     	948
+			icon_height 	0
+			icon_width 	0
+			icon_y_offset 	0
+			annotation 	1
+			Focus_Of_Control 	(object Focus_Of_Control "" @128
+			    location   	(2550, 721)
+			    line_color 	3342489
+			    InterObjView 	@127
+			    height     	90
+			    y_coord    	0
+			    Nested     	FALSE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @129
+			    location   	(2550, 878)
+			    line_color 	3342489
+			    InterObjView 	@127
+			    height     	205
+			    y_coord    	115
+			    Nested     	FALSE))
+		    (object InterMessView "消息" @130
+			location   	(0, 406)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @131
+			    Parent_View 	@130
+			    location   	(695, 362)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9B5960297"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	185
+			    justify    	0
+			    label      	"消息"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	0)
+			line_color 	3342489
+			client     	@117
+			supplier   	@120
+			Focus_Src  	@118
+			Focus_Entry 	@121
+			origin     	(394, 406)
+			terminus   	(997, 406)
+			ordinal    	0)
+		    (object InterMessView "注册信息" @132
+			location   	(0, 511)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @133
+			    Parent_View 	@132
+			    location   	(1306, 467)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9B78901D0"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	275
+			    justify    	0
+			    label      	"注册信息"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	0)
+			line_color 	3342489
+			client     	@120
+			supplier   	@123
+			Focus_Src  	@121
+			Focus_Entry 	@124
+			origin     	(1028, 511)
+			terminus   	(1584, 511)
+			ordinal    	1)
+		    (object InterMessView "提交信息" @134
+			location   	(0, 616)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @135
+			    Parent_View 	@134
+			    location   	(1801, 572)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9B8D3004C"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	285
+			    justify    	0
+			    label      	"提交信息"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	0)
+			line_color 	3342489
+			client     	@123
+			supplier   	@125
+			Focus_Src  	@124
+			Focus_Entry 	@126
+			origin     	(1615, 616)
+			terminus   	(1987, 616)
+			ordinal    	2)
+		    (object InterMessView "存储" @136
+			location   	(0, 721)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @137
+			    Parent_View 	@136
+			    location   	(2276, 677)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9B91B01DC"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	185
+			    justify    	0
+			    label      	"存储"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	0)
+			line_color 	3342489
+			client     	@125
+			supplier   	@127
+			Focus_Src  	@126
+			Focus_Entry 	@128
+			origin     	(2018, 721)
+			terminus   	(2534, 721)
+			ordinal    	3)
+		    (object InterMessView "注册成功" @138
+			location   	(0, 878)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @139
+			    Parent_View 	@138
+			    location   	(1782, 834)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9B9460134"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	285
+			    justify    	0
+			    label      	"注册成功"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	1)
+			line_color 	3342489
+			client     	@127
+			supplier   	@120
+			Focus_Src  	@129
+			Focus_Entry 	@122
+			origin     	(2534, 878)
+			terminus   	(1029, 878)
+			ordinal    	4)
+		    (object InterMessView "注册成功" @140
+			location   	(0, 983)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @141
+			    Parent_View 	@140
+			    location   	(696, 939)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9B95C0132"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	285
+			    justify    	0
+			    label      	"注册成功"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	1)
+			line_color 	3342489
+			client     	@120
+			supplier   	@117
+			Focus_Src  	@122
+			Focus_Entry 	@119
+			origin     	(997, 983)
+			terminus   	(395, 983)
+			ordinal    	5)))
+	    (object InteractionDiagram "用户报修时序图"
+		mechanism_ref 	@113
+		quid       	"58F9BE72035A"
+		title      	"用户报修时序图"
+		zoom       	100
+		max_height 	28350
+		max_width  	21600
+		origin_x   	0
+		origin_y   	1369
+		items      	(list diagram_item_list
+		    (object InterObjView "APP首页" @142
+			location   	(828, 225)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	TRUE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@142
+			    location   	(828, 225)
+			    fill_color 	13434879
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	282
+			    justify    	0
+			    label      	"APP首页")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"58F9BE8A02AA"
+			width      	300
+			height     	1774
+			icon_height 	0
+			icon_width 	0
+			icon_y_offset 	0
+			annotation 	1
+			Focus_Of_Control 	(object Focus_Of_Control "" @143
+			    location   	(828, 561)
+			    line_color 	3342489
+			    InterObjView 	@142
+			    height     	564
+			    y_coord    	474
+			    Nested     	FALSE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @144
+			    location   	(828, 1025)
+			    line_color 	3342489
+			    InterObjView 	@142
+			    height     	1
+			    y_coord    	-89
+			    Nested     	TRUE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @145
+			    location   	(828, 1189)
+			    line_color 	3342489
+			    InterObjView 	@142
+			    height     	90
+			    y_coord    	0
+			    Nested     	FALSE))
+		    (object InterObjView "报修页面" @146
+			location   	(1510, 225)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	TRUE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@146
+			    location   	(1510, 225)
+			    fill_color 	13434879
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	282
+			    justify    	0
+			    label      	"报修页面")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"58F9BE9600F2"
+			width      	300
+			height     	1774
+			icon_height 	0
+			icon_width 	0
+			icon_y_offset 	0
+			annotation 	1
+			Focus_Of_Control 	(object Focus_Of_Control "" @147
+			    location   	(1510, 1189)
+			    line_color 	3342489
+			    InterObjView 	@146
+			    height     	630
+			    y_coord    	540
+			    Nested     	FALSE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @148
+			    location   	(1510, 1714)
+			    line_color 	3342489
+			    InterObjView 	@146
+			    height     	1
+			    y_coord    	-89
+			    Nested     	TRUE))
+		    (object InterObjView "$UNNAMED$34" @149
+			location   	(334, 361)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	TRUE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@149
+			    location   	(334, 386)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	250
+			    justify    	0
+			    label      	"")
+			icon       	"Actor"
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"58F9BE82039A"
+			width      	262
+			height     	1638
+			icon_height 	162
+			icon_width 	120
+			icon_y_offset 	0
+			annotation 	1
+			Focus_Of_Control 	(object Focus_Of_Control "" @150
+			    location   	(334, 441)
+			    line_color 	3342489
+			    InterObjView 	@149
+			    height     	90
+			    y_coord    	0
+			    Nested     	FALSE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @151
+			    location   	(334, 561)
+			    line_color 	3342489
+			    InterObjView 	@149
+			    height     	90
+			    y_coord    	0
+			    Nested     	FALSE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @152
+			    location   	(334, 1819)
+			    line_color 	3342489
+			    InterObjView 	@149
+			    height     	90
+			    y_coord    	0
+			    Nested     	FALSE))
+		    (object InterObjView "服务端验证" @153
+			location   	(2263, 225)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	TRUE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@153
+			    location   	(2263, 225)
+			    fill_color 	13434879
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	282
+			    justify    	0
+			    label      	"服务端验证")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"58F9BEA100CB"
+			width      	300
+			height     	1774
+			icon_height 	0
+			icon_width 	0
+			icon_y_offset 	0
+			annotation 	1
+			Focus_Of_Control 	(object Focus_Of_Control "" @154
+			    location   	(2263, 666)
+			    line_color 	3342489
+			    InterObjView 	@153
+			    height     	359
+			    y_coord    	269
+			    Nested     	FALSE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @155
+			    location   	(2263, 902)
+			    line_color 	3342489
+			    InterObjView 	@153
+			    height     	1
+			    y_coord    	-89
+			    Nested     	TRUE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @156
+			    location   	(2263, 1294)
+			    line_color 	3342489
+			    InterObjView 	@153
+			    height     	420
+			    y_coord    	330
+			    Nested     	FALSE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @157
+			    location   	(2263, 1609)
+			    line_color 	3342489
+			    InterObjView 	@153
+			    height     	1
+			    y_coord    	-89
+			    Nested     	TRUE))
+		    (object InterObjView "MySql数据库" @158
+			location   	(3041, 225)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	TRUE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@158
+			    location   	(3041, 225)
+			    fill_color 	13434879
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	282
+			    justify    	0
+			    label      	"MySql数据库")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"58F9BEAB037B"
+			width      	300
+			height     	1774
+			icon_height 	0
+			icon_width 	0
+			icon_y_offset 	0
+			annotation 	1
+			Focus_Of_Control 	(object Focus_Of_Control "" @159
+			    location   	(3041, 771)
+			    line_color 	3342489
+			    InterObjView 	@158
+			    height     	131
+			    y_coord    	41
+			    Nested     	FALSE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @160
+			    location   	(3041, 1504)
+			    line_color 	3342489
+			    InterObjView 	@158
+			    height     	195
+			    y_coord    	105
+			    Nested     	FALSE))
+		    (object InterMessView "点击报修" @161
+			location   	(0, 1189)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @162
+			    Parent_View 	@161
+			    location   	(1168, 1145)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9BF830063"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	286
+			    justify    	0
+			    label      	"点击报修"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	0)
+			line_color 	3342489
+			client     	@142
+			supplier   	@146
+			Focus_Src  	@145
+			Focus_Entry 	@147
+			origin     	(843, 1189)
+			terminus   	(1494, 1189)
+			ordinal    	5)
+		    (object InterMessView "填入报修信息" @163
+			location   	(0, 1294)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @164
+			    Parent_View 	@163
+			    location   	(1886, 1250)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9BF9A03CA"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	385
+			    justify    	0
+			    label      	"填入报修信息"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	0)
+			line_color 	3342489
+			client     	@146
+			supplier   	@153
+			Focus_Src  	@147
+			Focus_Entry 	@156
+			origin     	(1525, 1294)
+			terminus   	(2247, 1294)
+			ordinal    	6)
+		    (object InterMessView "存储" @165
+			location   	(0, 1504)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @166
+			    Parent_View 	@165
+			    location   	(2651, 1460)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9BFAC0311"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	185
+			    justify    	0
+			    label      	"存储"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	0)
+			line_color 	3342489
+			client     	@153
+			supplier   	@158
+			Focus_Src  	@156
+			Focus_Entry 	@160
+			origin     	(2278, 1504)
+			terminus   	(3025, 1504)
+			ordinal    	7)
+		    (object InterMessView "存储成功" @167
+			location   	(0, 1609)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @168
+			    Parent_View 	@167
+			    location   	(2652, 1565)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9BFC60080"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	300
+			    justify    	0
+			    label      	"存储成功"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	1)
+			line_color 	3342489
+			client     	@158
+			supplier   	@153
+			Focus_Src  	@160
+			Focus_Entry 	@157
+			origin     	(3025, 1609)
+			terminus   	(2279, 1609)
+			ordinal    	8)
+		    (object InterMessView "报修成功" @169
+			location   	(0, 1714)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @170
+			    Parent_View 	@169
+			    location   	(1887, 1670)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9BFD90009"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	310
+			    justify    	0
+			    label      	"报修成功"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	1)
+			line_color 	3342489
+			client     	@153
+			supplier   	@146
+			Focus_Src  	@156
+			Focus_Entry 	@148
+			origin     	(2247, 1714)
+			terminus   	(1526, 1714)
+			ordinal    	9)
+		    (object InterMessView "消息1" @171
+			location   	(0, 561)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @172
+			    Parent_View 	@171
+			    location   	(580, 517)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9BECB013D"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	212
+			    justify    	0
+			    label      	"消息1"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	0)
+			line_color 	3342489
+			client     	@149
+			supplier   	@142
+			Focus_Src  	@151
+			Focus_Entry 	@143
+			origin     	(349, 561)
+			terminus   	(812, 561)
+			ordinal    	0)
+		    (object InterMessView "用户登录信息" @173
+			location   	(0, 666)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @174
+			    Parent_View 	@173
+			    location   	(1545, 622)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9BF0901C4"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	386
+			    justify    	0
+			    label      	"用户登录信息"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	0)
+			line_color 	3342489
+			client     	@142
+			supplier   	@153
+			Focus_Src  	@143
+			Focus_Entry 	@154
+			origin     	(843, 666)
+			terminus   	(2247, 666)
+			ordinal    	1)
+		    (object InterMessView "登录信息有效" @175
+			location   	(0, 1025)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @176
+			    Parent_View 	@175
+			    location   	(1546, 981)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9BF50012A"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	386
+			    justify    	0
+			    label      	"登录信息有效"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	1)
+			line_color 	3342489
+			client     	@153
+			supplier   	@142
+			Focus_Src  	@154
+			Focus_Entry 	@144
+			origin     	(2247, 1025)
+			terminus   	(844, 1025)
+			ordinal    	4)
+		    (object InterMessView "验证数据库" @177
+			location   	(0, 771)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @178
+			    Parent_View 	@177
+			    location   	(2651, 727)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9BF20029C"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	336
+			    justify    	0
+			    label      	"验证数据库"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	0)
+			line_color 	3342489
+			client     	@153
+			supplier   	@158
+			Focus_Src  	@154
+			Focus_Entry 	@159
+			origin     	(2278, 771)
+			terminus   	(3025, 771)
+			ordinal    	2)
+		    (object InterMessView "信息正确" @179
+			location   	(0, 902)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @180
+			    Parent_View 	@179
+			    location   	(2652, 858)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9BF3C03A3"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	286
+			    justify    	0
+			    label      	"信息正确"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	1)
+			line_color 	3342489
+			client     	@158
+			supplier   	@153
+			Focus_Src  	@159
+			Focus_Entry 	@155
+			origin     	(3025, 902)
+			terminus   	(2279, 902)
+			ordinal    	3)
+		    (object InterMessView "报修成功" @181
+			location   	(0, 1819)
+			font       	(object Font
+			    size       	12
+			    face       	"宋体"
+			    charSet    	134
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @182
+			    Parent_View 	@181
+			    location   	(922, 1775)
+			    font       	(object Font
+				size       	12
+				face       	"宋体"
+				charSet    	134
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"58F9BFEA008B"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	312
+			    justify    	0
+			    label      	"报修成功"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	1)
+			line_color 	3342489
+			client     	@146
+			supplier   	@149
+			Focus_Src  	@147
+			Focus_Entry 	@152
+			origin     	(1494, 1819)
+			terminus   	(350, 1819)
+			ordinal    	10)))
+	    (object InteractionDiagram "用户交房验房时序图"
+		mechanism_ref 	@114
+		quid       	"58F9C34102A6"
+		title      	"用户交房验房时序图"
 		zoom       	100
 		max_height 	28350
 		max_width  	21600
