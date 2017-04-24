@@ -1,0 +1,446 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>PTcheck论文检测报告</title>
+		<link rel="stylesheet" href="../css/base.css" />
+		<style type="text/css">
+		a {
+    color: #0796fe;
+}
+a:hover{
+    color:#0796fe!important;
+}
+			.mainContainer {
+				padding: 20px;
+	
+			}
+			
+			.navigation span {
+				display: inline-block;
+				padding-left: 5px;
+				padding-right: 5px;
+				color: #666;
+			}
+			
+			.btn_gray {
+				border: solid 1px #dddddd;
+				background-color: #eeeeee;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			
+			.btn_gray:hover,
+			.btn_blue {
+				background-color: #0099ff;
+				border: solid 1px #0099ff;
+				color: #fff!important;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			.para{
+				padding-top:20px;
+			}
+			
+			.duanluo{
+				padding-left:20px;
+				
+				padding-bottom: 5px;
+			}
+			.duanluo span{
+				display: inline-block;
+				padding-left:5px;
+				padding-right: 5px;
+				border: solid 1px #999;
+				color:#999;
+			}
+			.l{
+				line-height: 20px;
+				padding-bottom: 5px;
+			}
+			.l span{
+				color:#333;
+			}
+			.mymodify{
+				font-size:12px;
+			}
+			.mymodify textarea{
+				width:98%;
+				height:100px;
+				color:#333;
+				clear:both;
+			}
+			textarea{
+				padding:10px;
+				line-height: 20px;
+			}
+		</style>
+		<script type="text/javascript">
+
+        var isstorage=false;
+        var danhao;
+        var result= new Array();
+         function trimStr(str) {
+
+            if ((typeof (str) != "string") || !str) {
+
+                return "";
+
+            }
+
+            return str.replace(/(^\s*)|(\s*$)/g, "");
+
+        }
+          
+        function myclick() {
+            window.parent.parent.ViewMain.window.location.href = "../../htmls/jianchong_.htm";
+        }
+        function submitPart(obj, target) {
+            var parent = target.parentNode;
+            if(parent.getAttribute("data")=="add"){
+              var mynext = parent.nextSibling;
+              parent.setAttribute("data","remove");
+              parent.parentNode.removeChild(mynext);
+            }
+            else{
+            	parent.setAttribute("data","add");
+            	var temphtml = document.createElement("div");
+                temphtml.innerHTML = "<input type=\"hidden\" value=\""+ parent.getAttribute("paraseq") +"\"><div name=\"mymodify\" class=\"mymodify\" >"
+					+"<div class=\"a999\">改重内容（请对本句修改之后，点击“临时保存”，然后进入报告左侧“修改文档”页面中获取修改后的内容）：</div>"
+					+"<div><textarea>"+obj
+					+"</textarea>"
+					+"</div>"
+					+"<div align=\"right\" class=\"a999\" style=\"margin-top:14px;\">（注意：改完请及时到“修改文档”复制到原文）<span class=\"btn-gray btn a333\" onclick=\"mysave(this)\">临时保存</span></div>"
+				+"</div>";
+            	   parent.parentNode.insertBefore(temphtml, null);
+            }
+
+        }
+
+		function myNavigate(){
+		 document.getElementById("a_url").click();
+		}
+       
+        function mysave(target) {
+            var tempsen = trimStr(target.parentNode.previousSibling.lastChild.value.replace(/\"/g,"\\\"").replace(/\'/g,"\\\'"));
+            var paraseq = target.parentNode.parentNode.parentNode.firstChild.value;            
+            var mydiv = target.parentNode.parentNode.parentNode.previousSibling;
+             if (mydiv.nodeName == "#text") {
+                mydiv = mydiv.previousSibling;
+            }
+             
+            mydiv.lastChild.setAttribute("onclick", "submitPart('" + tempsen + "',this)");
+           mydiv.setAttribute("data","remove");
+           if (mydiv.firstChild.innerHTML != "已修改") {
+                var xiugai = document.createElement("span");
+                xiugai.setAttribute("style", "font-size:12px;color:#00AEAE;margin-right:10px;");
+                xiugai.innerHTML = "已修改";
+                mydiv.insertBefore(xiugai, mydiv.lastChild);
+               }
+            
+            var parent = target.parentNode.parentNode.parentNode;
+            parent.parentNode.removeChild(parent);
+            if(!isstorage)
+            {
+            window.parent.parent.parent.myset(paraseq, tempsen);
+            }
+            else
+            {
+            myset(paraseq, tempsen);
+            }
+        }
+        window.onload = function() {
+            danhao = document.getElementById("danhao").value;
+            if (window.localStorage) {
+                isstorage = true;
+            }
+            if (!isstorage) {
+                result = window.parent.parent.parent.modifyPara;
+                
+            }
+            else {
+                var temp = localStorage.getItem(danhao);
+                if (temp) {
+                    result = eval("(" + temp + ")");
+                }
+            }
+            if (result) {
+            	
+                for (var i = 0; i < result.length; i++) {
+                	
+                    //var all = $(":hidden");
+                    var all = getClass("div","modify");
+                   
+                    for (var j = 0; j < all.length; j++) {
+                        if (all[j].getAttribute("paraseq") == result[i].para) {
+                        	
+                            var xiugai = document.createElement("span");
+                            xiugai.setAttribute("style", "font-size:12px;color:#00AEAE;margin-right:10px;");
+                            xiugai.innerHTML = "已修改";
+                            all[j].insertBefore(xiugai, all[j].lastChild);
+                            all[j].lastChild.setAttribute("onclick", "submitPart('" + result[i].text.replace(/\"/g,"\\\"").replace(/\'/g,"\\\'") + "',this)");
+                        }
+                    }
+
+                }
+            }  
+        }
+
+
+        function mydivclick(e,obj) {
+            if (e.target.tagName.toUpperCase() != "INPUT") {
+                obj.lastChild.previousSibling.click();
+            }
+        }
+
+        function getClass(tagname, className) { //tagname指元素，className指class的值
+            var tagname = document.getElementsByTagName(tagname);  //获取指定元素
+            var tagnameAll = [];     //这个数组用于存储所有符合条件的元素
+            for (var i = 0; i < tagname.length; i++) {     //遍历获得的元素
+                if (tagname[i].className == className) {     //如果获得的元素中的class的值等于指定的类名，就赋值给tagnameAll
+                    tagnameAll[tagnameAll.length] = tagname[i];
+                }
+            }
+            return tagnameAll;
+
+        }
+
+       
+        
+        
+         function myset(paraseq, sen) {
+         	
+            var reg = new RegExp("\"", "g")
+            var model = "{\"para\":\"" + paraseq + "\",\"text\": \"" + sen + "\"}";
+            var mo = eval("(" + model + ")");
+            var exist = false;
+            for (var i = 0; i < result.length; i++) {
+                if (mo.para == result[i].para) {
+                    exist = true;
+                    result[i].text = mo.text;
+                }
+            }
+            if (!exist) {
+                result.push(mo);
+            }
+            localStorage.removeItem(danhao);
+            localStorage.setItem(danhao, json_encode(result));
+        }
+        
+        function json_decode(str_json) {
+            // Decodes the JSON representation into a PHP value  
+            //  
+            // version: 906.1806  
+            // discuss at: http://phpjs.org/functions/json_decode  
+            // +      original by: Public Domain (http://www.json.org/json2.js)  
+            // + reimplemented by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)  
+            // + improved by: T.J. Leahy  
+            // *     example 1: json_decode('[\n    "e",\n    {\n    "pluribus": "unum"\n}\n]');  
+            // *     returns 1: ['e', {pluribus: 'unum'}]  
+            /* 
+            http://www.JSON.org/json2.js 
+            2008-11-19 
+            Public Domain. 
+            NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK. 
+            See http://www.JSON.org/js.html 
+            */
+
+            var json = this.window.JSON;
+            if (typeof json === 'object' && typeof json.parse === 'function') {
+                return json.parse(str_json);
+            }
+
+            var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+            var j;
+            var text = str_json;
+
+            // Parsing happens in four stages. In the first stage, we replace certain  
+            // Unicode characters with escape sequences. JavaScript handles many characters  
+            // incorrectly, either silently deleting them, or treating them as line endings.  
+            cx.lastIndex = 0;
+            if (cx.test(text)) {
+                text = text.replace(cx, function(a) {
+                    return '\\u' +
+            ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+                });
+            }
+
+            // In the second stage, we run the text against regular expressions that look  
+            // for non-JSON patterns. We are especially concerned with '()' and 'new'  
+            // because they can cause invocation, and '=' because it can cause mutation.  
+            // But just to be safe, we want to reject all unexpected forms.  
+
+            // We split the second stage into 4 regexp operations in order to work around  
+            // crippling inefficiencies in IE's and Safari's regexp engines. First we  
+            // replace the JSON backslash pairs with '@' (a non-JSON character). Second, we  
+            // replace all simple value tokens with ']' characters. Third, we delete all  
+            // open brackets that follow a colon or comma or that begin the text. Finally,  
+            // we look to see that the remaining characters are only whitespace or ']' or  
+            // ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.  
+            if (/^[\],:{}\s]*$/.
+        test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@').
+            replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+            replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+
+                // In the third stage we use the eval function to compile the text into a  
+                // JavaScript structure. The '{' operator is subject to a syntactic ambiguity  
+                // in JavaScript: it can begin a block or an object literal. We wrap the text  
+                // in parens to eliminate the ambiguity.  
+
+                j = eval('(' + text + ')');
+
+                return j;
+            }
+
+            // If the text is not JSON parseable, then a SyntaxError is thrown.  
+            throw new SyntaxError('json_decode');
+        }
+
+        function json_encode(mixed_val) {
+            // Returns the JSON representation of a value  
+            //  
+            // version: 906.1806  
+            // discuss at: http://phpjs.org/functions/json_encode  
+            // +      original by: Public Domain (http://www.json.org/json2.js)  
+            // + reimplemented by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)  
+            // + improved by: T.J. Leahy  
+            // *     example 1: json_encode(['e', {pluribus: 'unum'}]);  
+            // *     returns 1: '[\n    "e",\n    {\n    "pluribus": "unum"\n}\n]'  
+            /* 
+            http://www.JSON.org/json2.js 
+            2008-11-19 
+            Public Domain. 
+            NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK. 
+            See http://www.JSON.org/js.html 
+            */
+            var json = this.window.JSON;
+            if (typeof json === 'object' && typeof json.stringify === 'function') {
+                return json.stringify(mixed_val);
+            }
+
+            var value = mixed_val;
+
+            var quote = function(string) {
+                var escapable = /[\\\"\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+                var meta = {    // table of character substitutions  
+                    '\b': '\\b',
+                    '\t': '\\t',
+                    '\n': '\\n',
+                    '\f': '\\f',
+                    '\r': '\\r',
+                    '"': '\\"',
+                    '\\': '\\\\'
+                };
+
+                escapable.lastIndex = 0;
+                return escapable.test(string) ?
+        '"' + string.replace(escapable, function(a) {
+            var c = meta[a];
+            return typeof c === 'string' ? c :
+            '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+        }) + '"' :
+        '"' + string + '"';
+            };
+
+            var str = function(key, holder) {
+                var gap = '';
+                var indent = '    ';
+                var i = 0;          // The loop counter.  
+                var k = '';          // The member key.  
+                var v = '';          // The member value.  
+                var length = 0;
+                var mind = gap;
+                var partial = [];
+                var value = holder[key];
+
+                // If the value has a toJSON method, call it to obtain a replacement value.  
+                if (value && typeof value === 'object' &&
+            typeof value.toJSON === 'function') {
+                    value = value.toJSON(key);
+                }
+
+                // What happens next depends on the value's type.  
+                switch (typeof value) {
+                    case 'string':
+                        return quote(value);
+
+                    case 'number':
+                        // JSON numbers must be finite. Encode non-finite numbers as null.  
+                        return isFinite(value) ? String(value) : 'null';
+
+                    case 'boolean':
+                    case 'null':
+                        // If the value is a boolean or null, convert it to a string. Note:  
+                        // typeof null does not produce 'null'. The case is included here in  
+                        // the remote chance that this gets fixed someday.  
+
+                        return String(value);
+
+                    case 'object':
+                        // If the type is 'object', we might be dealing with an object or an array or  
+                        // null.  
+                        // Due to a specification blunder in ECMAScript, typeof null is 'object',  
+                        // so watch out for that case.  
+                        if (!value) {
+                            return 'null';
+                        }
+
+                        // Make an array to hold the partial results of stringifying this object value.  
+                        gap += indent;
+                        partial = [];
+
+                        // Is the value an array?  
+                        if (Object.prototype.toString.apply(value) === '[object Array]') {
+                            // The value is an array. Stringify every element. Use null as a placeholder  
+                            // for non-JSON values.  
+
+                            length = value.length;
+                            for (i = 0; i < length; i += 1) {
+                                partial[i] = str(i, value) || 'null';
+                            }
+
+                            // Join all of the elements together, separated with commas, and wrap them in  
+                            // brackets.  
+                            v = partial.length === 0 ? '[]' :
+                    gap ? '[\n' + gap +
+                    partial.join(',\n' + gap) + '\n' +
+                    mind + ']' :
+                    '[' + partial.join(',') + ']';
+                            gap = mind;
+                            return v;
+                        }
+
+                        // Iterate through all of the keys in the object.  
+                        for (k in value) {
+                            if (Object.hasOwnProperty.call(value, k)) {
+                                v = str(k, value);
+                                if (v) {
+                                    partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                                }
+                            }
+                        }
+
+                        // Join all of the member texts together, separated with commas,  
+                        // and wrap them in braces.  
+                        v = partial.length === 0 ? '{}' :
+                gap ? '{\n' + gap + partial.join(',\n' + gap) + '\n' +
+                mind + '}' : '{' + partial.join(',') + '}';
+                        gap = mind;
+                        return v;
+                }
+            };
+
+            // Make a fake root object containing our value under the key of ''.  
+            // Return the result of stringifying the value.  
+            return str('', {
+                '': value
+            });
+        } 
+       
+    </script>
+	</head>
+
+	<body><a href="http://www.ptcheck.com/jack/segment.aspx" target="_blank" id="a_url" style="display:none;" ></a> <input type="hidden" id="danhao" value="9602180759585256" /><div class="mainContainer"><div align="center" class="navigation"><a href="paper_1.htm"><span class="btn_gray">首页</span></a><a  href="paper_2.htm"><span class="btn_gray">上一页</span></a><a href="#"><span class="btn_gray">下一页</span></a><a href="paper_3.htm">	<span class="btn_gray">尾页</span></a><span>页码：3/3页</span></div><div class="zhengwen"><div class="para"><div class="duanluo"><span>241</span></div><div class="l"><span style="margin-left:25px"></span><span >2.用户报修时序图如下图所示： </span></div></div><div class="para"><div class="duanluo"><span>242</span></div><div class="l"><span style="margin-left:25px"></span><span >图4-2 APP用户报修时序图 </span></div></div><div class="para"><div class="duanluo"><span>243</span></div><div class="l"><span style="margin-left:25px"></span><span >从时序图中我们可以知道，用户进入首页后，APP会先验证当前登录信息是否有效，如果当前登录信息无效（可能是超过15天未登录导致过期，或者未登录）， </span><span >则会先调取登录流程进行登录。 </span><span >登录成功之后，点击报修进入报修页面，并填入报修相关信息，访问接口将数据提交给服务器验证，验证通过则存储到数据库表中，并返回报修成功的信息。 </span><span >用户投诉的时序图和报修的时序图几乎是一样的，这里不再重复阐述。 </span></div><div class="modify" align="right" paraseq="242"><span class="btn btn-blue" onclick="submitPart('从时序图中我们可以知道，用户进入首页后，APP会先验证当前登录信息是否有效，如果当前登录信息无效（可能是超过15天未登录导致过期，或者未登录），则会先调取登录流程进行登录。登录成功之后，点击报修进入报修页面，并填入报修相关信息，访问接口将数据提交给服务器验证，验证通过则存储到数据库表中，并返回报修成功的信息。用户投诉的时序图和报修的时序图几乎是一样的，这里不再重复阐述。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>244</span></div><div class="l"><span style="margin-left:25px"></span><span >3.用户缴费时序图如下所示： </span></div></div><div class="para"><div class="duanluo"><span>245</span></div><div class="l"><span style="margin-left:25px"></span><span >图4-3APP用户缴费时序图 </span></div></div><div class="para"><div class="duanluo"><span>246</span></div><div class="l"><span style="margin-left:25px"></span><span >从时序图中我们可以知道，用户在缴费之前需要先选择缴费的类型和缴费地址，这是因为考虑到用户可能有多套房子，拥有多个缴费地址的情况。 </span><span >如果没有缴费地址，可以在缴费地址页面添加缴费地址之后进行缴费。 </span><span >缴费的类型有物业费、水费、电费、燃气费、宽带费等等。 </span><span >缴费是通过调用支付宝支付的接口，当缴费成功之后，会提交数据到服务端，并存储到数据库中。 </span></div><div class="modify" align="right" paraseq="245"><span class="btn btn-blue" onclick="submitPart('从时序图中我们可以知道，用户在缴费之前需要先选择缴费的类型和缴费地址，这是因为考虑到用户可能有多套房子，拥有多个缴费地址的情况。如果没有缴费地址，可以在缴费地址页面添加缴费地址之后进行缴费。缴费的类型有物业费、水费、电费、燃气费、宽带费等等。缴费是通过调用支付宝支付的接口，当缴费成功之后，会提交数据到服务端，并存储到数据库中。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>247</span></div><div class="l"><span style="margin-left:25px"></span><span >4.2.2邻里圈模块设计 </span></div></div><div class="para"><div class="duanluo"><span>248</span></div><div class="l"><span style="margin-left:25px"></span><span >邻里圈模块主要是一个社区动态功能，用户在登录之后可以发表心情动态，发表心情时可以输入文字，图片，表情等等内容。 </span><span >用户在邻里圈可以发表动态和浏览动态，随时随地掌握周边发生的生活趣闻，也可以将自己的生活点滴与小区的其他住户分享。 </span><span >用户浏览邻里圈的时序图如下图所示： </span></div><div class="modify" align="right" paraseq="247"><span class="btn btn-blue" onclick="submitPart('邻里圈模块主要是一个社区动态功能，用户在登录之后可以发表心情动态，发表心情时可以输入文字，图片，表情等等内容。用户在邻里圈可以发表动态和浏览动态，随时随地掌握周边发生的生活趣闻，也可以将自己的生活点滴与小区的其他住户分享。用户浏览邻里圈的时序图如下图所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>249</span></div><div class="l"><span style="margin-left:25px"></span><span >图4-4用户浏览邻里圈时序图 </span></div></div><div class="para"><div class="duanluo"><span>250</span></div><div class="l"><span style="margin-left:25px"></span><span >从时序图可以了解到，邻里圈属于APP中的一个主要模块，用户在点击邻里圈之后，需要调用API获取当前的邻里圈数据， </span><span >在调取的同时需要给服务端发送当前用户的验证信息，服务端获取这个信息之后经过处理，从数据库中加载到可用的邻里圈动态列表数据，并通过接口返回给APP， </span><span >经过解析显示到Activity界面上。 </span></div><div class="modify" align="right" paraseq="249"><span class="btn btn-blue" onclick="submitPart('从时序图可以了解到，邻里圈属于APP中的一个主要模块，用户在点击邻里圈之后，需要调用API获取当前的邻里圈数据，在调取的同时需要给服务端发送当前用户的验证信息，服务端获取这个信息之后经过处理，从数据库中加载到可用的邻里圈动态列表数据，并通过接口返回给APP，经过解析显示到Activity界面上。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>251</span></div><div class="l"><span style="margin-left:25px"></span><span >同样，用户发表邻里圈的时序图如下图所示： </span></div></div><div class="para"><div class="duanluo"><span>252</span></div><div class="l"><span style="margin-left:25px"></span><span >图4-5用户发表邻里圈时序图 </span></div></div><div class="para"><div class="duanluo"><span>253</span></div><div class="l"><span style="margin-left:25px"></span><span >从上图可以看出，登录用户发表邻里圈时，需要先填写要发表的内容，这些心情动态数据可以是图片，文字和表情等等。 </span><a href="../sentence_detail/471.htm" target="right" class="orange">如果有图片，需要先调用一个接口将图片上传到服务器，当上传成功时，在上传文字等信息。</a><span >服务器处理后存储到数据库中。 </span></div><div class="modify" align="right" paraseq="252"><span class="btn btn-blue" onclick="submitPart('从上图可以看出，登录用户发表邻里圈时，需要先填写要发表的内容，这些心情动态数据可以是图片，文字和表情等等。如果有图片，需要先调用一个接口将图片上传到服务器，当上传成功时，在上传文字等信息。服务器处理后存储到数据库中。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>254</span></div><div class="l"><span style="margin-left:25px"></span><span >4.2.3个人中心模块设计 </span></div></div><div class="para"><div class="duanluo"><span>255</span></div><div class="l"><span style="margin-left:25px"></span><span >个人中心是APP的第三个主要模块，在APP的首页底栏点击&quot;个人中心&rdquo;即可进入个人中心页面。 </span><span >在个人中心中，如果当前用户已登录并且登录验证没有过期，则会现实当前用户的手机号和头像等信息。 </span><span >如果未登录，则会显示登录注册的按钮，用户点击可以进行登录或者注册为新的用户。 </span><span >登录之后可以查看缴费记录，完善用户资料，反馈意见，修改手机号，修改密码，清除缓存，以及退出当前账号等操作。 </span></div><div class="modify" align="right" paraseq="254"><span class="btn btn-blue" onclick="submitPart('个人中心是APP的第三个主要模块，在APP的首页底栏点击&quot;个人中心&rdquo;即可进入个人中心页面。在个人中心中，如果当前用户已登录并且登录验证没有过期，则会现实当前用户的手机号和头像等信息。如果未登录，则会显示登录注册的按钮，用户点击可以进行登录或者注册为新的用户。登录之后可以查看缴费记录，完善用户资料，反馈意见，修改手机号，修改密码，清除缓存，以及退出当前账号等操作。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>256</span></div><div class="l"><span style="margin-left:25px"></span><span >1.APP用户查看缴费记录 </span></div></div><div class="para"><div class="duanluo"><span>257</span></div><div class="l"><span style="margin-left:25px"></span><span >用户缴费之后，可以在个人中心模块查看缴费记录，缴费记录会按照缴费时间降序排序，每一个缴费记录都会有缴费金额，缴费类型，缴费时间，缴费地址， </span><span >缴费状态等信息，点击条目可以查看详情。 </span><span >用户查看缴费记录的时序图如下所示： </span></div><div class="modify" align="right" paraseq="256"><span class="btn btn-blue" onclick="submitPart('用户缴费之后，可以在个人中心模块查看缴费记录，缴费记录会按照缴费时间降序排序，每一个缴费记录都会有缴费金额，缴费类型，缴费时间，缴费地址，缴费状态等信息，点击条目可以查看详情。用户查看缴费记录的时序图如下所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>258</span></div><div class="l"><span style="margin-left:25px"></span><span >图4-6用户查看缴费记录时序图 </span></div></div><div class="para"><div class="duanluo"><span>259</span></div><div class="l"><span style="margin-left:25px"></span><span >从上图可以看出，查看缴费记录是比较敏感的操作，APP会先进行登录信息验证，如果验证通过，才会将用户的最近缴费情况的数据通过API调用返回给用户查看。 </span></div><div class="modify" align="right" paraseq="258"><span class="btn btn-blue" onclick="submitPart('从上图可以看出，查看缴费记录是比较敏感的操作，APP会先进行登录信息验证，如果验证通过，才会将用户的最近缴费情况的数据通过API调用返回给用户查看。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>260</span></div><div class="l"><span style="margin-left:25px"></span><span >2.APP用户修改登录信息 </span></div></div><div class="para"><div class="duanluo"><span>261</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/485.htm" target="right" class="orange">用户修改登录信息分为修改手机号和修改密码，修改手机号需要验证新手机号的验证码，修改密码可以通过旧密码修改或者短信验证码修改。</a><span >时序图如下所示： </span></div><div class="modify" align="right" paraseq="260"><span class="btn btn-blue" onclick="submitPart('用户修改登录信息分为修改手机号和修改密码，修改手机号需要验证新手机号的验证码，修改密码可以通过旧密码修改或者短信验证码修改。时序图如下所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>262</span></div><div class="l"><span style="margin-left:25px"></span><span >图4-7用户修改手机号时序图 </span></div></div><div class="para"><div class="duanluo"><span>263</span></div><div class="l"><span style="margin-left:25px"></span><span >从上图可以看出，用户修改手机号需要第三方平台的短信验证码，用户首先调用接口获取短信验证码，手机收到短信验证码之后，输入短信验证码和新的密码， </span><span >并将数据通过接口提交到服务器，服务器验证没有问题后，更新数据库中的记录，并返回提示信息。 </span></div><div class="modify" align="right" paraseq="262"><span class="btn btn-blue" onclick="submitPart('从上图可以看出，用户修改手机号需要第三方平台的短信验证码，用户首先调用接口获取短信验证码，手机收到短信验证码之后，输入短信验证码和新的密码，并将数据通过接口提交到服务器，服务器验证没有问题后，更新数据库中的记录，并返回提示信息。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>264</span></div><div class="l"><span style="margin-left:25px"></span><span >个人中心的其他功能的时序图均和用户查看缴费记录的时序图是相同的，这里不再重复阐述。 </span></div><div class="modify" align="right" paraseq="263"><span class="btn btn-blue" onclick="submitPart('个人中心的其他功能的时序图均和用户查看缴费记录的时序图是相同的，这里不再重复阐述。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>265</span></div><div class="l"><span style="margin-left:25px"></span><span >5.基于手机的物业服务APP的实现 </span></div></div><div class="para"><div class="duanluo"><span>266</span></div><div class="l"><span style="margin-left:25px"></span><span >5.1开发平台介绍 </span></div></div><div class="para"><div class="duanluo"><span>267</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/493.htm" target="right" class="orange">本文的物业服务APP是基于安卓的一款APP，在开发的过程中主要使用了Android Studio2.2作为开发工具。</a><a href="../sentence_detail/494.htm" target="right" class="orange">早在2013年，以Eclipse为开发工具，集成ADT插件和Android SDK的开发形式就逐渐被淘汰，因为Google推出了一款更为强大的，</a><a href="../sentence_detail/495.htm" target="right" class="red">专门针对Android开发的工具，这就是Android Studio。</a><a href="../sentence_detail/496.htm" target="right" class="orange">Android Studio的代码编辑器是基于IntelliJ IDEA的，并集成了gradle工具，使得项目的集成更方便。</a><a href="../sentence_detail/497.htm" target="right" class="orange">与Eclipse ADT相比，Android Studio无论从编译器的编译速度，对性能的损耗，</a><span >代码编辑的方便性还是项目集成的方便性上面都有了质的飞跃。 </span></div><div class="modify" align="right" paraseq="266"><span class="btn btn-blue" onclick="submitPart('本文的物业服务APP是基于安卓的一款APP，在开发的过程中主要使用了Android Studio2.2作为开发工具。早在2013年，以Eclipse为开发工具，集成ADT插件和Android SDK的开发形式就逐渐被淘汰，因为Google推出了一款更为强大的，专门针对Android开发的工具，这就是Android Studio。Android Studio的代码编辑器是基于IntelliJ IDEA的，并集成了gradle工具，使得项目的集成更方便。与Eclipse ADT相比，Android Studio无论从编译器的编译速度，对性能的损耗，代码编辑的方便性还是项目集成的方便性上面都有了质的飞跃。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>268</span></div><div class="l"><span style="margin-left:25px"></span><span >在开发过程中，主要使用了Android6.0SDK进行开发，这个版本是去年推出的，市场上新机型的自带系统版本大部分都是6.0。 </span><span >Android6.0可以保障一定的稳定性，同时也提供了大量的新特性供开发者调用。 </span></div><div class="modify" align="right" paraseq="267"><span class="btn btn-blue" onclick="submitPart('在开发过程中，主要使用了Android6.0SDK进行开发，这个版本是去年推出的，市场上新机型的自带系统版本大部分都是6.0。Android6.0可以保障一定的稳定性，同时也提供了大量的新特性供开发者调用。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>269</span></div><div class="l"><span style="margin-left:25px"></span><span >项目开发中调用接口，主要使用OKHttp框架作为接口请求的框架，并使用一些设计模式进行了封装。 </span><a href="../sentence_detail/502.htm" target="right" class="orange">JSON数据解析主要使用了Gson框架，Gson框架是Google推出的一款非常方便的JSON数据解析框架，</a><span >能够很方便的将JSON字符串或者JSON数组解析成为Java对象，反过来，也能很方便的将一个Java对象解析成JSON字符串。 </span></div><div class="modify" align="right" paraseq="268"><span class="btn btn-blue" onclick="submitPart('项目开发中调用接口，主要使用OKHttp框架作为接口请求的框架，并使用一些设计模式进行了封装。JSON数据解析主要使用了Gson框架，Gson框架是Google推出的一款非常方便的JSON数据解析框架，能够很方便的将JSON字符串或者JSON数组解析成为Java对象，反过来，也能很方便的将一个Java对象解析成JSON字符串。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>270</span></div><div class="l"><span style="margin-left:25px"></span><span >项目开发的主要思想是面向对象的软件设计思想（OOP），在开发过程中使用了控制反转（IOC）技术，同时在设计的过程中也用到了一些基于OOP的设计模式。 </span></div><div class="modify" align="right" paraseq="269"><span class="btn btn-blue" onclick="submitPart('项目开发的主要思想是面向对象的软件设计思想（OOP），在开发过程中使用了控制反转（IOC）技术，同时在设计的过程中也用到了一些基于OOP的设计模式。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>271</span></div><div class="l"><span style="margin-left:25px"></span><span >5.2APP的架构设计 </span></div></div><div class="para"><div class="duanluo"><span>272</span></div><div class="l"><span style="margin-left:25px"></span><span >5.2.1基于IOC实现依赖注入 </span></div></div><div class="para"><div class="duanluo"><span>273</span></div><div class="l"><span style="margin-left:25px"></span><span >（1）为什么要使用IOC技术 </span></div></div><div class="para"><div class="duanluo"><span>274</span></div><div class="l"><span style="margin-left:25px"></span><span >IOC是控制反转的英文缩写，IOC的核心思想是能够实现代码的解耦，同时使用IOC也能提高代码的可读性和可扩展性。 </span><a href="../sentence_detail/509.htm" target="right" class="orange">在Android开发中，页面的实现过程一般是通过在资源文件夹中定义一个xml格式的资源文件，</a><span >并在xml中定义这个页面的各个视图组件以及这些组件的关系还有各种属性等等。 </span><span >在页面生成过程中，xml中定义的每一个组件都会被解析成一个视图对象（View类的子类对象），这些对象可以绑定给Activity的布局， </span><span >并实现相应的业务逻辑。 </span></div><div class="modify" align="right" paraseq="273"><span class="btn btn-blue" onclick="submitPart('IOC是控制反转的英文缩写，IOC的核心思想是能够实现代码的解耦，同时使用IOC也能提高代码的可读性和可扩展性。在Android开发中，页面的实现过程一般是通过在资源文件夹中定义一个xml格式的资源文件，并在xml中定义这个页面的各个视图组件以及这些组件的关系还有各种属性等等。在页面生成过程中，xml中定义的每一个组件都会被解析成一个视图对象（View类的子类对象），这些对象可以绑定给Activity的布局，并实现相应的业务逻辑。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>275</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/513.htm" target="right" class="orange">对于Activity组件来说，页面中的每个控件对象都是一个依赖对象，</a><a href="../sentence_detail/514.htm" target="right" class="orange">传统的方式是通过Activity调用自身的findViewById方法将这些获取到。</a><span >而给这些控件绑定各种事件监听也需要Activity自身来完成。 </span><span >这样就造成了大量的冗余代码，并且使代码的可阅读性大大降低。 </span></div><div class="modify" align="right" paraseq="274"><span class="btn btn-blue" onclick="submitPart('对于Activity组件来说，页面中的每个控件对象都是一个依赖对象，传统的方式是通过Activity调用自身的findViewById方法将这些获取到。而给这些控件绑定各种事件监听也需要Activity自身来完成。这样就造成了大量的冗余代码，并且使代码的可阅读性大大降低。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>276</span></div><div class="l"><span style="margin-left:25px"></span><span >上文中提到，IOC的思想就是将一个组件获取其依赖对象的实现过程&quot;反转&rdquo;，通过一个第三方组件完成，从而大大降低了程序的耦合性。 </span><span >在本文中，我们就通过编写一个IOC的容器，来实现所有页面视图控件的绑定，页面内容视图的绑定以及事件监听的绑定。 </span></div><div class="modify" align="right" paraseq="275"><span class="btn btn-blue" onclick="submitPart('上文中提到，IOC的思想就是将一个组件获取其依赖对象的实现过程&quot;反转&rdquo;，通过一个第三方组件完成，从而大大降低了程序的耦合性。在本文中，我们就通过编写一个IOC的容器，来实现所有页面视图控件的绑定，页面内容视图的绑定以及事件监听的绑定。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>277</span></div><div class="l"><span style="margin-left:25px"></span><span >（2）基于IOC的依赖注入具体实现 </span></div></div><div class="para"><div class="duanluo"><span>278</span></div><div class="l"><span style="margin-left:25px"></span><span >首先包结构和主要的类如下图所示： </span></div></div><div class="para"><div class="duanluo"><span>279</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-1 IOC系统主要类设计 </span></div></div><div class="para"><div class="duanluo"><span>280</span></div><div class="l"><span style="margin-left:25px"></span><span >为了更方便的了解这些注解和类的关系，其类图如下图所示： </span></div></div><div class="para"><div class="duanluo"><span>281</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-2 IOC依赖注入类图 </span></div></div><div class="para"><div class="duanluo"><span>282</span></div><div class="l"><span style="margin-left:25px"></span><span >从上图中我们可以知道，在设计中主要有四个包和3个核心类。 </span><span >这三个和核心类分别是BaseAnnoInjectActivity、AnnoInjectUtils和MyEventInvocationHandler， </span><span >下面分别介绍这三个类的作用： </span></div><div class="modify" align="right" paraseq="281"><span class="btn btn-blue" onclick="submitPart('从上图中我们可以知道，在设计中主要有四个包和3个核心类。这三个和核心类分别是BaseAnnoInjectActivity、AnnoInjectUtils和MyEventInvocationHandler，下面分别介绍这三个类的作用：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>283</span></div><div class="l"><span style="margin-left:25px"></span><span >（1）BaseAnnoInjectActivity，所有页面的父类，在页面创建的OnCreate函数通过调用AnnoInjectUtils中的函数， </span><span >实现页面布局和事件监听以及控件对象的注入。 </span></div><div class="modify" align="right" paraseq="282"><span class="btn btn-blue" onclick="submitPart('（1）BaseAnnoInjectActivity，所有页面的父类，在页面创建的OnCreate函数通过调用AnnoInjectUtils中的函数，实现页面布局和事件监听以及控件对象的注入。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>284</span></div><div class="l"><span style="margin-left:25px"></span><span >（2）AnnoInjectUtils，IOC的核心，这个类首先反射获取具体页面Activity对象的各个控件属性和方法，并获取其中注解的值， </span><span >并根据获取到的值，通过反射机制将具体的依赖对象赋值给当前引用。 </span></div><div class="modify" align="right" paraseq="283"><span class="btn btn-blue" onclick="submitPart('（2）AnnoInjectUtils，IOC的核心，这个类首先反射获取具体页面Activity对象的各个控件属性和方法，并获取其中注解的值，并根据获取到的值，通过反射机制将具体的依赖对象赋值给当前引用。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>285</span></div><div class="l"><span style="margin-left:25px"></span><span >（3）MyEventInvocationHandler，通过Java动态代理机制实现的一个类， </span><a href="../sentence_detail/532.htm" target="right" class="orange">这个类继承自Java的InvocationHandler类，并实现其invoke方法。</a><span >其作用是能够动态代理控件的点击事件，长按事件，触摸事件等等常用事件的监听。 </span></div><div class="modify" align="right" paraseq="284"><span class="btn btn-blue" onclick="submitPart('（3）MyEventInvocationHandler，通过Java动态代理机制实现的一个类，这个类继承自Java的InvocationHandler类，并实现其invoke方法。其作用是能够动态代理控件的点击事件，长按事件，触摸事件等等常用事件的监听。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>286</span></div><div class="l"><span style="margin-left:25px"></span><span >通过IOC框架实现的效果如下： </span></div></div><div class="para"><div class="duanluo"><span>287</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-3 IOC实现控件以及页面布局的绑定 </span></div></div><div class="para"><div class="duanluo"><span>288</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/536.htm" target="right" class="orange">从上图我们可以看出，使用IOC架构设计，在一个Activity类上方使用我们定义的注解ContentView，并将资源文件Id传入，</a><span >便可实现页面布局文件的注入，同理，我们使用ViewId注解，并传入控件Id，便可给页面需要的控件制动绑定控件对象。 </span><span >使用上面非常的方便，在节省了大量代码的同时，也让代码更加整洁美观。 </span></div><div class="modify" align="right" paraseq="287"><span class="btn btn-blue" onclick="submitPart('从上图我们可以看出，使用IOC架构设计，在一个Activity类上方使用我们定义的注解ContentView，并将资源文件Id传入，便可实现页面布局文件的注入，同理，我们使用ViewId注解，并传入控件Id，便可给页面需要的控件制动绑定控件对象。使用上面非常的方便，在节省了大量代码的同时，也让代码更加整洁美观。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>289</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-4 IOC架构实现事件的动态绑定 </span></div></div><div class="para"><div class="duanluo"><span>290</span></div><div class="l"><span style="margin-left:25px"></span><span >从上图我们可以看出，我们可以在Activity中定义一个方法，并通过OnClick注解来实现点击事件的动态绑定，同理，在图5-1中出现的其他事件类， </span><a href="../sentence_detail/541.htm" target="right" class="orange">如OnLongClick，OnTouch等等事件均可用同样的方式实现事件的动态绑定。</a></div><div class="modify" align="right" paraseq="289"><span class="btn btn-blue" onclick="submitPart('从上图我们可以看出，我们可以在Activity中定义一个方法，并通过OnClick注解来实现点击事件的动态绑定，同理，在图5-1中出现的其他事件类，如OnLongClick，OnTouch等等事件均可用同样的方式实现事件的动态绑定。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>291</span></div><div class="l"><span style="margin-left:25px"></span><span >5.2.2Http请求的架构设计 </span></div></div><div class="para"><div class="duanluo"><span>292</span></div><div class="l"><span style="margin-left:25px"></span><span >上文介绍，APP采用OkHttp框架来实现客户端与服务端的数据交互。 </span><span >由于所有的页面几乎都需要调取接口，所以我们对Http请求做了架构上的设计，使APP的网络请求更方便快捷。 </span><span >其类图如下图所示： </span></div><div class="modify" align="right" paraseq="291"><span class="btn btn-blue" onclick="submitPart('上文介绍，APP采用OkHttp框架来实现客户端与服务端的数据交互。由于所有的页面几乎都需要调取接口，所以我们对Http请求做了架构上的设计，使APP的网络请求更方便快捷。其类图如下图所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>293</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-5 Http请求的架构设计类图 </span></div></div><div class="para"><div class="duanluo"><span>294</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/547.htm" target="right" class="orange">从上图可以知道，MyOkHttpClient类使用了单例模式，提供OkHttpClient的单例对象给HttpRequest类。</a><span >HttpRequest类封装了6个方法实现互联网请求，并通过反射HttpParam对象来获取请求参数。 </span><a href="../sentence_detail/549.htm" target="right" class="orange">而所有页面的父类BaseActivity中获取了HttpRequest类的实例，</a><span >从而保证所有的页面都可以直接调用HttpRequest的6和方法之一请求接口。 </span><span >请求的参数只需要新建一个类继承自HttpParam类即可。 </span><span >响应的数据只需要创建一个类继承自ResultCallback，并指定接口将会返回的数据类型，框架会自动解析为相应的相应数据。 </span></div><div class="modify" align="right" paraseq="293"><span class="btn btn-blue" onclick="submitPart('从上图可以知道，MyOkHttpClient类使用了单例模式，提供OkHttpClient的单例对象给HttpRequest类。HttpRequest类封装了6个方法实现互联网请求，并通过反射HttpParam对象来获取请求参数。而所有页面的父类BaseActivity中获取了HttpRequest类的实例，从而保证所有的页面都可以直接调用HttpRequest的6和方法之一请求接口。请求的参数只需要新建一个类继承自HttpParam类即可。响应的数据只需要创建一个类继承自ResultCallback，并指定接口将会返回的数据类型，框架会自动解析为相应的相应数据。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>295</span></div><div class="l"><span style="margin-left:25px"></span><span >5.3APP的页面功能实现 </span></div></div><div class="para"><div class="duanluo"><span>296</span></div><div class="l"><span style="margin-left:25px"></span><span >5.3.1首页各页面的实现 </span></div></div><div class="para"><div class="duanluo"><span>297</span></div><div class="l"><span style="margin-left:25px"></span><span >（1）APP首页 </span></div></div><div class="para"><div class="duanluo"><span>298</span></div><div class="l"><span style="margin-left:25px"></span><span >APP首页上部分为轮播图，首页有缴费的入口和小区动态、报修、交房验房、投诉等功能的入口。 </span><span >APP首页下面有热门邻里圈列表，用户可以浏览访问量最大的邻里圈动态。 </span></div><div class="modify" align="right" paraseq="297"><span class="btn btn-blue" onclick="submitPart('APP首页上部分为轮播图，首页有缴费的入口和小区动态、报修、交房验房、投诉等功能的入口。APP首页下面有热门邻里圈列表，用户可以浏览访问量最大的邻里圈动态。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>299</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-6 APP首页 </span></div></div><div class="para"><div class="duanluo"><span>300</span></div><div class="l"><span style="margin-left:25px"></span><span >（2）小区动态页面 </span></div></div><div class="para"><div class="duanluo"><span>301</span></div><div class="l"><span style="margin-left:25px"></span><span >小区动态页面可以浏览物业和居委会发布的各种消息，并可以点击阅读全文查看全文信息。 </span></div><div class="modify" align="right" paraseq="300"><span class="btn btn-blue" onclick="submitPart('小区动态页面可以浏览物业和居委会发布的各种消息，并可以点击阅读全文查看全文信息。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>302</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-7 小区动态页面 </span></div></div><div class="para"><div class="duanluo"><span>303</span></div><div class="l"><span style="margin-left:25px"></span><span >（3）用户投诉页面 </span></div></div><div class="para"><div class="duanluo"><span>304</span></div><div class="l"><span style="margin-left:25px"></span><span >用户投诉页面可以上传图片，输入投诉的内容，并提交进行投诉。 </span></div></div><div class="para"><div class="duanluo"><span>305</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-8用户投诉上传图片 </span></div></div><div class="para"><div class="duanluo"><span>306</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-9用户投诉 </span></div></div><div class="para"><div class="duanluo"><span>307</span></div><div class="l"><span style="margin-left:25px"></span><span >（4）用户报修 </span></div></div><div class="para"><div class="duanluo"><span>308</span></div><div class="l"><span style="margin-left:25px"></span><span >用户报修前需要登录，报修可进入APP相册选取图片，并可输入文字说明。 </span></div><div class="modify" align="right" paraseq="307"><span class="btn btn-blue" onclick="submitPart('用户报修前需要登录，报修可进入APP相册选取图片，并可输入文字说明。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>309</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-10用户报修选取图片 </span></div></div><div class="para"><div class="duanluo"><span>310</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-11用户报修页面 </span></div></div><div class="para"><div class="duanluo"><span>311</span></div><div class="l"><span style="margin-left:25px"></span><span >（5）交房验房的页面如下图所示： </span></div></div><div class="para"><div class="duanluo"><span>312</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-12 交房验房 </span></div></div><div class="para"><div class="duanluo"><span>313</span></div><div class="l"><span style="margin-left:25px"></span><span >（6）用户缴费 </span></div></div><div class="para"><div class="duanluo"><span>314</span></div><div class="l"><span style="margin-left:25px"></span><span >用户在登录成功后，APP首页点击缴费的类型可以进行缴费，缴费调用支付宝支付接口，相应的界面如下： </span></div><div class="modify" align="right" paraseq="313"><span class="btn btn-blue" onclick="submitPart('用户在登录成功后，APP首页点击缴费的类型可以进行缴费，缴费调用支付宝支付接口，相应的界面如下：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>315</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-13获取缴费列表 </span></div></div><div class="para"><div class="duanluo"><span>316</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-14 缴费 </span></div></div><div class="para"><div class="duanluo"><span>317</span></div><div class="l"><span style="margin-left:25px"></span><span >5.3.2邻里圈各页面的实现 </span></div></div><div class="para"><div class="duanluo"><span>318</span></div><div class="l"><span style="margin-left:25px"></span><span >（1）邻里圈首页 </span></div></div><div class="para"><div class="duanluo"><span>319</span></div><div class="l"><span style="margin-left:25px"></span><span >邻里圈可以浏览周边动态，点击右上角的添加按钮可以发表动态，其页面效果如图5-15所示： </span></div><div class="modify" align="right" paraseq="318"><span class="btn btn-blue" onclick="submitPart('邻里圈可以浏览周边动态，点击右上角的添加按钮可以发表动态，其页面效果如图5-15所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>320</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-15 邻里圈 </span></div></div><div class="para"><div class="duanluo"><span>321</span></div><div class="l"><span style="margin-left:25px"></span><span >（2）发表邻里圈 </span></div></div><div class="para"><div class="duanluo"><span>322</span></div><div class="l"><span style="margin-left:25px"></span><span >发表邻里圈和投诉的操作类似，相应的页面效果如图5-16所示： </span></div><div class="modify" align="right" paraseq="321"><span class="btn btn-blue" onclick="submitPart('发表邻里圈和投诉的操作类似，相应的页面效果如图5-16所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>323</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-16发表邻里圈 </span></div></div><div class="para"><div class="duanluo"><span>324</span></div><div class="l"><span style="margin-left:25px"></span><span >5.3.3个人中心各页面的实现 </span></div></div><div class="para"><div class="duanluo"><span>325</span></div><div class="l"><span style="margin-left:25px"></span><span >（1）个人中心首页 </span></div></div><div class="para"><div class="duanluo"><span>326</span></div><div class="l"><span style="margin-left:25px"></span><span >当用户未登录时，个人中心有按钮提示用户登录，当前用户显示&quot;您好，游客&rdquo;，相应的效果如图5-17所示： </span></div><div class="modify" align="right" paraseq="325"><span class="btn btn-blue" onclick="submitPart('当用户未登录时，个人中心有按钮提示用户登录，当前用户显示&quot;您好，游客&rdquo;，相应的效果如图5-17所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>327</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-17未登录状态下的个人中心 </span></div></div><div class="para"><div class="duanluo"><span>328</span></div><div class="l"><span style="margin-left:25px"></span><span >当用户已经登录，则提示登录的文字消失，当前登录用户的头像右边显示登录用户的手机号，如图5-18所示： </span></div><div class="modify" align="right" paraseq="327"><span class="btn btn-blue" onclick="submitPart('当用户已经登录，则提示登录的文字消失，当前登录用户的头像右边显示登录用户的手机号，如图5-18所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>329</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-18登录状态下的个人中心 </span></div></div><div class="para"><div class="duanluo"><span>330</span></div><div class="l"><span style="margin-left:25px"></span><span >当用户向上滑动页面时，个人中心头部标题栏变为白色，相应的页面如图5-19所示： </span></div><div class="modify" align="right" paraseq="329"><span class="btn btn-blue" onclick="submitPart('当用户向上滑动页面时，个人中心头部标题栏变为白色，相应的页面如图5-19所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>331</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-19个人中心滑动显示效果 </span></div></div><div class="para"><div class="duanluo"><span>332</span></div><div class="l"><span style="margin-left:25px"></span><span >（2）用户注册 </span></div></div><div class="para"><div class="duanluo"><span>333</span></div><div class="l"><span style="margin-left:25px"></span><span >    用户可以通过手机号注册为新用户，相应的页面如图5-20所示： </span></div><div class="modify" align="right" paraseq="332"><span class="btn btn-blue" onclick="submitPart('用户可以通过手机号注册为新用户，相应的页面如图5-20所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>334</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-20APP用户注册 </span></div></div><div class="para"><div class="duanluo"><span>335</span></div><div class="l"><span style="margin-left:25px"></span><span >（3）用户登录 </span></div></div><div class="para"><div class="duanluo"><span>336</span></div><div class="l"><span style="margin-left:25px"></span><span >个人中心所有的操作只有在用户登录的情况下才可以使用，相应的页面如下图所示： </span></div><div class="modify" align="right" paraseq="335"><span class="btn btn-blue" onclick="submitPart('个人中心所有的操作只有在用户登录的情况下才可以使用，相应的页面如下图所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>337</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-21APP用户登录 </span></div></div><div class="para"><div class="duanluo"><span>338</span></div><div class="l"><span style="margin-left:25px"></span><span >（4）个人中心查看缴费记录 </span></div></div><div class="para"><div class="duanluo"><span>339</span></div><div class="l"><span style="margin-left:25px"></span><span >登录用户可以在个人中心查看最近几个月的缴费记录，缴费记录可以查看日期，缴费金额，缴费类型，缴费状态等等，相应的页面如图5-22所示： </span></div><div class="modify" align="right" paraseq="338"><span class="btn btn-blue" onclick="submitPart('登录用户可以在个人中心查看最近几个月的缴费记录，缴费记录可以查看日期，缴费金额，缴费类型，缴费状态等等，相应的页面如图5-22所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>340</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-22缴费记录页面 </span></div></div><div class="para"><div class="duanluo"><span>341</span></div><div class="l"><span style="margin-left:25px"></span><span >（5）APP用户完善资料 </span></div></div><div class="para"><div class="duanluo"><span>342</span></div><div class="l"><span style="margin-left:25px"></span><span >APP用户只有在完善资料的前提下，才可以进行缴费，交房验房等操作。 </span><span >用户完善资料需要填入真实姓名、身份证号、性别、出生年月、家庭人口数、婚姻状况、工作单位、职业、联系方式、小区名称、楼栋、单元和房号等信息， </span><span >点击右上角的完成按钮会提交数据到服务器。 </span><span >相应的页面如图5-23所示： </span></div><div class="modify" align="right" paraseq="341"><span class="btn btn-blue" onclick="submitPart('APP用户只有在完善资料的前提下，才可以进行缴费，交房验房等操作。用户完善资料需要填入真实姓名、身份证号、性别、出生年月、家庭人口数、婚姻状况、工作单位、职业、联系方式、小区名称、楼栋、单元和房号等信息，点击右上角的完成按钮会提交数据到服务器。相应的页面如图5-23所示：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>343</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-23APP用户完善资料 </span></div></div><div class="para"><div class="duanluo"><span>344</span></div><div class="l"><span style="margin-left:25px"></span><span >（6）用户意见反馈，相应的页面如图5-24所示： </span></div></div><div class="para"><div class="duanluo"><span>345</span></div><div class="l"><span style="margin-left:25px"></span><span >图5-24APP用户意见反馈 </span></div></div><div class="para"><div class="duanluo"><span>346</span></div><div class="l"><span style="margin-left:25px"></span><span >6结束语 </span></div></div><div class="para"><div class="duanluo"><span>347</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/609.htm" target="right" class="orange">本文通过分析国内物业管理行业的现状，由此找到了目前我国大部分小区物业服务的缺陷和不足。</a><span >经过细致的研究，从多个方面探讨，最终确定了APP的需求。 </span><span >在需求分析的基础上，利用UML建模工具进行细致的分析，确定了整个APP用户各个功能模块的时序图和流程，并设计出APP的页面原型。 </span><span >在得到APP详细设计之后，本文分析并实现了APP的架构设计。 </span><span >APP的架构设计整体上采用了控制反转（Inversion Of Control）的思想，实现了APP页面内容视图、各个页面控件对象的依赖注入， </span><span >架构中使用到了很多Java反射和注解的知识。 </span><span >通过Java的动态代理机制，实现了页面内各个控件的监听事件代理。 </span><span >架构设计的第二个重点是对OKHttp框架的封装，在设计的过程中主要使用面向对象（OOP）的思想和单例模式等设计模式，设置了一些接口和超类， </span><span >并利用反射实现了万能的Http请求类，大大简化了APP请求网络的代码。 </span><span >最后通过对各个页面的分析和实现，快捷地完成了各个页面的功能。 </span></div><div class="modify" align="right" paraseq="346"><span class="btn btn-blue" onclick="submitPart('本文通过分析国内物业管理行业的现状，由此找到了目前我国大部分小区物业服务的缺陷和不足。经过细致的研究，从多个方面探讨，最终确定了APP的需求。在需求分析的基础上，利用UML建模工具进行细致的分析，确定了整个APP用户各个功能模块的时序图和流程，并设计出APP的页面原型。在得到APP详细设计之后，本文分析并实现了APP的架构设计。APP的架构设计整体上采用了控制反转（Inversion Of Control）的思想，实现了APP页面内容视图、各个页面控件对象的依赖注入，架构中使用到了很多Java反射和注解的知识。通过Java的动态代理机制，实现了页面内各个控件的监听事件代理。架构设计的第二个重点是对OKHttp框架的封装，在设计的过程中主要使用面向对象（OOP）的思想和单例模式等设计模式，设置了一些接口和超类，并利用反射实现了万能的Http请求类，大大简化了APP请求网络的代码。最后通过对各个页面的分析和实现，快捷地完成了各个页面的功能。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>348</span></div><div class="l"><span style="margin-left:25px"></span><span >整体上来看，本APP有以下一些优点： </span></div></div><div class="para"><div class="duanluo"><span>349</span></div><div class="l"><span style="margin-left:25px"></span><span >（1）界面设计合理，简洁，方便用户的操作。 </span></div></div><div class="para"><div class="duanluo"><span>350</span></div><div class="l"><span style="margin-left:25px"></span><span >（2）本APP通过使用加密算法对数据进行加密操作，大大提高了APP用户的数据安全性。 </span></div><div class="modify" align="right" paraseq="349"><span class="btn btn-blue" onclick="submitPart('（2）本APP通过使用加密算法对数据进行加密操作，大大提高了APP用户的数据安全性。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>351</span></div><div class="l"><span style="margin-left:25px"></span><span >（3）本APP通过支付宝缴费，缴费安全系数高，并且各项支出都有详细的清单，用户一目了然。 </span></div><div class="modify" align="right" paraseq="350"><span class="btn btn-blue" onclick="submitPart('（3）本APP通过支付宝缴费，缴费安全系数高，并且各项支出都有详细的清单，用户一目了然。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>352</span></div><div class="l"><span style="margin-left:25px"></span><span >（4）本APP通过小区动态和邻里圈模块的设计，在物业公司和住户，小区住户之间搭建了信息互通的渠道，提升了APP的趣味性和交互性。 </span></div><div class="modify" align="right" paraseq="351"><span class="btn btn-blue" onclick="submitPart('（4）本APP通过小区动态和邻里圈模块的设计，在物业公司和住户，小区住户之间搭建了信息互通的渠道，提升了APP的趣味性和交互性。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>353</span></div><div class="l"><span style="margin-left:25px"></span><span >与此同时，由于开发周期不长，开发模块较多等问题，本APP还存在运行不够流畅，数据比较单一等等问题，希望在日后的开发中能够逐步完善。 </span></div><div class="modify" align="right" paraseq="352"><span class="btn btn-blue" onclick="submitPart('与此同时，由于开发周期不长，开发模块较多等问题，本APP还存在运行不够流畅，数据比较单一等等问题，希望在日后的开发中能够逐步完善。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>354</span></div><div class="l"><span style="margin-left:25px"></span><span >参考文献 </span></div></div><div class="para"><div class="duanluo"><span>355</span></div><div class="l"><span style="margin-left:25px"></span><span >[1] 李宁.Android开发完全讲义（第三版）.北京：水利水电出版社，2015 30-325 </span></div><div class="modify" align="right" paraseq="354"><span class="btn btn-blue" onclick="submitPart('[1] 李宁.Android开发完全讲义（第三版）.北京：水利水电出版社，2015 30-325',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>356</span></div><div class="l"><span style="margin-left:25px"></span><span >[2] 郭霖.第一行代码 Android 第2版.北京：人民邮电出版社，2016 50 221 </span></div><div class="modify" align="right" paraseq="355"><span class="btn btn-blue" onclick="submitPart('[2] 郭霖.第一行代码 Android 第2版.北京：人民邮电出版社，2016 50 221',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>357</span></div><div class="l"><span style="margin-left:25px"></span><span >[3] 毕小朋.精通Android Studio.北京：清华大学出版社，2016 15-125 </span></div><div class="modify" align="right" paraseq="356"><span class="btn btn-blue" onclick="submitPart('[3] 毕小朋.精通Android Studio.北京：清华大学出版社，2016 15-125',this)" class="modify">段落修改</div></div><div align="center" class="navigation"><a href="paper_1.htm"><span class="btn_gray">首页</span></a><a  href="paper_2.htm"><span class="btn_gray">上一页</span></a><a href="#"><span class="btn_gray">下一页</span></a><a href="paper_3.htm">	<span class="btn_gray">尾页</span></a><span>页码：3/3页</span></div><div class="footer"><div align="center" class="a666" style="font-size:14px;padding-top:50px;padding-bottom:30px;"><div>检测报告由 <a class="nounderline" href="http://www.ptcheck.com" target="_blank">PTcheck</a>文献相似度检测系统生成 </div><div>Copyright © 2007-2017 PTcheck </div></div></div></div></body></html>

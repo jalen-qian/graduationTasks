@@ -1,0 +1,446 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>PTcheck论文检测报告</title>
+		<link rel="stylesheet" href="../css/base.css" />
+		<style type="text/css">
+		a {
+    color: #0796fe;
+}
+a:hover{
+    color:#0796fe!important;
+}
+			.mainContainer {
+				padding: 20px;
+	
+			}
+			
+			.navigation span {
+				display: inline-block;
+				padding-left: 5px;
+				padding-right: 5px;
+				color: #666;
+			}
+			
+			.btn_gray {
+				border: solid 1px #dddddd;
+				background-color: #eeeeee;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			
+			.btn_gray:hover,
+			.btn_blue {
+				background-color: #0099ff;
+				border: solid 1px #0099ff;
+				color: #fff!important;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			.para{
+				padding-top:20px;
+			}
+			
+			.duanluo{
+				padding-left:20px;
+				
+				padding-bottom: 5px;
+			}
+			.duanluo span{
+				display: inline-block;
+				padding-left:5px;
+				padding-right: 5px;
+				border: solid 1px #999;
+				color:#999;
+			}
+			.l{
+				line-height: 20px;
+				padding-bottom: 5px;
+			}
+			.l span{
+				color:#333;
+			}
+			.mymodify{
+				font-size:12px;
+			}
+			.mymodify textarea{
+				width:98%;
+				height:100px;
+				color:#333;
+				clear:both;
+			}
+			textarea{
+				padding:10px;
+				line-height: 20px;
+			}
+		</style>
+		<script type="text/javascript">
+
+        var isstorage=false;
+        var danhao;
+        var result= new Array();
+         function trimStr(str) {
+
+            if ((typeof (str) != "string") || !str) {
+
+                return "";
+
+            }
+
+            return str.replace(/(^\s*)|(\s*$)/g, "");
+
+        }
+          
+        function myclick() {
+            window.parent.parent.ViewMain.window.location.href = "../../htmls/jianchong_.htm";
+        }
+        function submitPart(obj, target) {
+            var parent = target.parentNode;
+            if(parent.getAttribute("data")=="add"){
+              var mynext = parent.nextSibling;
+              parent.setAttribute("data","remove");
+              parent.parentNode.removeChild(mynext);
+            }
+            else{
+            	parent.setAttribute("data","add");
+            	var temphtml = document.createElement("div");
+                temphtml.innerHTML = "<input type=\"hidden\" value=\""+ parent.getAttribute("paraseq") +"\"><div name=\"mymodify\" class=\"mymodify\" >"
+					+"<div class=\"a999\">改重内容（请对本句修改之后，点击“临时保存”，然后进入报告左侧“修改文档”页面中获取修改后的内容）：</div>"
+					+"<div><textarea>"+obj
+					+"</textarea>"
+					+"</div>"
+					+"<div align=\"right\" class=\"a999\" style=\"margin-top:14px;\">（注意：改完请及时到“修改文档”复制到原文）<span class=\"btn-gray btn a333\" onclick=\"mysave(this)\">临时保存</span></div>"
+				+"</div>";
+            	   parent.parentNode.insertBefore(temphtml, null);
+            }
+
+        }
+
+		function myNavigate(){
+		 document.getElementById("a_url").click();
+		}
+       
+        function mysave(target) {
+            var tempsen = trimStr(target.parentNode.previousSibling.lastChild.value.replace(/\"/g,"\\\"").replace(/\'/g,"\\\'"));
+            var paraseq = target.parentNode.parentNode.parentNode.firstChild.value;            
+            var mydiv = target.parentNode.parentNode.parentNode.previousSibling;
+             if (mydiv.nodeName == "#text") {
+                mydiv = mydiv.previousSibling;
+            }
+             
+            mydiv.lastChild.setAttribute("onclick", "submitPart('" + tempsen + "',this)");
+           mydiv.setAttribute("data","remove");
+           if (mydiv.firstChild.innerHTML != "已修改") {
+                var xiugai = document.createElement("span");
+                xiugai.setAttribute("style", "font-size:12px;color:#00AEAE;margin-right:10px;");
+                xiugai.innerHTML = "已修改";
+                mydiv.insertBefore(xiugai, mydiv.lastChild);
+               }
+            
+            var parent = target.parentNode.parentNode.parentNode;
+            parent.parentNode.removeChild(parent);
+            if(!isstorage)
+            {
+            window.parent.parent.parent.myset(paraseq, tempsen);
+            }
+            else
+            {
+            myset(paraseq, tempsen);
+            }
+        }
+        window.onload = function() {
+            danhao = document.getElementById("danhao").value;
+            if (window.localStorage) {
+                isstorage = true;
+            }
+            if (!isstorage) {
+                result = window.parent.parent.parent.modifyPara;
+                
+            }
+            else {
+                var temp = localStorage.getItem(danhao);
+                if (temp) {
+                    result = eval("(" + temp + ")");
+                }
+            }
+            if (result) {
+            	
+                for (var i = 0; i < result.length; i++) {
+                	
+                    //var all = $(":hidden");
+                    var all = getClass("div","modify");
+                   
+                    for (var j = 0; j < all.length; j++) {
+                        if (all[j].getAttribute("paraseq") == result[i].para) {
+                        	
+                            var xiugai = document.createElement("span");
+                            xiugai.setAttribute("style", "font-size:12px;color:#00AEAE;margin-right:10px;");
+                            xiugai.innerHTML = "已修改";
+                            all[j].insertBefore(xiugai, all[j].lastChild);
+                            all[j].lastChild.setAttribute("onclick", "submitPart('" + result[i].text.replace(/\"/g,"\\\"").replace(/\'/g,"\\\'") + "',this)");
+                        }
+                    }
+
+                }
+            }  
+        }
+
+
+        function mydivclick(e,obj) {
+            if (e.target.tagName.toUpperCase() != "INPUT") {
+                obj.lastChild.previousSibling.click();
+            }
+        }
+
+        function getClass(tagname, className) { //tagname指元素，className指class的值
+            var tagname = document.getElementsByTagName(tagname);  //获取指定元素
+            var tagnameAll = [];     //这个数组用于存储所有符合条件的元素
+            for (var i = 0; i < tagname.length; i++) {     //遍历获得的元素
+                if (tagname[i].className == className) {     //如果获得的元素中的class的值等于指定的类名，就赋值给tagnameAll
+                    tagnameAll[tagnameAll.length] = tagname[i];
+                }
+            }
+            return tagnameAll;
+
+        }
+
+       
+        
+        
+         function myset(paraseq, sen) {
+         	
+            var reg = new RegExp("\"", "g")
+            var model = "{\"para\":\"" + paraseq + "\",\"text\": \"" + sen + "\"}";
+            var mo = eval("(" + model + ")");
+            var exist = false;
+            for (var i = 0; i < result.length; i++) {
+                if (mo.para == result[i].para) {
+                    exist = true;
+                    result[i].text = mo.text;
+                }
+            }
+            if (!exist) {
+                result.push(mo);
+            }
+            localStorage.removeItem(danhao);
+            localStorage.setItem(danhao, json_encode(result));
+        }
+        
+        function json_decode(str_json) {
+            // Decodes the JSON representation into a PHP value  
+            //  
+            // version: 906.1806  
+            // discuss at: http://phpjs.org/functions/json_decode  
+            // +      original by: Public Domain (http://www.json.org/json2.js)  
+            // + reimplemented by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)  
+            // + improved by: T.J. Leahy  
+            // *     example 1: json_decode('[\n    "e",\n    {\n    "pluribus": "unum"\n}\n]');  
+            // *     returns 1: ['e', {pluribus: 'unum'}]  
+            /* 
+            http://www.JSON.org/json2.js 
+            2008-11-19 
+            Public Domain. 
+            NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK. 
+            See http://www.JSON.org/js.html 
+            */
+
+            var json = this.window.JSON;
+            if (typeof json === 'object' && typeof json.parse === 'function') {
+                return json.parse(str_json);
+            }
+
+            var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+            var j;
+            var text = str_json;
+
+            // Parsing happens in four stages. In the first stage, we replace certain  
+            // Unicode characters with escape sequences. JavaScript handles many characters  
+            // incorrectly, either silently deleting them, or treating them as line endings.  
+            cx.lastIndex = 0;
+            if (cx.test(text)) {
+                text = text.replace(cx, function(a) {
+                    return '\\u' +
+            ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+                });
+            }
+
+            // In the second stage, we run the text against regular expressions that look  
+            // for non-JSON patterns. We are especially concerned with '()' and 'new'  
+            // because they can cause invocation, and '=' because it can cause mutation.  
+            // But just to be safe, we want to reject all unexpected forms.  
+
+            // We split the second stage into 4 regexp operations in order to work around  
+            // crippling inefficiencies in IE's and Safari's regexp engines. First we  
+            // replace the JSON backslash pairs with '@' (a non-JSON character). Second, we  
+            // replace all simple value tokens with ']' characters. Third, we delete all  
+            // open brackets that follow a colon or comma or that begin the text. Finally,  
+            // we look to see that the remaining characters are only whitespace or ']' or  
+            // ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.  
+            if (/^[\],:{}\s]*$/.
+        test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@').
+            replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+            replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+
+                // In the third stage we use the eval function to compile the text into a  
+                // JavaScript structure. The '{' operator is subject to a syntactic ambiguity  
+                // in JavaScript: it can begin a block or an object literal. We wrap the text  
+                // in parens to eliminate the ambiguity.  
+
+                j = eval('(' + text + ')');
+
+                return j;
+            }
+
+            // If the text is not JSON parseable, then a SyntaxError is thrown.  
+            throw new SyntaxError('json_decode');
+        }
+
+        function json_encode(mixed_val) {
+            // Returns the JSON representation of a value  
+            //  
+            // version: 906.1806  
+            // discuss at: http://phpjs.org/functions/json_encode  
+            // +      original by: Public Domain (http://www.json.org/json2.js)  
+            // + reimplemented by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)  
+            // + improved by: T.J. Leahy  
+            // *     example 1: json_encode(['e', {pluribus: 'unum'}]);  
+            // *     returns 1: '[\n    "e",\n    {\n    "pluribus": "unum"\n}\n]'  
+            /* 
+            http://www.JSON.org/json2.js 
+            2008-11-19 
+            Public Domain. 
+            NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK. 
+            See http://www.JSON.org/js.html 
+            */
+            var json = this.window.JSON;
+            if (typeof json === 'object' && typeof json.stringify === 'function') {
+                return json.stringify(mixed_val);
+            }
+
+            var value = mixed_val;
+
+            var quote = function(string) {
+                var escapable = /[\\\"\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+                var meta = {    // table of character substitutions  
+                    '\b': '\\b',
+                    '\t': '\\t',
+                    '\n': '\\n',
+                    '\f': '\\f',
+                    '\r': '\\r',
+                    '"': '\\"',
+                    '\\': '\\\\'
+                };
+
+                escapable.lastIndex = 0;
+                return escapable.test(string) ?
+        '"' + string.replace(escapable, function(a) {
+            var c = meta[a];
+            return typeof c === 'string' ? c :
+            '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+        }) + '"' :
+        '"' + string + '"';
+            };
+
+            var str = function(key, holder) {
+                var gap = '';
+                var indent = '    ';
+                var i = 0;          // The loop counter.  
+                var k = '';          // The member key.  
+                var v = '';          // The member value.  
+                var length = 0;
+                var mind = gap;
+                var partial = [];
+                var value = holder[key];
+
+                // If the value has a toJSON method, call it to obtain a replacement value.  
+                if (value && typeof value === 'object' &&
+            typeof value.toJSON === 'function') {
+                    value = value.toJSON(key);
+                }
+
+                // What happens next depends on the value's type.  
+                switch (typeof value) {
+                    case 'string':
+                        return quote(value);
+
+                    case 'number':
+                        // JSON numbers must be finite. Encode non-finite numbers as null.  
+                        return isFinite(value) ? String(value) : 'null';
+
+                    case 'boolean':
+                    case 'null':
+                        // If the value is a boolean or null, convert it to a string. Note:  
+                        // typeof null does not produce 'null'. The case is included here in  
+                        // the remote chance that this gets fixed someday.  
+
+                        return String(value);
+
+                    case 'object':
+                        // If the type is 'object', we might be dealing with an object or an array or  
+                        // null.  
+                        // Due to a specification blunder in ECMAScript, typeof null is 'object',  
+                        // so watch out for that case.  
+                        if (!value) {
+                            return 'null';
+                        }
+
+                        // Make an array to hold the partial results of stringifying this object value.  
+                        gap += indent;
+                        partial = [];
+
+                        // Is the value an array?  
+                        if (Object.prototype.toString.apply(value) === '[object Array]') {
+                            // The value is an array. Stringify every element. Use null as a placeholder  
+                            // for non-JSON values.  
+
+                            length = value.length;
+                            for (i = 0; i < length; i += 1) {
+                                partial[i] = str(i, value) || 'null';
+                            }
+
+                            // Join all of the elements together, separated with commas, and wrap them in  
+                            // brackets.  
+                            v = partial.length === 0 ? '[]' :
+                    gap ? '[\n' + gap +
+                    partial.join(',\n' + gap) + '\n' +
+                    mind + ']' :
+                    '[' + partial.join(',') + ']';
+                            gap = mind;
+                            return v;
+                        }
+
+                        // Iterate through all of the keys in the object.  
+                        for (k in value) {
+                            if (Object.hasOwnProperty.call(value, k)) {
+                                v = str(k, value);
+                                if (v) {
+                                    partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                                }
+                            }
+                        }
+
+                        // Join all of the member texts together, separated with commas,  
+                        // and wrap them in braces.  
+                        v = partial.length === 0 ? '{}' :
+                gap ? '{\n' + gap + partial.join(',\n' + gap) + '\n' +
+                mind + '}' : '{' + partial.join(',') + '}';
+                        gap = mind;
+                        return v;
+                }
+            };
+
+            // Make a fake root object containing our value under the key of ''.  
+            // Return the result of stringifying the value.  
+            return str('', {
+                '': value
+            });
+        } 
+       
+    </script>
+	</head>
+
+	<body><a href="http://www.ptcheck.com/jack/segment.aspx" target="_blank" id="a_url" style="display:none;" ></a> <input type="hidden" id="danhao" value="9602180759585256" /><div class="mainContainer"><div align="center" class="navigation"><a href="paper_1.htm"><span class="btn_gray">首页</span></a><a  href="paper_1.htm"><span class="btn_gray">上一页</span></a><a href="paper_3.htm"><span class="btn_gray">下一页</span></a><a href="paper_3.htm">	<span class="btn_gray">尾页</span></a><span>页码：2/3页</span></div><div class="zhengwen"><div class="para"><div class="duanluo"><span>121</span></div><div class="l"><span style="margin-left:25px"></span><span >针对APP的系统用例，下面的各个表中给出了详细的用例分析。 </span></div></div><div class="para"><div class="duanluo"><span>122</span></div><div class="l"><span style="margin-left:25px"></span><span >（1）用户注册 </span></div></div><div class="para"><div class="duanluo"><span>123</span></div><div class="l"><span style="margin-left:25px"></span><span >用户注册的用例分析如下表所示： </span></div></div><div class="para"><div class="duanluo"><span>124</span></div><div class="l"><span style="margin-left:25px"></span><span >表3-1注册用例分析 </span></div></div><div class="para"><div class="duanluo"><span>125</span></div><div class="l"><span style="margin-left:25px"></span><span >用例名称	注册 </span></div></div><div class="para"><div class="duanluo"><span>126</span></div><div class="l"><span style="margin-left:25px"></span><span >用例ID	001 </span></div></div><div class="para"><div class="duanluo"><span>127</span></div><div class="l"><span style="margin-left:25px"></span><span >角色	用户 </span></div></div><div class="para"><div class="duanluo"><span>128</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/323.htm" target="right" class="red">用例描述	用户点击登录页注册按钮进入注册页，填写手机号并点击&quot;获取验证码&rdquo;，填写收到的6位数字验证码，并输入密码，完成注册。</a></div><div class="modify" align="right" paraseq="127"><span class="btn btn-blue" onclick="submitPart('用例描述	用户点击登录页注册按钮进入注册页，填写手机号并点击&quot;获取验证码&rdquo;，填写收到的6位数字验证码，并输入密码，完成注册。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>129</span></div><div class="l"><span style="margin-left:25px"></span><span >前置条件	用户进入登录页 </span></div></div><div class="para"><div class="duanluo"><span>130</span></div><div class="l"><span style="margin-left:25px"></span><span >后置	注册成功跳转到登录页 </span></div></div><div class="para"><div class="duanluo"><span>131</span></div><div class="l"><span style="margin-left:25px"></span><span >（2）用户登录 </span></div></div><div class="para"><div class="duanluo"><span>132</span></div><div class="l"><span style="margin-left:25px"></span><span >用户登录的用例分析如下表所示： </span></div></div><div class="para"><div class="duanluo"><span>133</span></div><div class="l"><span style="margin-left:25px"></span><span >表3-2登录用例分析 </span></div></div><div class="para"><div class="duanluo"><span>134</span></div><div class="l"><span style="margin-left:25px"></span><span >用例名称	登录 </span></div></div><div class="para"><div class="duanluo"><span>135</span></div><div class="l"><span style="margin-left:25px"></span><span >用例ID	002 </span></div></div><div class="para"><div class="duanluo"><span>136</span></div><div class="l"><span style="margin-left:25px"></span><span >角色	用户 </span></div></div><div class="para"><div class="duanluo"><span>137</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/332.htm" target="right" class="orange">用例描述	用户注册完成后，进入登录页，输入手机号和密码，点击登录按钮完成登录。</a></div><div class="modify" align="right" paraseq="136"><span class="btn btn-blue" onclick="submitPart('用例描述	用户注册完成后，进入登录页，输入手机号和密码，点击登录按钮完成登录。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>138</span></div><div class="l"><span style="margin-left:25px"></span><span >前置条件	用户完成注册 </span></div></div><div class="para"><div class="duanluo"><span>139</span></div><div class="l"><span style="margin-left:25px"></span><span >后置	登录成功跳转到APP首页 </span></div></div><div class="para"><div class="duanluo"><span>140</span></div><div class="l"><span style="margin-left:25px"></span><span >（3）用户报修 </span></div></div><div class="para"><div class="duanluo"><span>141</span></div><div class="l"><span style="margin-left:25px"></span><span >用户报修的用例分析如下表所示： </span></div></div><div class="para"><div class="duanluo"><span>142</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/337.htm" target="right" class="orange">表3-3用户报修用例分析</a></div></div><div class="para"><div class="duanluo"><span>143</span></div><div class="l"><span style="margin-left:25px"></span><span >用例名称	报修 </span></div></div><div class="para"><div class="duanluo"><span>144</span></div><div class="l"><span style="margin-left:25px"></span><span >用例ID	003 </span></div></div><div class="para"><div class="duanluo"><span>145</span></div><div class="l"><span style="margin-left:25px"></span><span >角色	用户 </span></div></div><div class="para"><div class="duanluo"><span>146</span></div><div class="l"><span style="margin-left:25px"></span><span >用例描述	用户进入首页，点击报修按钮进入报修页面，选择报修类型，输入姓名和电话以及报修描述，并添加图片（最多3张），点击提交按钮完成报修。 </span></div><div class="modify" align="right" paraseq="145"><span class="btn btn-blue" onclick="submitPart('用例描述	用户进入首页，点击报修按钮进入报修页面，选择报修类型，输入姓名和电话以及报修描述，并添加图片（最多3张），点击提交按钮完成报修。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>147</span></div><div class="l"><span style="margin-left:25px"></span><span >前置条件	用户已登录 </span></div></div><div class="para"><div class="duanluo"><span>148</span></div><div class="l"><span style="margin-left:25px"></span><span >后置	报修成功跳转到首页 </span></div></div><div class="para"><div class="duanluo"><span>149</span></div><div class="l"><span style="margin-left:25px"></span><span >（4）用户投诉 </span></div></div><div class="para"><div class="duanluo"><span>150</span></div><div class="l"><span style="margin-left:25px"></span><span >用户投诉的用例分析如下表所示： </span></div></div><div class="para"><div class="duanluo"><span>151</span></div><div class="l"><span style="margin-left:25px"></span><span >表3-4用户投诉用例分析 </span></div></div><div class="para"><div class="duanluo"><span>152</span></div><div class="l"><span style="margin-left:25px"></span><span >用例名称	登录 </span></div></div><div class="para"><div class="duanluo"><span>153</span></div><div class="l"><span style="margin-left:25px"></span><span >用例ID	004 </span></div></div><div class="para"><div class="duanluo"><span>154</span></div><div class="l"><span style="margin-left:25px"></span><span >角色	用户 </span></div></div><div class="para"><div class="duanluo"><span>155</span></div><div class="l"><span style="margin-left:25px"></span><span >用例描述	用户进入首页，点击投诉按钮进入投诉页面，输入投诉的文字内容，选择要上传你的图片（最多3张，也可不选择），点击提交按钮完成投诉。 </span></div><div class="modify" align="right" paraseq="154"><span class="btn btn-blue" onclick="submitPart('用例描述	用户进入首页，点击投诉按钮进入投诉页面，输入投诉的文字内容，选择要上传你的图片（最多3张，也可不选择），点击提交按钮完成投诉。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>156</span></div><div class="l"><span style="margin-left:25px"></span><span >前置条件	用户完成注册 </span></div></div><div class="para"><div class="duanluo"><span>157</span></div><div class="l"><span style="margin-left:25px"></span><span >后置	投诉成功跳转到APP首页 </span></div></div><div class="para"><div class="duanluo"><span>158</span></div><div class="l"><span style="margin-left:25px"></span><span >（5）用户新增缴费地址 </span></div></div><div class="para"><div class="duanluo"><span>159</span></div><div class="l"><span style="margin-left:25px"></span><span >用户新增缴费地址的用例分析如下表所示： </span></div></div><div class="para"><div class="duanluo"><span>160</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/355.htm" target="right" class="orange">表3-5用户新增缴费地址用例分析</a></div></div><div class="para"><div class="duanluo"><span>161</span></div><div class="l"><span style="margin-left:25px"></span><span >用例名称	新增缴费地址 </span></div></div><div class="para"><div class="duanluo"><span>162</span></div><div class="l"><span style="margin-left:25px"></span><span >用例ID	005 </span></div></div><div class="para"><div class="duanluo"><span>163</span></div><div class="l"><span style="margin-left:25px"></span><span >角色	用户 </span></div></div><div class="para"><div class="duanluo"><span>164</span></div><div class="l"><span style="margin-left:25px"></span><span >用例描述	用户进入首页，点击任意一个缴费按钮，进入缴费地址页面，点击&quot;新增地址&rdquo;，进入新增缴费地址页面，填入地址信息。 </span></div><div class="modify" align="right" paraseq="163"><span class="btn btn-blue" onclick="submitPart('用例描述	用户进入首页，点击任意一个缴费按钮，进入缴费地址页面，点击&quot;新增地址&rdquo;，进入新增缴费地址页面，填入地址信息。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>165</span></div><div class="l"><span style="margin-left:25px"></span><span >前置条件	用户已登录 </span></div></div><div class="para"><div class="duanluo"><span>166</span></div><div class="l"><span style="margin-left:25px"></span><span >后置	缴费地址列表新增一条地址 </span></div></div><div class="para"><div class="duanluo"><span>167</span></div><div class="l"><span style="margin-left:25px"></span><span >（6）物业缴费 </span></div></div><div class="para"><div class="duanluo"><span>168</span></div><div class="l"><span style="margin-left:25px"></span><span >用户物业缴费的用例分析如下表所示： </span></div></div><div class="para"><div class="duanluo"><span>169</span></div><div class="l"><span style="margin-left:25px"></span><span >表3-6用户物业缴费用例分析 </span></div></div><div class="para"><div class="duanluo"><span>170</span></div><div class="l"><span style="margin-left:25px"></span><span >用例名称	物业缴费 </span></div></div><div class="para"><div class="duanluo"><span>171</span></div><div class="l"><span style="margin-left:25px"></span><span >用例ID	006 </span></div></div><div class="para"><div class="duanluo"><span>172</span></div><div class="l"><span style="margin-left:25px"></span><span >角色	用户 </span></div></div><div class="para"><div class="duanluo"><span>173</span></div><div class="l"><span style="margin-left:25px"></span><span >用例描述	用户进入首页，点击任意一个缴费按钮，进入缴费地址页面，选择一个缴费地址，并进入缴费清单界面，选择缴费的月份，并核对金额， </span><span >确认后输入支付密码进行缴费。 </span></div><div class="modify" align="right" paraseq="172"><span class="btn btn-blue" onclick="submitPart('用例描述	用户进入首页，点击任意一个缴费按钮，进入缴费地址页面，选择一个缴费地址，并进入缴费清单界面，选择缴费的月份，并核对金额，确认后输入支付密码进行缴费。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>174</span></div><div class="l"><span style="margin-left:25px"></span><span >前置条件	用户已登录且完善资料 </span></div></div><div class="para"><div class="duanluo"><span>175</span></div><div class="l"><span style="margin-left:25px"></span><span >后置	用户缴费成功，回到首页 </span></div></div><div class="para"><div class="duanluo"><span>176</span></div><div class="l"><span style="margin-left:25px"></span><span >（7）用户完善个人资料 </span></div></div><div class="para"><div class="duanluo"><span>177</span></div><div class="l"><span style="margin-left:25px"></span><span >用户完善个人资料的用例分析如下表所示： </span></div></div><div class="para"><div class="duanluo"><span>178</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/374.htm" target="right" class="orange">表3-7用户完善个人资料用例分析</a></div></div><div class="para"><div class="duanluo"><span>179</span></div><div class="l"><span style="margin-left:25px"></span><span >用例名称	完善个人资料 </span></div></div><div class="para"><div class="duanluo"><span>180</span></div><div class="l"><span style="margin-left:25px"></span><span >用例ID	007 </span></div></div><div class="para"><div class="duanluo"><span>181</span></div><div class="l"><span style="margin-left:25px"></span><span >角色	用户 </span></div></div><div class="para"><div class="duanluo"><span>182</span></div><div class="l"><span style="margin-left:25px"></span><span >用例描述	用户进入首页，点击个人中心完善资料条目，进入完善资料页面，按照要求填入各项信息，并点击提交按钮。 </span></div><div class="modify" align="right" paraseq="181"><span class="btn btn-blue" onclick="submitPart('用例描述	用户进入首页，点击个人中心完善资料条目，进入完善资料页面，按照要求填入各项信息，并点击提交按钮。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>183</span></div><div class="l"><span style="margin-left:25px"></span><span >前置条件	用户已登录 </span></div></div><div class="para"><div class="duanluo"><span>184</span></div><div class="l"><span style="margin-left:25px"></span><span >后置	完善资料成功，回到首页 </span></div></div><div class="para"><div class="duanluo"><span>185</span></div><div class="l"><span style="margin-left:25px"></span><span >（8）用户查看小区动态 </span></div></div><div class="para"><div class="duanluo"><span>186</span></div><div class="l"><span style="margin-left:25px"></span><span >用户查看小区动态的用例分析如下表所示： </span></div></div><div class="para"><div class="duanluo"><span>187</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/383.htm" target="right" class="orange">表3-8用户查看小区动态用例分析</a></div></div><div class="para"><div class="duanluo"><span>188</span></div><div class="l"><span style="margin-left:25px"></span><span >用例名称	查看小区动态 </span></div></div><div class="para"><div class="duanluo"><span>189</span></div><div class="l"><span style="margin-left:25px"></span><span >用例ID	008 </span></div></div><div class="para"><div class="duanluo"><span>190</span></div><div class="l"><span style="margin-left:25px"></span><span >角色	用户 </span></div></div><div class="para"><div class="duanluo"><span>191</span></div><div class="l"><span style="margin-left:25px"></span><span >用例描述	用户进入首页，点击小区动态按钮，进入小区动态页面，查看小区动态。 </span></div><div class="modify" align="right" paraseq="190"><span class="btn btn-blue" onclick="submitPart('用例描述	用户进入首页，点击小区动态按钮，进入小区动态页面，查看小区动态。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>192</span></div><div class="l"><span style="margin-left:25px"></span><span >前置条件	用户已登录 </span></div></div><div class="para"><div class="duanluo"><span>193</span></div><div class="l"><span style="margin-left:25px"></span><span >后置	查看完点击返回键回到APP首页 </span></div></div><div class="para"><div class="duanluo"><span>194</span></div><div class="l"><span style="margin-left:25px"></span><span >（9）用户查看邻里圈动态 </span></div></div><div class="para"><div class="duanluo"><span>195</span></div><div class="l"><span style="margin-left:25px"></span><span >用户查看邻里圈动态的用例分析如下表所示： </span></div></div><div class="para"><div class="duanluo"><span>196</span></div><div class="l"><span style="margin-left:25px"></span><span >表3-9用户查看邻里圈动态用例分析 </span></div></div><div class="para"><div class="duanluo"><span>197</span></div><div class="l"><span style="margin-left:25px"></span><span >用例名称	用户查看邻里圈动态 </span></div></div><div class="para"><div class="duanluo"><span>198</span></div><div class="l"><span style="margin-left:25px"></span><span >用例ID	009 </span></div></div><div class="para"><div class="duanluo"><span>199</span></div><div class="l"><span style="margin-left:25px"></span><span >角色	用户和游客 </span></div></div><div class="para"><div class="duanluo"><span>200</span></div><div class="l"><span style="margin-left:25px"></span><span >用例描述	用户进入首页，点击邻里圈，进入邻里圈页面，查看当前邻里圈动态。 </span></div><div class="modify" align="right" paraseq="199"><span class="btn btn-blue" onclick="submitPart('用例描述	用户进入首页，点击邻里圈，进入邻里圈页面，查看当前邻里圈动态。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>201</span></div><div class="l"><span style="margin-left:25px"></span><span >前置条件	用户点击邻里圈 </span></div></div><div class="para"><div class="duanluo"><span>202</span></div><div class="l"><span style="margin-left:25px"></span><span >后置	无 </span></div></div><div class="para"><div class="duanluo"><span>203</span></div><div class="l"><span style="margin-left:25px"></span><span >（10）用户发表邻里圈动态 </span></div></div><div class="para"><div class="duanluo"><span>204</span></div><div class="l"><span style="margin-left:25px"></span><span >用户发表邻里圈动态的用例分析如下表所示： </span></div></div><div class="para"><div class="duanluo"><span>205</span></div><div class="l"><span style="margin-left:25px"></span><span >表3-10用户发表邻里圈动态用例分析 </span></div></div><div class="para"><div class="duanluo"><span>206</span></div><div class="l"><span style="margin-left:25px"></span><span >用例名称	用户发表邻里圈动态 </span></div></div><div class="para"><div class="duanluo"><span>207</span></div><div class="l"><span style="margin-left:25px"></span><span >用例ID	010 </span></div></div><div class="para"><div class="duanluo"><span>208</span></div><div class="l"><span style="margin-left:25px"></span><span >角色	用户 </span></div></div><div class="para"><div class="duanluo"><span>209</span></div><div class="l"><span style="margin-left:25px"></span><span >用例描述	用户进入首页，点击邻里圈，进入邻里圈页面，点击右上角的添加按钮，进入发表邻里圈页面，输入文字，选择图片，点击发表按钮。 </span></div><div class="modify" align="right" paraseq="208"><span class="btn btn-blue" onclick="submitPart('用例描述	用户进入首页，点击邻里圈，进入邻里圈页面，点击右上角的添加按钮，进入发表邻里圈页面，输入文字，选择图片，点击发表按钮。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>210</span></div><div class="l"><span style="margin-left:25px"></span><span >前置条件	用户已登录 </span></div></div><div class="para"><div class="duanluo"><span>211</span></div><div class="l"><span style="margin-left:25px"></span><span >后置	发表完成进入邻里圈页面 </span></div></div><div class="para"><div class="duanluo"><span>212</span></div><div class="l"><span style="margin-left:25px"></span><span >（11）用户意见反馈 </span></div></div><div class="para"><div class="duanluo"><span>213</span></div><div class="l"><span style="margin-left:25px"></span><span >用户意见反馈的用例分析如下表所示： </span></div></div><div class="para"><div class="duanluo"><span>214</span></div><div class="l"><span style="margin-left:25px"></span><span >表3-11用户意见反馈用例分析 </span></div></div><div class="para"><div class="duanluo"><span>215</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/411.htm" target="right" class="red">用例名称	用户意见反馈</a></div></div><div class="para"><div class="duanluo"><span>216</span></div><div class="l"><span style="margin-left:25px"></span><span >用例ID	011 </span></div></div><div class="para"><div class="duanluo"><span>217</span></div><div class="l"><span style="margin-left:25px"></span><span >角色	用户 </span></div></div><div class="para"><div class="duanluo"><span>218</span></div><div class="l"><span style="margin-left:25px"></span><span >用例描述	用户进入首页，点击个人中心，点击 意见反馈条目，进入意见反馈页面，输入反馈内容，点击提交按钮。 </span></div><div class="modify" align="right" paraseq="217"><span class="btn btn-blue" onclick="submitPart('用例描述	用户进入首页，点击个人中心，点击 意见反馈条目，进入意见反馈页面，输入反馈内容，点击提交按钮。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>219</span></div><div class="l"><span style="margin-left:25px"></span><span >前置条件	用户已登录 </span></div></div><div class="para"><div class="duanluo"><span>220</span></div><div class="l"><span style="margin-left:25px"></span><span >后置	反馈成功，返回个人中心 </span></div></div><div class="para"><div class="duanluo"><span>221</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/417.htm" target="right" class="red">（12）用户修改手机号</a></div></div><div class="para"><div class="duanluo"><span>222</span></div><div class="l"><span style="margin-left:25px"></span><span >用户修改手机号用例分析如下表所示： </span></div></div><div class="para"><div class="duanluo"><span>223</span></div><div class="l"><span style="margin-left:25px"></span><span >表3-12用户修改手机号用例分析 </span></div></div><div class="para"><div class="duanluo"><span>224</span></div><div class="l"><span style="margin-left:25px"></span><span >用例名称	用户修改手机号 </span></div></div><div class="para"><div class="duanluo"><span>225</span></div><div class="l"><span style="margin-left:25px"></span><span >用例ID	012 </span></div></div><div class="para"><div class="duanluo"><span>226</span></div><div class="l"><span style="margin-left:25px"></span><span >角色	用户 </span></div></div><div class="para"><div class="duanluo"><span>227</span></div><div class="l"><span style="margin-left:25px"></span><span >用例描述	用户进入首页，点击个人中心，点击修改手机号条目，进入修改手机号页面，输入新手机号和收到的短信验证码与密码，点击确认按钮进行修改。 </span></div><div class="modify" align="right" paraseq="226"><span class="btn btn-blue" onclick="submitPart('用例描述	用户进入首页，点击个人中心，点击修改手机号条目，进入修改手机号页面，输入新手机号和收到的短信验证码与密码，点击确认按钮进行修改。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>228</span></div><div class="l"><span style="margin-left:25px"></span><span >前置条件	用户已登录 </span></div></div><div class="para"><div class="duanluo"><span>229</span></div><div class="l"><span style="margin-left:25px"></span><span >后置	修改成功，进入登录页重新登录 </span></div></div><div class="para"><div class="duanluo"><span>230</span></div><div class="l"><span style="margin-left:25px"></span><span >4.物业服务APP详细设计 </span></div></div><div class="para"><div class="duanluo"><span>231</span></div><div class="l"><span style="margin-left:25px"></span><span >4.1系统总体架构 </span></div></div><div class="para"><div class="duanluo"><span>232</span></div><div class="l"><span style="margin-left:25px"></span><span >系统的总体架构图如下： </span></div></div><div class="para"><div class="duanluo"><span>233</span></div><div class="l"><span style="margin-left:25px"></span><span >图4-1 APP的系统架构图 </span></div></div><div class="para"><div class="duanluo"><span>234</span></div><div class="l"><span style="margin-left:25px"></span><span >上图是从整个软件系统来考虑，不仅仅局限于APP的设计。 </span><span >从整体上来看，整个系统共分为4层，分别是数据层、服务层、控制层和访问层。 </span><span >我们开发的APP属于访问层。 </span><span >小区用户通过APP注册成为客户端用户，并通过接口与Web服务器进行交互，实现缴费、投诉、发表邻友圈动态、报修、反馈意见，接收消息等等功能。 </span><span >而物业公司管理人员通过浏览器注册登录系统，成为系统管理员。 </span><span >登录之后可以实现缴费管理、会员管理、投诉管理、报修管理、消息管理等等功能。 </span><span >而所有的交互数据都是由WEB服务器处理后反馈给APP用户和系统管理员的。 </span><span >Web服务器所需要的数据存储在数据库中，web服务器通过增删改查等等操作，与数据库进行交互。 </span></div><div class="modify" align="right" paraseq="233"><span class="btn btn-blue" onclick="submitPart('上图是从整个软件系统来考虑，不仅仅局限于APP的设计。从整体上来看，整个系统共分为4层，分别是数据层、服务层、控制层和访问层。我们开发的APP属于访问层。小区用户通过APP注册成为客户端用户，并通过接口与Web服务器进行交互，实现缴费、投诉、发表邻友圈动态、报修、反馈意见，接收消息等等功能。而物业公司管理人员通过浏览器注册登录系统，成为系统管理员。登录之后可以实现缴费管理、会员管理、投诉管理、报修管理、消息管理等等功能。而所有的交互数据都是由WEB服务器处理后反馈给APP用户和系统管理员的。Web服务器所需要的数据存储在数据库中，web服务器通过增删改查等等操作，与数据库进行交互。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>235</span></div><div class="l"><span style="margin-left:25px"></span><span >4.2APP功能模块设计 </span></div></div><div class="para"><div class="duanluo"><span>236</span></div><div class="l"><span style="margin-left:25px"></span><span >4.2.1用户模块设计 </span></div></div><div class="para"><div class="duanluo"><span>237</span></div><div class="l"><span style="margin-left:25px"></span><span >APP的用户模块主要有用户的登录和注册，投诉，报修，查看社区通知动态，办理交房验房手续等等功能。 </span><span >上述功能只有登录用户才可以使用。 </span><span >APP用户的唯一标识是手机号，在APP中只有通过手机号注册才可登录，只有登录成功之后才可以进行投诉、报修、验收房等等操作。 </span></div><div class="modify" align="right" paraseq="236"><span class="btn btn-blue" onclick="submitPart('APP的用户模块主要有用户的登录和注册，投诉，报修，查看社区通知动态，办理交房验房手续等等功能。上述功能只有登录用户才可以使用。APP用户的唯一标识是手机号，在APP中只有通过手机号注册才可登录，只有登录成功之后才可以进行投诉、报修、验收房等等操作。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>238</span></div><div class="l"><span style="margin-left:25px"></span><span >1.APP用户注册的时序图如下图所示： </span></div></div><div class="para"><div class="duanluo"><span>239</span></div><div class="l"><span style="margin-left:25px"></span><span >图4-1 APP用户注册时序图 </span></div></div><div class="para"><div class="duanluo"><span>240</span></div><div class="l"><span style="margin-left:25px"></span><span >用户注册的时序图中我们可以看出，用户点击进入APP首页之后才有注册页面的入口，进入注册页面之后，首先需要填入手机号、密码、确认密码、验证码等信息， </span><span >填入之后通过API接口提交给后台服务器进行验证，服务器验证通过，则会将此用户信息加密后存储到数据库表中，并返回给APP注册成功的信息。 </span><span >同样，用户的登录过程的时序图是相同的，这里不再重复阐述。 </span></div><div class="modify" align="right" paraseq="239"><span class="btn btn-blue" onclick="submitPart('用户注册的时序图中我们可以看出，用户点击进入APP首页之后才有注册页面的入口，进入注册页面之后，首先需要填入手机号、密码、确认密码、验证码等信息，填入之后通过API接口提交给后台服务器进行验证，服务器验证通过，则会将此用户信息加密后存储到数据库表中，并返回给APP注册成功的信息。同样，用户的登录过程的时序图是相同的，这里不再重复阐述。',this)" class="modify">段落修改</div></div><div align="center" class="navigation"><a href="paper_1.htm"><span class="btn_gray">首页</span></a><a  href="paper_1.htm"><span class="btn_gray">上一页</span></a><a href="paper_3.htm"><span class="btn_gray">下一页</span></a><a href="paper_3.htm">	<span class="btn_gray">尾页</span></a><span>页码：2/3页</span></div><div class="footer"><div align="center" class="a666" style="font-size:14px;padding-top:50px;padding-bottom:30px;"><div>检测报告由 <a class="nounderline" href="http://www.ptcheck.com" target="_blank">PTcheck</a>文献相似度检测系统生成 </div><div>Copyright © 2007-2017 PTcheck </div></div></div></div></body></html>

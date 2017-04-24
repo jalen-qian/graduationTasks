@@ -1,0 +1,446 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>PTcheck论文检测报告</title>
+		<link rel="stylesheet" href="../css/base.css" />
+		<style type="text/css">
+		a {
+    color: #0796fe;
+}
+a:hover{
+    color:#0796fe!important;
+}
+			.mainContainer {
+				padding: 20px;
+	
+			}
+			
+			.navigation span {
+				display: inline-block;
+				padding-left: 5px;
+				padding-right: 5px;
+				color: #666;
+			}
+			
+			.btn_gray {
+				border: solid 1px #dddddd;
+				background-color: #eeeeee;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			
+			.btn_gray:hover,
+			.btn_blue {
+				background-color: #0099ff;
+				border: solid 1px #0099ff;
+				color: #fff!important;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			.para{
+				padding-top:20px;
+			}
+			
+			.duanluo{
+				padding-left:20px;
+				
+				padding-bottom: 5px;
+			}
+			.duanluo span{
+				display: inline-block;
+				padding-left:5px;
+				padding-right: 5px;
+				border: solid 1px #999;
+				color:#999;
+			}
+			.l{
+				line-height: 20px;
+				padding-bottom: 5px;
+			}
+			.l span{
+				color:#333;
+			}
+			.mymodify{
+				font-size:12px;
+			}
+			.mymodify textarea{
+				width:98%;
+				height:100px;
+				color:#333;
+				clear:both;
+			}
+			textarea{
+				padding:10px;
+				line-height: 20px;
+			}
+		</style>
+		<script type="text/javascript">
+
+        var isstorage=false;
+        var danhao;
+        var result= new Array();
+         function trimStr(str) {
+
+            if ((typeof (str) != "string") || !str) {
+
+                return "";
+
+            }
+
+            return str.replace(/(^\s*)|(\s*$)/g, "");
+
+        }
+          
+        function myclick() {
+            window.parent.parent.ViewMain.window.location.href = "../../htmls/jianchong_.htm";
+        }
+        function submitPart(obj, target) {
+            var parent = target.parentNode;
+            if(parent.getAttribute("data")=="add"){
+              var mynext = parent.nextSibling;
+              parent.setAttribute("data","remove");
+              parent.parentNode.removeChild(mynext);
+            }
+            else{
+            	parent.setAttribute("data","add");
+            	var temphtml = document.createElement("div");
+                temphtml.innerHTML = "<input type=\"hidden\" value=\""+ parent.getAttribute("paraseq") +"\"><div name=\"mymodify\" class=\"mymodify\" >"
+					+"<div class=\"a999\">改重内容（请对本句修改之后，点击“临时保存”，然后进入报告左侧“修改文档”页面中获取修改后的内容）：</div>"
+					+"<div><textarea>"+obj
+					+"</textarea>"
+					+"</div>"
+					+"<div align=\"right\" class=\"a999\" style=\"margin-top:14px;\">（注意：改完请及时到“修改文档”复制到原文）<span class=\"btn-gray btn a333\" onclick=\"mysave(this)\">临时保存</span></div>"
+				+"</div>";
+            	   parent.parentNode.insertBefore(temphtml, null);
+            }
+
+        }
+
+		function myNavigate(){
+		 document.getElementById("a_url").click();
+		}
+       
+        function mysave(target) {
+            var tempsen = trimStr(target.parentNode.previousSibling.lastChild.value.replace(/\"/g,"\\\"").replace(/\'/g,"\\\'"));
+            var paraseq = target.parentNode.parentNode.parentNode.firstChild.value;            
+            var mydiv = target.parentNode.parentNode.parentNode.previousSibling;
+             if (mydiv.nodeName == "#text") {
+                mydiv = mydiv.previousSibling;
+            }
+             
+            mydiv.lastChild.setAttribute("onclick", "submitPart('" + tempsen + "',this)");
+           mydiv.setAttribute("data","remove");
+           if (mydiv.firstChild.innerHTML != "已修改") {
+                var xiugai = document.createElement("span");
+                xiugai.setAttribute("style", "font-size:12px;color:#00AEAE;margin-right:10px;");
+                xiugai.innerHTML = "已修改";
+                mydiv.insertBefore(xiugai, mydiv.lastChild);
+               }
+            
+            var parent = target.parentNode.parentNode.parentNode;
+            parent.parentNode.removeChild(parent);
+            if(!isstorage)
+            {
+            window.parent.parent.parent.myset(paraseq, tempsen);
+            }
+            else
+            {
+            myset(paraseq, tempsen);
+            }
+        }
+        window.onload = function() {
+            danhao = document.getElementById("danhao").value;
+            if (window.localStorage) {
+                isstorage = true;
+            }
+            if (!isstorage) {
+                result = window.parent.parent.parent.modifyPara;
+                
+            }
+            else {
+                var temp = localStorage.getItem(danhao);
+                if (temp) {
+                    result = eval("(" + temp + ")");
+                }
+            }
+            if (result) {
+            	
+                for (var i = 0; i < result.length; i++) {
+                	
+                    //var all = $(":hidden");
+                    var all = getClass("div","modify");
+                   
+                    for (var j = 0; j < all.length; j++) {
+                        if (all[j].getAttribute("paraseq") == result[i].para) {
+                        	
+                            var xiugai = document.createElement("span");
+                            xiugai.setAttribute("style", "font-size:12px;color:#00AEAE;margin-right:10px;");
+                            xiugai.innerHTML = "已修改";
+                            all[j].insertBefore(xiugai, all[j].lastChild);
+                            all[j].lastChild.setAttribute("onclick", "submitPart('" + result[i].text.replace(/\"/g,"\\\"").replace(/\'/g,"\\\'") + "',this)");
+                        }
+                    }
+
+                }
+            }  
+        }
+
+
+        function mydivclick(e,obj) {
+            if (e.target.tagName.toUpperCase() != "INPUT") {
+                obj.lastChild.previousSibling.click();
+            }
+        }
+
+        function getClass(tagname, className) { //tagname指元素，className指class的值
+            var tagname = document.getElementsByTagName(tagname);  //获取指定元素
+            var tagnameAll = [];     //这个数组用于存储所有符合条件的元素
+            for (var i = 0; i < tagname.length; i++) {     //遍历获得的元素
+                if (tagname[i].className == className) {     //如果获得的元素中的class的值等于指定的类名，就赋值给tagnameAll
+                    tagnameAll[tagnameAll.length] = tagname[i];
+                }
+            }
+            return tagnameAll;
+
+        }
+
+       
+        
+        
+         function myset(paraseq, sen) {
+         	
+            var reg = new RegExp("\"", "g")
+            var model = "{\"para\":\"" + paraseq + "\",\"text\": \"" + sen + "\"}";
+            var mo = eval("(" + model + ")");
+            var exist = false;
+            for (var i = 0; i < result.length; i++) {
+                if (mo.para == result[i].para) {
+                    exist = true;
+                    result[i].text = mo.text;
+                }
+            }
+            if (!exist) {
+                result.push(mo);
+            }
+            localStorage.removeItem(danhao);
+            localStorage.setItem(danhao, json_encode(result));
+        }
+        
+        function json_decode(str_json) {
+            // Decodes the JSON representation into a PHP value  
+            //  
+            // version: 906.1806  
+            // discuss at: http://phpjs.org/functions/json_decode  
+            // +      original by: Public Domain (http://www.json.org/json2.js)  
+            // + reimplemented by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)  
+            // + improved by: T.J. Leahy  
+            // *     example 1: json_decode('[\n    "e",\n    {\n    "pluribus": "unum"\n}\n]');  
+            // *     returns 1: ['e', {pluribus: 'unum'}]  
+            /* 
+            http://www.JSON.org/json2.js 
+            2008-11-19 
+            Public Domain. 
+            NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK. 
+            See http://www.JSON.org/js.html 
+            */
+
+            var json = this.window.JSON;
+            if (typeof json === 'object' && typeof json.parse === 'function') {
+                return json.parse(str_json);
+            }
+
+            var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+            var j;
+            var text = str_json;
+
+            // Parsing happens in four stages. In the first stage, we replace certain  
+            // Unicode characters with escape sequences. JavaScript handles many characters  
+            // incorrectly, either silently deleting them, or treating them as line endings.  
+            cx.lastIndex = 0;
+            if (cx.test(text)) {
+                text = text.replace(cx, function(a) {
+                    return '\\u' +
+            ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+                });
+            }
+
+            // In the second stage, we run the text against regular expressions that look  
+            // for non-JSON patterns. We are especially concerned with '()' and 'new'  
+            // because they can cause invocation, and '=' because it can cause mutation.  
+            // But just to be safe, we want to reject all unexpected forms.  
+
+            // We split the second stage into 4 regexp operations in order to work around  
+            // crippling inefficiencies in IE's and Safari's regexp engines. First we  
+            // replace the JSON backslash pairs with '@' (a non-JSON character). Second, we  
+            // replace all simple value tokens with ']' characters. Third, we delete all  
+            // open brackets that follow a colon or comma or that begin the text. Finally,  
+            // we look to see that the remaining characters are only whitespace or ']' or  
+            // ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.  
+            if (/^[\],:{}\s]*$/.
+        test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@').
+            replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+            replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+
+                // In the third stage we use the eval function to compile the text into a  
+                // JavaScript structure. The '{' operator is subject to a syntactic ambiguity  
+                // in JavaScript: it can begin a block or an object literal. We wrap the text  
+                // in parens to eliminate the ambiguity.  
+
+                j = eval('(' + text + ')');
+
+                return j;
+            }
+
+            // If the text is not JSON parseable, then a SyntaxError is thrown.  
+            throw new SyntaxError('json_decode');
+        }
+
+        function json_encode(mixed_val) {
+            // Returns the JSON representation of a value  
+            //  
+            // version: 906.1806  
+            // discuss at: http://phpjs.org/functions/json_encode  
+            // +      original by: Public Domain (http://www.json.org/json2.js)  
+            // + reimplemented by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)  
+            // + improved by: T.J. Leahy  
+            // *     example 1: json_encode(['e', {pluribus: 'unum'}]);  
+            // *     returns 1: '[\n    "e",\n    {\n    "pluribus": "unum"\n}\n]'  
+            /* 
+            http://www.JSON.org/json2.js 
+            2008-11-19 
+            Public Domain. 
+            NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK. 
+            See http://www.JSON.org/js.html 
+            */
+            var json = this.window.JSON;
+            if (typeof json === 'object' && typeof json.stringify === 'function') {
+                return json.stringify(mixed_val);
+            }
+
+            var value = mixed_val;
+
+            var quote = function(string) {
+                var escapable = /[\\\"\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+                var meta = {    // table of character substitutions  
+                    '\b': '\\b',
+                    '\t': '\\t',
+                    '\n': '\\n',
+                    '\f': '\\f',
+                    '\r': '\\r',
+                    '"': '\\"',
+                    '\\': '\\\\'
+                };
+
+                escapable.lastIndex = 0;
+                return escapable.test(string) ?
+        '"' + string.replace(escapable, function(a) {
+            var c = meta[a];
+            return typeof c === 'string' ? c :
+            '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+        }) + '"' :
+        '"' + string + '"';
+            };
+
+            var str = function(key, holder) {
+                var gap = '';
+                var indent = '    ';
+                var i = 0;          // The loop counter.  
+                var k = '';          // The member key.  
+                var v = '';          // The member value.  
+                var length = 0;
+                var mind = gap;
+                var partial = [];
+                var value = holder[key];
+
+                // If the value has a toJSON method, call it to obtain a replacement value.  
+                if (value && typeof value === 'object' &&
+            typeof value.toJSON === 'function') {
+                    value = value.toJSON(key);
+                }
+
+                // What happens next depends on the value's type.  
+                switch (typeof value) {
+                    case 'string':
+                        return quote(value);
+
+                    case 'number':
+                        // JSON numbers must be finite. Encode non-finite numbers as null.  
+                        return isFinite(value) ? String(value) : 'null';
+
+                    case 'boolean':
+                    case 'null':
+                        // If the value is a boolean or null, convert it to a string. Note:  
+                        // typeof null does not produce 'null'. The case is included here in  
+                        // the remote chance that this gets fixed someday.  
+
+                        return String(value);
+
+                    case 'object':
+                        // If the type is 'object', we might be dealing with an object or an array or  
+                        // null.  
+                        // Due to a specification blunder in ECMAScript, typeof null is 'object',  
+                        // so watch out for that case.  
+                        if (!value) {
+                            return 'null';
+                        }
+
+                        // Make an array to hold the partial results of stringifying this object value.  
+                        gap += indent;
+                        partial = [];
+
+                        // Is the value an array?  
+                        if (Object.prototype.toString.apply(value) === '[object Array]') {
+                            // The value is an array. Stringify every element. Use null as a placeholder  
+                            // for non-JSON values.  
+
+                            length = value.length;
+                            for (i = 0; i < length; i += 1) {
+                                partial[i] = str(i, value) || 'null';
+                            }
+
+                            // Join all of the elements together, separated with commas, and wrap them in  
+                            // brackets.  
+                            v = partial.length === 0 ? '[]' :
+                    gap ? '[\n' + gap +
+                    partial.join(',\n' + gap) + '\n' +
+                    mind + ']' :
+                    '[' + partial.join(',') + ']';
+                            gap = mind;
+                            return v;
+                        }
+
+                        // Iterate through all of the keys in the object.  
+                        for (k in value) {
+                            if (Object.hasOwnProperty.call(value, k)) {
+                                v = str(k, value);
+                                if (v) {
+                                    partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                                }
+                            }
+                        }
+
+                        // Join all of the member texts together, separated with commas,  
+                        // and wrap them in braces.  
+                        v = partial.length === 0 ? '{}' :
+                gap ? '{\n' + gap + partial.join(',\n' + gap) + '\n' +
+                mind + '}' : '{' + partial.join(',') + '}';
+                        gap = mind;
+                        return v;
+                }
+            };
+
+            // Make a fake root object containing our value under the key of ''.  
+            // Return the result of stringifying the value.  
+            return str('', {
+                '': value
+            });
+        } 
+       
+    </script>
+	</head>
+
+	<body><a href="http://www.ptcheck.com/jack/segment.aspx" target="_blank" id="a_url" style="display:none;" ></a> <input type="hidden" id="danhao" value="9602180759585256" /><div class="mainContainer"><div align="center" class="navigation"><a href="paper_1.htm"><span class="btn_gray">首页</span></a><a  href="#"><span class="btn_gray">上一页</span></a><a href="paper_2.htm"><span class="btn_gray">下一页</span></a><a href="paper_3.htm">	<span class="btn_gray">尾页</span></a><span>页码：1/3页</span></div><div class="zhengwen"><div class="para"><div class="duanluo"><span>1</span></div><div class="l"><span style="margin-left:25px"></span><span >基于手机的小区物业服务APP的设计与开发 </span></div></div><div class="para"><div class="duanluo"><span>2</span></div><div class="l"><span style="margin-left:25px"></span><span >作者：钱文军   指导教师：韩冰  </span></div></div><div class="para"><div class="duanluo"><span>3</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/3.htm" target="right" class="orange">（海南师范大学信息科学技术学院软件工程系，海口，xxxxx）</a></div><div class="modify" align="right" paraseq="2"><span class="btn btn-blue" onclick="submitPart('（海南师范大学信息科学技术学院软件工程系，海口，xxxxx）',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>4</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/4.htm" target="right" class="orange">摘 要：随着我国房地产行业的不断发展，人们对住宅的要求日益增高。</a><span >人们已经不再满足于对于&quot;数量型&rdquo;的追求，而是更偏向于追求高质量的小区生活，更便利的功能和服务体验。 </span><span >物业服务作为一门学科，现在迫切的需要解决由传统的信息采集人工管理的方式，向智能化数据分析，自动化管理，人性化服务的方向发展。 </span></div><div class="modify" align="right" paraseq="3"><span class="btn btn-blue" onclick="submitPart('摘 要：随着我国房地产行业的不断发展，人们对住宅的要求日益增高。人们已经不再满足于对于&quot;数量型&rdquo;的追求，而是更偏向于追求高质量的小区生活，更便利的功能和服务体验。物业服务作为一门学科，现在迫切的需要解决由传统的信息采集人工管理的方式，向智能化数据分析，自动化管理，人性化服务的方向发展。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>5</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/7.htm" target="right" class="orange">    近些年来我国互联网和科学技术不断发展，互联网技术已经渗透到生活的方方面面。</a><span >尤其是移动互联网技术的蓬勃发展，使得手机已经从原来的单纯的通讯工具，发展成为搭载独立的操作系统，能够安装各种应用，并极大地改变人们生活方式的设备。 </span><span >现在大部分的物业管理机制仍是传统的社区服务，尤其是在一些二线三线城市，物业管理的现状更是堪忧。 </span><span >人们迫切需要网络化信息传输，依托移动互联网蓬勃发展的大趋势，提高物业服务质量和效率。 </span><span >为了更好的整合资源，提高资源利用率，解决小区业主的痛点，我们要顺应时代发展的潮流，利用我们学习到的互联网相关的知识，在小区开发建设如火如荼的同时， </span><span >开发基于手机的现代化的，集信息收集和处理，及时反馈，功能丰富的物业服务系统，以提高管理质量，改善人们的生活的目标。 </span></div><div class="modify" align="right" paraseq="4"><span class="btn btn-blue" onclick="submitPart('近些年来我国互联网和科学技术不断发展，互联网技术已经渗透到生活的方方面面。尤其是移动互联网技术的蓬勃发展，使得手机已经从原来的单纯的通讯工具，发展成为搭载独立的操作系统，能够安装各种应用，并极大地改变人们生活方式的设备。现在大部分的物业管理机制仍是传统的社区服务，尤其是在一些二线三线城市，物业管理的现状更是堪忧。人们迫切需要网络化信息传输，依托移动互联网蓬勃发展的大趋势，提高物业服务质量和效率。为了更好的整合资源，提高资源利用率，解决小区业主的痛点，我们要顺应时代发展的潮流，利用我们学习到的互联网相关的知识，在小区开发建设如火如荼的同时，开发基于手机的现代化的，集信息收集和处理，及时反馈，功能丰富的物业服务系统，以提高管理质量，改善人们的生活的目标。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>6</span></div><div class="l"><span style="margin-left:25px"></span><span >    本篇论文将采用面向对象的软件设计思想，按照安卓手机APP的开发规范，系统分析手机物业服务系统的需求和业务逻辑，从而得出APP的详细设计。 </span><span >本APP系统主要面向安卓手机用户， </span><span >APP的功能涵盖了物业信息采集、物业缴费、物业投诉、社区动态、交房装修等等方面的服务。 </span><span >论文主要完成安卓端APP的框架设计，页面的分析与设计，与后台服务端的数据调取和交互，性能的优化等等。 </span><span >论文采用IOC的设计思想，使用JSON作为接口数据交互格式，采用各种设计模式和第三方库等等设计与开发系统。 </span><span >后端采用Java的SSH框架编写，采用MYSQL数据库作为后台数据系统，实现了对小区用户的信息和小区设备信息进行及时搜集和处理，同时在手机上操作， </span><span >大大方便了小区业主的生活。 </span></div><div class="modify" align="right" paraseq="5"><span class="btn btn-blue" onclick="submitPart('本篇论文将采用面向对象的软件设计思想，按照安卓手机APP的开发规范，系统分析手机物业服务系统的需求和业务逻辑，从而得出APP的详细设计。本APP系统主要面向安卓手机用户，APP的功能涵盖了物业信息采集、物业缴费、物业投诉、社区动态、交房装修等等方面的服务。论文主要完成安卓端APP的框架设计，页面的分析与设计，与后台服务端的数据调取和交互，性能的优化等等。论文采用IOC的设计思想，使用JSON作为接口数据交互格式，采用各种设计模式和第三方库等等设计与开发系统。后端采用Java的SSH框架编写，采用MYSQL数据库作为后台数据系统，实现了对小区用户的信息和小区设备信息进行及时搜集和处理，同时在手机上操作，大大方便了小区业主的生活。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>7</span></div><div class="l"><span style="margin-left:25px"></span><span >    本文开发的物业服务APP是将移动互联网与传统的物业缴费，管理模式结合在一起，在此基础上设计和实现的。 </span><span >为了使APP能够发挥出便携性、及时性、安全性的优势，我们以操作简便、界面友好为目标开发和完善。 </span></div><div class="modify" align="right" paraseq="6"><span class="btn btn-blue" onclick="submitPart('本文开发的物业服务APP是将移动互联网与传统的物业缴费，管理模式结合在一起，在此基础上设计和实现的。为了使APP能够发挥出便携性、及时性、安全性的优势，我们以操作简便、界面友好为目标开发和完善。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>8</span></div><div class="l"><span style="margin-left:25px"></span><span >关键词：物业服务； 安卓； IOC； </span></div></div><div class="para"><div class="duanluo"><span>9</span></div><div class="l"><span style="margin-left:25px"></span><span >Design And Development of Residential Property Service System  </span></div><div class="modify" align="right" paraseq="8"><span class="btn btn-blue" onclick="submitPart('Design And Development of Residential Property Service System',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>10</span></div><div class="l"><span style="margin-left:25px"></span><span >Based On Mobile APP  </span></div></div><div class="para"><div class="duanluo"><span>11</span></div><div class="l"><span style="margin-left:25px"></span><span >Author: Qian Wen jun   Tutor: Han Bing </span></div><div class="modify" align="right" paraseq="10"><span class="btn btn-blue" onclick="submitPart('Author: Qian Wen jun   Tutor: Han Bing',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>12</span></div><div class="l"><span style="margin-left:25px"></span><span >（Department of Software Engineering, </span><span > School of Information Science and Technology, HaiNan Normal University, </span><span > HaiKou, xxxxx） </span></div><div class="modify" align="right" paraseq="11"><span class="btn btn-blue" onclick="submitPart('（Department of Software Engineering,School of Information Science and Technology, HaiNan Normal University,HaiKou, xxxxx）',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>13</span></div><div class="l"><span style="margin-left:25px"></span><span >Abstract:  With the incessant development of the Eeal Estate Industry in our nation, </span><span >people have increasing desire of their house. </span><span >And they turn their attention from the number to high-quality community life, </span><span >more convenient functions and service experiences. </span><span >As a subject, </span><span >property service is going to solve the crying need that turning the development direction from the traditional information acquisition and labor management to Intelligent data analysis, </span><span > automated management and people-oriented service. </span></div><div class="modify" align="right" paraseq="12"><span class="btn btn-blue" onclick="submitPart('Abstract:  With the incessant development of the Eeal Estate Industry in our nation,people have increasing desire of their house.And they turn their attention from the number to high-quality community life,more convenient functions and service experiences.As a subject,property service is going to solve the crying need that turning the development direction from the traditional information acquisition and labor management to Intelligent data analysis,automated management and people-oriented service.',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>14</span></div><div class="l"><span style="margin-left:25px"></span><span >Recent years, </span><a href="../sentence_detail/37.htm" target="right" class="orange">the science and technology especially the internet technology are continuously developing,</a><a href="../sentence_detail/38.htm" target="right" class="red"> and the internet technology has penetrated every aspect of social life.</a><span >Especially, </span><span > the rapid development of Mobile Internet Technology has made mobile phones develop to equipment that can install an OS into it and can also install a lot of apps and  greatly change the life-style of people, </span><span > not just communication tools. </span><span > Nowadays, </span><span > most of the property management mechanism is still the traditional community services, </span><span > especially in some second-tier third-tier cities, </span><a href="../sentence_detail/45.htm" target="right" class="orange"> property management is even more worrying about the status quo.</a><span > People urgently need networked information transmission, </span><a href="../sentence_detail/47.htm" target="right" class="orange"> relying on the mobile Internet vigorous development trend,</a><a href="../sentence_detail/48.htm" target="right" class="red"> improve the quality of property services and efficiency.</a><span > In order to better integrate resources, improve resource utilization, </span><span > to solve the pain of community owners, </span><a href="../sentence_detail/51.htm" target="right" class="orange"> we should follow the trend of the development of the times,</a><a href="../sentence_detail/52.htm" target="right" class="red"> we use the Internet to learn the knowledge,</a><a href="../sentence_detail/53.htm" target="right" class="orange"> in the community development and construction in full swing at the same time,</a><span > the development of mobile phone based on the modernization , </span><a href="../sentence_detail/55.htm" target="right" class="orange"> Set the information collection and processing, timely feedback,</a><a href="../sentence_detail/56.htm" target="right" class="orange"> feature-rich property service system to improve the quality of management and improve people's lives.</a></div><div class="modify" align="right" paraseq="13"><span class="btn btn-blue" onclick="submitPart('Recent years,the science and technology especially the internet technology are continuously developing,and the internet technology has penetrated every aspect of social life.Especially,the rapid development of Mobile Internet Technology has made mobile phones develop to equipment that can install an OS into it and can also install a lot of apps and  greatly change the life-style of people,not just communication tools.Nowadays,most of the property management mechanism is still the traditional community services,especially in some second-tier third-tier cities,property management is even more worrying about the status quo.People urgently need networked information transmission,relying on the mobile Internet vigorous development trend,improve the quality of property services and efficiency.In order to better integrate resources, improve resource utilization,to solve the pain of community owners,we should follow the trend of the development of the times,we use the Internet to learn the knowledge,in the community development and construction in full swing at the same time,the development of mobile phone based on the modernization ,Set the information collection and processing, timely feedback,feature-rich property service system to improve the quality of management and improve people\'s lives.',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>15</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/57.htm" target="right" class="orange">This paper will use the object-oriented software design ideas,</a><span > according to the development of Android mobile phone APP specification, </span><span > system analysis of mobile phone property service system needs and business logic, </span><span > resulting in the detailed design of APP. </span><span > The APP system mainly for Andrews mobile phone users, </span><span > APP's function covers the property information collection, </span><span > property payment, property complaints, community dynamics, </span><span > delivery decoration and so on services. </span><span > The paper mainly completes the framework design, </span><span > the analysis and design of the page, the data retrieval and interaction, </span><a href="../sentence_detail/67.htm" target="right" class="red"> the optimization of the performance and so on.</a><span > The paper adopts the design idea of IOC, </span><span > uses JSON as the interface data interactive format, </span><span > adopts various design patterns and third party library and so on design and development system. </span><span > Back-end using Java's SSH framework, </span><span > the use of MYSQL database as a back-end data system to achieve the community information and community equipment information for timely collection and processing, </span><span > while operating on the phone, </span><a href="../sentence_detail/74.htm" target="right" class="orange"> greatly facilitate the community owners of life.</a></div><div class="modify" align="right" paraseq="14"><span class="btn btn-blue" onclick="submitPart('This paper will use the object-oriented software design ideas,according to the development of Android mobile phone APP specification,system analysis of mobile phone property service system needs and business logic,resulting in the detailed design of APP.The APP system mainly for Andrews mobile phone users,APP\'s function covers the property information collection,property payment, property complaints, community dynamics,delivery decoration and so on services.The paper mainly completes the framework design,the analysis and design of the page, the data retrieval and interaction,the optimization of the performance and so on.The paper adopts the design idea of IOC,uses JSON as the interface data interactive format,adopts various design patterns and third party library and so on design and development system.Back-end using Java\'s SSH framework,the use of MYSQL database as a back-end data system to achieve the community information and community equipment information for timely collection and processing,while operating on the phone,greatly facilitate the community owners of life.',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>16</span></div><div class="l"><span style="margin-left:25px"></span><span >This paper develops the property service APP is the mobile Internet and the traditional property payment, </span><span > management mode together, </span><a href="../sentence_detail/77.htm" target="right" class="orange"> on the basis of design and implementation.</a><span > In order to make APP to play a portability, timeliness, </span><span > security advantages, we operate with simple, </span><span > user-friendly development and improvement. </span></div><div class="modify" align="right" paraseq="15"><span class="btn btn-blue" onclick="submitPart('This paper develops the property service APP is the mobile Internet and the traditional property payment,management mode together,on the basis of design and implementation.In order to make APP to play a portability, timeliness,security advantages, we operate with simple,user-friendly development and improvement.',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>17</span></div><div class="l"><span style="margin-left:25px"></span><span >Key words: the Property Service; Android;IOC </span></div><div class="modify" align="right" paraseq="16"><span class="btn btn-blue" onclick="submitPart('Key words: the Property Service; Android;IOC',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>18</span></div><div class="l"><span style="margin-left:25px"></span><span >1引言 </span></div></div><div class="para"><div class="duanluo"><span>19</span></div><div class="l"><span style="margin-left:25px"></span><span >1.1课题背景 </span></div></div><div class="para"><div class="duanluo"><span>20</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/84.htm" target="right" class="orange">随着我国房地产行业日渐成熟，再加上近年来我国的科学技术水平和经济发展状况都有显著的提高，我国城市化进程不断加快，</a><span >物业服务的质量直接反映出我国的社会发展状况和人民的生活水平质量。 </span><span >目前互联网技术不断成熟，当前社会正处于信息技术的研究和应用的中间点，移动互联网技术已经发展到了一定的阶段，但是移动互联网技术的应用还处在初期， </span><span >很多传统行业还没有被普及。 </span><span >有研究表明，目前我们国家的小区物业管理由于近十年来的不断发展，正处于蓬勃发展的态势。 </span><a href="../sentence_detail/89.htm" target="right" class="orange">由于IS09002国际质量管理体系等在物业管理与服务中的应用，我国的物业服务整体上朝着正规化，人性化的方向发展。</a></div><div class="modify" align="right" paraseq="19"><span class="btn btn-blue" onclick="submitPart('随着我国房地产行业日渐成熟，再加上近年来我国的科学技术水平和经济发展状况都有显著的提高，我国城市化进程不断加快，物业服务的质量直接反映出我国的社会发展状况和人民的生活水平质量。目前互联网技术不断成熟，当前社会正处于信息技术的研究和应用的中间点，移动互联网技术已经发展到了一定的阶段，但是移动互联网技术的应用还处在初期，很多传统行业还没有被普及。有研究表明，目前我们国家的小区物业管理由于近十年来的不断发展，正处于蓬勃发展的态势。由于IS09002国际质量管理体系等在物业管理与服务中的应用，我国的物业服务整体上朝着正规化，人性化的方向发展。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>21</span></div><div class="l"><span style="margin-left:25px"></span><span >从另一个角度看，我国的居住物业服务行业并没有快速地跟上互联网发展的步伐，整体上还是以传统的人工服务的形式为主。 </span><span >其一，社区公告还是以纸质的公告为主，住户无法及时了解最新的信息。 </span><span >其二，由于缴费接口没有统一，物业缴费形式仍然以传统的现金缴费方式为主，住户必须到缴费地点排队缴费，浪费了大量的时间和人力物力。 </span><span >其三，用户的投诉，房产的交接等等也没有办法方便地得到及时处理和反馈。 </span><a href="../sentence_detail/94.htm" target="right" class="orange">为解决上述问题，基于手机的小区物业服务系统的设计与开发很有必要。</a></div><div class="modify" align="right" paraseq="20"><span class="btn btn-blue" onclick="submitPart('从另一个角度看，我国的居住物业服务行业并没有快速地跟上互联网发展的步伐，整体上还是以传统的人工服务的形式为主。其一，社区公告还是以纸质的公告为主，住户无法及时了解最新的信息。其二，由于缴费接口没有统一，物业缴费形式仍然以传统的现金缴费方式为主，住户必须到缴费地点排队缴费，浪费了大量的时间和人力物力。其三，用户的投诉，房产的交接等等也没有办法方便地得到及时处理和反馈。为解决上述问题，基于手机的小区物业服务系统的设计与开发很有必要。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>22</span></div><div class="l"><span style="margin-left:25px"></span><span >1.2研究的意义和目的 </span></div></div><div class="para"><div class="duanluo"><span>23</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/96.htm" target="right" class="orange">近几年移动互联网蓬勃发展，网络技术的应用已经逐渐改变人们的生活方式。</a><span >而作为直接影响人们社区生活的小区物业服务行业，其服务质量和效率尤为重要，传统的服务形式早已无法满足现代人们的需求。 </span><span >基于以上出现的问题，结合当前手机APP蓬勃发展的大背景，基于手机的小区物业服务系统的设计与开发很有意义。 </span></div><div class="modify" align="right" paraseq="22"><span class="btn btn-blue" onclick="submitPart('近几年移动互联网蓬勃发展，网络技术的应用已经逐渐改变人们的生活方式。而作为直接影响人们社区生活的小区物业服务行业，其服务质量和效率尤为重要，传统的服务形式早已无法满足现代人们的需求。基于以上出现的问题，结合当前手机APP蓬勃发展的大背景，基于手机的小区物业服务系统的设计与开发很有意义。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>24</span></div><div class="l"><span style="margin-left:25px"></span><span >物业服务APP，顾名思义是一款能够给小区的住户提供物业服务的手机APP。 </span><span >它在物业公司和小区住户之间搭建起了一个服务提供的桥梁。 </span><span >开发这样一款APP，能够解决一下的问题： </span></div><div class="modify" align="right" paraseq="23"><span class="btn btn-blue" onclick="submitPart('物业服务APP，顾名思义是一款能够给小区的住户提供物业服务的手机APP。它在物业公司和小区住户之间搭建起了一个服务提供的桥梁。开发这样一款APP，能够解决一下的问题：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>25</span></div><div class="l"><span style="margin-left:25px"></span><span >第一：原有的物业服务形式多采用人工方式，效率低下，无论从及时性，正确率还是智能手机几乎人手一部， </span><span >本文中开发的APP方便业主及时接收和查阅社区的各种信息，自动进行数据处理和统计，用户动动手指就能处理业务，查看和反馈各种信息， </span><span >最大限度的节省了业主们的宝贵时间。 </span></div><div class="modify" align="right" paraseq="24"><span class="btn btn-blue" onclick="submitPart('第一：原有的物业服务形式多采用人工方式，效率低下，无论从及时性，正确率还是智能手机几乎人手一部，本文中开发的APP方便业主及时接收和查阅社区的各种信息，自动进行数据处理和统计，用户动动手指就能处理业务，查看和反馈各种信息，最大限度的节省了业主们的宝贵时间。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>26</span></div><div class="l"><span style="margin-left:25px"></span><span >第二：方便物业服务公司的工作。 </span><span >物业公司可以使用APP，利用现在强大的第三方支付平台，自动收取物业费，水费，电费等等费用，节省了大量的人力物力，同时能很大程度上保障数据的正确性。 </span><span >物业公司也可以通过我们的APP及时收取业主的交房验房信息、投诉等等，这样就方便物业合理安排人员，及时处理问题。 </span><span >同时，传统的贴公告的方式，不仅浪费人力，而且用户能及时收到信息的概率很低。 </span><span >APP上面的小区动态能够方便物业公司快速的发送通知到各个小区的每一个用户，拓宽了信息渠道。 </span></div><div class="modify" align="right" paraseq="25"><span class="btn btn-blue" onclick="submitPart('第二：方便物业服务公司的工作。物业公司可以使用APP，利用现在强大的第三方支付平台，自动收取物业费，水费，电费等等费用，节省了大量的人力物力，同时能很大程度上保障数据的正确性。物业公司也可以通过我们的APP及时收取业主的交房验房信息、投诉等等，这样就方便物业合理安排人员，及时处理问题。同时，传统的贴公告的方式，不仅浪费人力，而且用户能及时收到信息的概率很低。APP上面的小区动态能够方便物业公司快速的发送通知到各个小区的每一个用户，拓宽了信息渠道。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>27</span></div><div class="l"><span style="margin-left:25px"></span><span >1.3物业服务的现状 </span></div></div><div class="para"><div class="duanluo"><span>28</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/111.htm" target="right" class="red">物业管理既是房地产行业经营和管理的重要组成部分，又是现代城市管理不可缺少的一部分。</a><span >物业服务行业虽然发展势头良好，但是仍然存在以下的问题： </span></div><div class="modify" align="right" paraseq="27"><span class="btn btn-blue" onclick="submitPart('物业管理既是房地产行业经营和管理的重要组成部分，又是现代城市管理不可缺少的一部分。物业服务行业虽然发展势头良好，但是仍然存在以下的问题：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>29</span></div><div class="l"><span style="margin-left:25px"></span><span >1.业主知情权问题 </span></div></div><div class="para"><div class="duanluo"><span>30</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/114.htm" target="right" class="orange">目前我国的物业服务前期在程序管理和质量控制方面虽然还需要进一步的完善和不断改进，但是也已经开始了市场化的进程。</a><a href="../sentence_detail/115.htm" target="right" class="red">后期物业管理却仍然大部分停留在指派或协议进驻阶段，广大业主的选择权甚至是知情权都没有办法发挥，相当于业主需要雇一个保姆，工资都定好了，</a><a href="../sentence_detail/116.htm" target="right" class="red">而且干好干坏都得付钱，这样理所当然会引起业主的反感。</a><span >究其原因，主要是因为消息的传递通道闭塞，业主无法及时收到各种社区服务的消息推送，因此建设一个社区服务平台很有必要， </span><span >它能够将物业服务公司的消息直接推送到用户手机上，使得业主能够第一时间掌握第一手资料，充分发挥业主的知情权和选择权。 </span></div><div class="modify" align="right" paraseq="29"><span class="btn btn-blue" onclick="submitPart('目前我国的物业服务前期在程序管理和质量控制方面虽然还需要进一步的完善和不断改进，但是也已经开始了市场化的进程。后期物业管理却仍然大部分停留在指派或协议进驻阶段，广大业主的选择权甚至是知情权都没有办法发挥，相当于业主需要雇一个保姆，工资都定好了，而且干好干坏都得付钱，这样理所当然会引起业主的反感。究其原因，主要是因为消息的传递通道闭塞，业主无法及时收到各种社区服务的消息推送，因此建设一个社区服务平台很有必要，它能够将物业服务公司的消息直接推送到用户手机上，使得业主能够第一时间掌握第一手资料，充分发挥业主的知情权和选择权。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>31</span></div><div class="l"><span style="margin-left:25px"></span><span >2.收费精细化问题 </span></div></div><div class="para"><div class="duanluo"><span>32</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/120.htm" target="right" class="orange">目前，我国大部分的物业服务在收费上面没有做到详细透明，不仅业主不清楚物业费用的收费项目，甚至对当前正在享受哪些物业服务也知之甚少。</a><a href="../sentence_detail/121.htm" target="right" class="red">模糊的物业收费直接导致的后果就是，只要业主对物业有一点不满，不管其他的服务做得多好，都可以以此为由拒绝交费，这样也会造成物业公司的大量损失。</a></div><div class="modify" align="right" paraseq="31"><span class="btn btn-blue" onclick="submitPart('目前，我国大部分的物业服务在收费上面没有做到详细透明，不仅业主不清楚物业费用的收费项目，甚至对当前正在享受哪些物业服务也知之甚少。模糊的物业收费直接导致的后果就是，只要业主对物业有一点不满，不管其他的服务做得多好，都可以以此为由拒绝交费，这样也会造成物业公司的大量损失。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>33</span></div><div class="l"><span style="margin-left:25px"></span><span >3.报修投诉反馈问题 </span></div></div><div class="para"><div class="duanluo"><span>34</span></div><div class="l"><span style="margin-left:25px"></span><span >    目前大部分小区接收用户投诉主要采用人工接听电话的方式，不仅效率低下，而且很容易出现错误。 </span><span >导致住户反映的问题无法及时得到处理和解决，这样不仅使得小区业主的问题迟迟得不到反馈， </span><span >而且也使得物业在处理业主问题时也因为无法及时准确获取到相应的信息而产生管理混乱，人力资源浪费很大的问题。 </span></div><div class="modify" align="right" paraseq="33"><span class="btn btn-blue" onclick="submitPart('目前大部分小区接收用户投诉主要采用人工接听电话的方式，不仅效率低下，而且很容易出现错误。导致住户反映的问题无法及时得到处理和解决，这样不仅使得小区业主的问题迟迟得不到反馈，而且也使得物业在处理业主问题时也因为无法及时准确获取到相应的信息而产生管理混乱，人力资源浪费很大的问题。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>35</span></div><div class="l"><span style="margin-left:25px"></span><span >1.4研究内容 </span></div></div><div class="para"><div class="duanluo"><span>36</span></div><div class="l"><span style="margin-left:25px"></span><span >本篇论文主要是对基于手机的小区物业服务系统的开发与研究，在研究现代智能手机APP开发技术的同时，解决我国房地产行业物业服务中存在的一些问题。 </span><span >在研究了传统物业服务的方式和特点之后，进行深入的需求分析和系统设计，给出系统的各个功能模块和页面的详细设计。 </span><a href="../sentence_detail/129.htm" target="right" class="orange">在此基础上本文详细介绍了如何利用Android Studio进行开发和调试，实现各个页面的编写和功能。</a><span >在开发过程中采用了面向对象的设计思想，着重介绍项目架构设计中用到的IOC思想和各种设计模式。 </span><span >最后进行APP的测试，切实开发出一款基于安卓手机的小区物业服务APP。 </span><span >以下是本文的详细内容： </span></div><div class="modify" align="right" paraseq="35"><span class="btn btn-blue" onclick="submitPart('本篇论文主要是对基于手机的小区物业服务系统的开发与研究，在研究现代智能手机APP开发技术的同时，解决我国房地产行业物业服务中存在的一些问题。在研究了传统物业服务的方式和特点之后，进行深入的需求分析和系统设计，给出系统的各个功能模块和页面的详细设计。在此基础上本文详细介绍了如何利用Android Studio进行开发和调试，实现各个页面的编写和功能。在开发过程中采用了面向对象的设计思想，着重介绍项目架构设计中用到的IOC思想和各种设计模式。最后进行APP的测试，切实开发出一款基于安卓手机的小区物业服务APP。以下是本文的详细内容：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>37</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/133.htm" target="right" class="orange">第一章：引言，主要介绍了物业服务APP的研究背景，并论述研究的目的和意义，并分析目前我国的物业管理与服务的现状和痛点，由此确定了本文的研究重点和方向，</a><span >要达到的效果。 </span></div><div class="modify" align="right" paraseq="36"><span class="btn btn-blue" onclick="submitPart('第一章：引言，主要介绍了物业服务APP的研究背景，并论述研究的目的和意义，并分析目前我国的物业管理与服务的现状和痛点，由此确定了本文的研究重点和方向，要达到的效果。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>38</span></div><div class="l"><span style="margin-left:25px"></span><span >第二章：相关技术，介绍基于手机的物业服务APP运用的主要技术和架构。 </span></div><div class="modify" align="right" paraseq="37"><span class="btn btn-blue" onclick="submitPart('第二章：相关技术，介绍基于手机的物业服务APP运用的主要技术和架构。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>39</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/136.htm" target="right" class="orange">第三章：系统需求分析，包括物业服务系统APP端的需求来源，进行可行性分析，并对APP的各个功能模块和页面进行深入的功能性和非功能性需求分析，</a><span >并论述APP的设计思想。 </span></div><div class="modify" align="right" paraseq="38"><span class="btn btn-blue" onclick="submitPart('第三章：系统需求分析，包括物业服务系统APP端的需求来源，进行可行性分析，并对APP的各个功能模块和页面进行深入的功能性和非功能性需求分析，并论述APP的设计思想。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>40</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/138.htm" target="right" class="orange">第四章：系统方案设计，在需求分析的基础上，对基于手机的物业服务APP进行了架构设计，利用时序图，类图，程序流程图等等对APP的各个功能模块进行分析，</a><span >设计出各个页面的样式和功能。 </span></div><div class="modify" align="right" paraseq="39"><span class="btn btn-blue" onclick="submitPart('第四章：系统方案设计，在需求分析的基础上，对基于手机的物业服务APP进行了架构设计，利用时序图，类图，程序流程图等等对APP的各个功能模块进行分析，设计出各个页面的样式和功能。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>41</span></div><div class="l"><span style="margin-left:25px"></span><span >第五章：系统的实现，主要是在系统设计的基础上，通过相关的安卓手机APP开发工具和技术，实现各个页面的UI编写和功能逻辑，数据渲染等等， </span><span >展示了系统实现的内容。 </span></div><div class="modify" align="right" paraseq="40"><span class="btn btn-blue" onclick="submitPart('第五章：系统的实现，主要是在系统设计的基础上，通过相关的安卓手机APP开发工具和技术，实现各个页面的UI编写和功能逻辑，数据渲染等等，展示了系统实现的内容。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>42</span></div><div class="l"><span style="margin-left:25px"></span><span >第六章：结束语，本文的全面总结和在总结的基础上对未来的展望。 </span></div><div class="modify" align="right" paraseq="41"><span class="btn btn-blue" onclick="submitPart('第六章：结束语，本文的全面总结和在总结的基础上对未来的展望。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>43</span></div><div class="l"><span style="margin-left:25px"></span><span >2相关技术 </span></div></div><div class="para"><div class="duanluo"><span>44</span></div><div class="l"><span style="margin-left:25px"></span><span >2.1Android平台介绍与系统框架 </span></div></div><div class="para"><div class="duanluo"><span>45</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/145.htm" target="right" class="red">Android系统是Google开发的一款开源移动OS，Android中文名被国内用户俗称&quot;安卓&rdquo;。</a><a href="../sentence_detail/146.htm" target="right" class="red">Android操作系统基于Linux内核设计，使用了Google公司自己开发的Dalvik Java虚拟机。</a><a href="../sentence_detail/147.htm" target="right" class="orange">Android操作系统已经成为全球最大的智能手机操作系统。Android系统架构如下图：</a></div><div class="modify" align="right" paraseq="44"><span class="btn btn-blue" onclick="submitPart('Android系统是Google开发的一款开源移动OS，Android中文名被国内用户俗称&quot;安卓&rdquo;。Android操作系统基于Linux内核设计，使用了Google公司自己开发的Dalvik Java虚拟机。Android操作系统已经成为全球最大的智能手机操作系统。Android系统架构如下图：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>46</span></div><div class="l"><span style="margin-left:25px"></span><span >图2-1安卓系统架构图 </span></div></div><div class="para"><div class="duanluo"><span>47</span></div><div class="l"><span style="margin-left:25px"></span><span >在系统架构上，Android平台共分为五层，分别是： </span></div></div><div class="para"><div class="duanluo"><span>48</span></div><div class="l"><span style="margin-left:25px"></span><span >1. </span><span >Linux内核（Linux Kernel）：Android系统是基于Linux内核的，这也是安卓系统具有高度可移植性和极高安全性的原因之一。 </span><a href="../sentence_detail/152.htm" target="right" class="red">Android Runtime (ART) 依靠 Linux 内核来执行底层功能，例如线程和低层内存管理。</a><a href="../sentence_detail/153.htm" target="right" class="orange">在Linux内核层，Android系统提供了大量的硬件驱动，比如USB驱动、蓝牙驱动、电源管理、相机驱动、WiFi驱动等等。</a></div><div class="modify" align="right" paraseq="47"><span class="btn btn-blue" onclick="submitPart('1.Linux内核（Linux Kernel）：Android系统是基于Linux内核的，这也是安卓系统具有高度可移植性和极高安全性的原因之一。Android Runtime (ART) 依靠 Linux 内核来执行底层功能，例如线程和低层内存管理。在Linux内核层，Android系统提供了大量的硬件驱动，比如USB驱动、蓝牙驱动、电源管理、相机驱动、WiFi驱动等等。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>49</span></div><div class="l"><span style="margin-left:25px"></span><span >2. </span><a href="../sentence_detail/155.htm" target="right" class="orange">Android硬件抽象层（Hardware Abstraction Haler）：HAL是对Linux内核驱动程序的封装，向上提供接口，</a><span >屏蔽掉底层的实现细节。 </span><a href="../sentence_detail/157.htm" target="right" class="red">也就是说，把对硬件的支持分成了两层，一层放在用户空间（User Space），一层放在内核空间（Kernel Space），其中，</a><a href="../sentence_detail/158.htm" target="right" class="red">硬件抽象层运行在用户空间，而Linux内核驱动程序运行在内核空间。</a><a href="../sentence_detail/159.htm" target="right" class="red">为什么要这样安排呢？把硬件抽象层和内核驱动整合在一起放在内核空间不可行吗？</a><a href="../sentence_detail/160.htm" target="right" class="red">从技术实现的角度来看，是可以的，然而从商业的角度来看，把对硬件的支持逻辑都放在内核空间，可能会损害厂家的利益。</a><a href="../sentence_detail/161.htm" target="right" class="red">我们知道，Linux内核源代码版权遵循GNU License，而Android源代码版权遵循Apache License，前者在发布产品时，</a><a href="../sentence_detail/162.htm" target="right" class="red">必须公布源代码，而后者无须发布源代码。</a><a href="../sentence_detail/163.htm" target="right" class="red">如果把对硬件支持的所有代码都放在Linux驱动层，那就意味着发布时要公开驱动程序的源代码，而公开源代码就意味着把硬件的相关参数和实现都公开了，</a><a href="../sentence_detail/164.htm" target="right" class="red">在手机市场竞争激烈的今天，这对厂家来说，损害是非常大的。</a></div><div class="modify" align="right" paraseq="48"><span class="btn btn-blue" onclick="submitPart('2.Android硬件抽象层（Hardware Abstraction Haler）：HAL是对Linux内核驱动程序的封装，向上提供接口，屏蔽掉底层的实现细节。也就是说，把对硬件的支持分成了两层，一层放在用户空间（User Space），一层放在内核空间（Kernel Space），其中，硬件抽象层运行在用户空间，而Linux内核驱动程序运行在内核空间。为什么要这样安排呢？把硬件抽象层和内核驱动整合在一起放在内核空间不可行吗？从技术实现的角度来看，是可以的，然而从商业的角度来看，把对硬件的支持逻辑都放在内核空间，可能会损害厂家的利益。我们知道，Linux内核源代码版权遵循GNU License，而Android源代码版权遵循Apache License，前者在发布产品时，必须公布源代码，而后者无须发布源代码。如果把对硬件支持的所有代码都放在Linux驱动层，那就意味着发布时要公开驱动程序的源代码，而公开源代码就意味着把硬件的相关参数和实现都公开了，在手机市场竞争激烈的今天，这对厂家来说，损害是非常大的。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>50</span></div><div class="l"><span style="margin-left:25px"></span><span >3. </span><a href="../sentence_detail/166.htm" target="right" class="orange">原生C/C++库（Native C/C++ Libraries）和Android Runtime：许多核心 Android 系统组件和服务在构建自原生代码时，</a><span >需要以 C 和 C++ 编写的原生库，例如OpenGL 库提供给应用框架层API，能够实现2D和3D图形的绘制。 </span><a href="../sentence_detail/168.htm" target="right" class="red">而Android Runtime为安卓系统提供基于Java虚拟机的Dalvik虚拟机，每个Dalvik虚拟机运行一个独立的应用，并占用独立的进程。</a></div><div class="modify" align="right" paraseq="49"><span class="btn btn-blue" onclick="submitPart('3.原生C/C++库（Native C/C++ Libraries）和Android Runtime：许多核心 Android 系统组件和服务在构建自原生代码时，需要以 C 和 C++ 编写的原生库，例如OpenGL 库提供给应用框架层API，能够实现2D和3D图形的绘制。而Android Runtime为安卓系统提供基于Java虚拟机的Dalvik虚拟机，每个Dalvik虚拟机运行一个独立的应用，并占用独立的进程。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>51</span></div><div class="l"><span style="margin-left:25px"></span><span >4. </span><a href="../sentence_detail/170.htm" target="right" class="orange">应用框架层（Application Framework）：这一层是通过Java语言编写的一个API集合，包含了所有Android OS的核心功能集。</a><span >它为系统的四大组件和其他核心组件都提供了相应的管理器（Manager）。 </span></div><div class="modify" align="right" paraseq="50"><span class="btn btn-blue" onclick="submitPart('4.应用框架层（Application Framework）：这一层是通过Java语言编写的一个API集合，包含了所有Android OS的核心功能集。它为系统的四大组件和其他核心组件都提供了相应的管理器（Manager）。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>52</span></div><div class="l"><span style="margin-left:25px"></span><span >5. </span><a href="../sentence_detail/173.htm" target="right" class="orange">应用层（Application）：系统应用和第三方开发的应用都处于这一层。</a></div><div class="modify" align="right" paraseq="51"><span class="btn btn-blue" onclick="submitPart('5.应用层（Application）：系统应用和第三方开发的应用都处于这一层。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>53</span></div><div class="l"><span style="margin-left:25px"></span><span >2.2Android系统的四大组件 </span></div></div><div class="para"><div class="duanluo"><span>54</span></div><div class="l"><span style="margin-left:25px"></span><span >一个安卓应用各种功能的实现，通常是由安卓系统的四大组件来完成的。 </span><span >四大组件都有自己的生命周期，他们都是通过Intent（我们称之为&quot;意图&rdquo;）来传递消息，并且在安卓应用中担任不同的职责。 </span><span >这四大组件分别是： </span></div><div class="modify" align="right" paraseq="53"><span class="btn btn-blue" onclick="submitPart('一个安卓应用各种功能的实现，通常是由安卓系统的四大组件来完成的。四大组件都有自己的生命周期，他们都是通过Intent（我们称之为&quot;意图&rdquo;）来传递消息，并且在安卓应用中担任不同的职责。这四大组件分别是：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>55</span></div><div class="l"><span style="margin-left:25px"></span><span >1.Activity（与用户交互的界面） </span></div></div><div class="para"><div class="duanluo"><span>56</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/179.htm" target="right" class="orange">一个Activity在Android应用中就是一个用户界面，用户可与其提供的屏幕进行交互，</a><a href="../sentence_detail/180.htm" target="right" class="red">以执行拨打电话、拍摄照片、发送电子邮件或查看地图等业务逻辑需要的操作。</a><a href="../sentence_detail/181.htm" target="right" class="orange">Activity 是四大组件中唯一一个用户可见的系统组件，也是使用得最多的一个组件。</a><a href="../sentence_detail/182.htm" target="right" class="red">每个 Activity 都会获得一个用于绘制其用户界面的窗口。</a><a href="../sentence_detail/183.htm" target="right" class="red">窗口通常会充满屏幕，但也可小于屏幕并浮动在其他窗口之上。</a></div><div class="modify" align="right" paraseq="55"><span class="btn btn-blue" onclick="submitPart('一个Activity在Android应用中就是一个用户界面，用户可与其提供的屏幕进行交互，以执行拨打电话、拍摄照片、发送电子邮件或查看地图等业务逻辑需要的操作。Activity 是四大组件中唯一一个用户可见的系统组件，也是使用得最多的一个组件。每个 Activity 都会获得一个用于绘制其用户界面的窗口。窗口通常会充满屏幕，但也可小于屏幕并浮动在其他窗口之上。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>57</span></div><div class="l"><span style="margin-left:25px"></span><span >2.Service（后台服务） </span></div></div><div class="para"><div class="duanluo"><span>58</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/185.htm" target="right" class="red">Service 是一个可以在后台执行长时间运行操作而不提供用户界面的应用组件。</a><a href="../sentence_detail/186.htm" target="right" class="red">服务可由其他应用组件启动，而且即使用户切换到其他应用，服务仍将在后台继续运行。</a><a href="../sentence_detail/187.htm" target="right" class="red"> 此外，组件可以绑定到服务，以与之进行交互，甚至是执行进程间通信 (IPC)。</a><a href="../sentence_detail/188.htm" target="right" class="red"> 例如，服务可以处理网络事务、播放音乐，执行文件 I/O 或与内容提供程序交互，而所有这一切均可在后台进行。</a></div><div class="modify" align="right" paraseq="57"><span class="btn btn-blue" onclick="submitPart('Service 是一个可以在后台执行长时间运行操作而不提供用户界面的应用组件。服务可由其他应用组件启动，而且即使用户切换到其他应用，服务仍将在后台继续运行。此外，组件可以绑定到服务，以与之进行交互，甚至是执行进程间通信 (IPC)。例如，服务可以处理网络事务、播放音乐，执行文件 I/O 或与内容提供程序交互，而所有这一切均可在后台进行。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>59</span></div><div class="l"><span style="margin-left:25px"></span><span >3.Broadcast Receiver（广播接收器） </span></div></div><div class="para"><div class="duanluo"><span>60</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/190.htm" target="right" class="red">一个Android应用可以使用广播接受器对外部事件进行过滤，只对感兴趣的外部事件(如当电话呼入时，或者数据网络可用时)进行接收并做出响应。</a><span >广播接收器没有用户界面。 </span><a href="../sentence_detail/192.htm" target="right" class="red">然而，它们可以启动一个activity或Service来响应它们收到的信息，或者用Notification Manager 来通知用户。</a><a href="../sentence_detail/193.htm" target="right" class="red">通知可以用很多种方式来吸引用户的注意力──闪动背灯、震动、播放声音等。</a><a href="../sentence_detail/194.htm" target="right" class="red">一般来说是在状态栏上放一个持久的图标，用户可以打开它并获取消息。</a><a href="../sentence_detail/195.htm" target="right" class="orange">在Android系统中，广播可以分为有序广播和无序广播两种。</a></div><div class="modify" align="right" paraseq="59"><span class="btn btn-blue" onclick="submitPart('一个Android应用可以使用广播接受器对外部事件进行过滤，只对感兴趣的外部事件(如当电话呼入时，或者数据网络可用时)进行接收并做出响应。广播接收器没有用户界面。然而，它们可以启动一个activity或Service来响应它们收到的信息，或者用Notification Manager 来通知用户。通知可以用很多种方式来吸引用户的注意力──闪动背灯、震动、播放声音等。一般来说是在状态栏上放一个持久的图标，用户可以打开它并获取消息。在Android系统中，广播可以分为有序广播和无序广播两种。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>61</span></div><div class="l"><span style="margin-left:25px"></span><span >4.Content Provider（内容提供者） </span></div></div><div class="para"><div class="duanluo"><span>62</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/197.htm" target="right" class="red">内容提供程序管理对结构化数据集的访问。它们封装数据，并提供用于定义数据安全性的机制。</a><span > 内容提供程序是连接一个进程中的数据与另一个进程中运行的代码的标准界面。 </span></div><div class="modify" align="right" paraseq="61"><span class="btn btn-blue" onclick="submitPart('内容提供程序管理对结构化数据集的访问。它们封装数据，并提供用于定义数据安全性的机制。内容提供程序是连接一个进程中的数据与另一个进程中运行的代码的标准界面。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>63</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/199.htm" target="right" class="red">如果您想要访问内容提供程序中的数据，</a><a href="../sentence_detail/200.htm" target="right" class="red">可以将应用的Context 中的 ContentResolver 对象用作客户端来与提供程序通信。</a><a href="../sentence_detail/201.htm" target="right" class="red"> ContentResolver 对象会与提供程序对象（即实现 Content Provider 的类实例）通信。</a><a href="../sentence_detail/202.htm" target="right" class="red"> 提供程序对象从客户端接收数据请求，执行请求的操作并返回结果。</a></div><div class="modify" align="right" paraseq="62"><span class="btn btn-blue" onclick="submitPart('如果您想要访问内容提供程序中的数据，可以将应用的Context 中的 ContentResolver 对象用作客户端来与提供程序通信。ContentResolver 对象会与提供程序对象（即实现 Content Provider 的类实例）通信。提供程序对象从客户端接收数据请求，执行请求的操作并返回结果。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>64</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/203.htm" target="right" class="red">如果您不打算与其他应用共享数据，则无需开发自己的提供程序。</a><a href="../sentence_detail/204.htm" target="right" class="red"> 不过，您需要通过自己的提供程序在您自己的应用中提供自定义搜索建议。</a><a href="../sentence_detail/205.htm" target="right" class="red"> 如果您想将复杂的数据或文件从您的应用复制并粘贴到其他应用中，也需要创建您自己的提供程序。</a></div><div class="modify" align="right" paraseq="63"><span class="btn btn-blue" onclick="submitPart('如果您不打算与其他应用共享数据，则无需开发自己的提供程序。不过，您需要通过自己的提供程序在您自己的应用中提供自定义搜索建议。如果您想将复杂的数据或文件从您的应用复制并粘贴到其他应用中，也需要创建您自己的提供程序。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>65</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/206.htm" target="right" class="red">Android 本身包括的内容提供程序可管理音频、视频、图像和个人联系信息等数据。</a><a href="../sentence_detail/207.htm" target="right" class="red"> android.provider 软件包参考文档中列出了部分提供程序。</a><a href="../sentence_detail/208.htm" target="right" class="red"> 任何 Android 应用都可以访问这些提供程序，但会受到某些限制。</a></div><div class="modify" align="right" paraseq="64"><span class="btn btn-blue" onclick="submitPart('Android 本身包括的内容提供程序可管理音频、视频、图像和个人联系信息等数据。android.provider 软件包参考文档中列出了部分提供程序。任何 Android 应用都可以访问这些提供程序，但会受到某些限制。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>66</span></div><div class="l"><span style="margin-left:25px"></span><span >2.3控制反转（IOC）技术 </span></div></div><div class="para"><div class="duanluo"><span>67</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/210.htm" target="right" class="red">控制反转（Inversion of Control，英文缩写为IOC），是一种在现代面向对象编程技术中重要的技术，它是为了减少程序中的耦合性而诞生的。</a><a href="../sentence_detail/211.htm" target="right" class="orange">在Java后端框架中，控制反转技术是Spring框架的核心。</a><a href="../sentence_detail/212.htm" target="right" class="red">IOC一般分为两种类型，一种是依赖注入（Dependency Injection），另一种是依赖查找（Dependency Lookup），其中，</a><span >依赖注入运用的更加广泛。 </span><span >在面向对象的编程中，要实现一个功能，通常需要两个或者更多的类协同来实现，这个时候一个类就必须包含与之合作的类（我们称之为依赖类）的实例。 </span><span >通常的做法是这个类自己去获取依赖对象，这样做无疑会导致程序的高度耦合。 </span></div><div class="modify" align="right" paraseq="66"><span class="btn btn-blue" onclick="submitPart('控制反转（Inversion of Control，英文缩写为IOC），是一种在现代面向对象编程技术中重要的技术，它是为了减少程序中的耦合性而诞生的。在Java后端框架中，控制反转技术是Spring框架的核心。IOC一般分为两种类型，一种是依赖注入（Dependency Injection），另一种是依赖查找（Dependency Lookup），其中，依赖注入运用的更加广泛。在面向对象的编程中，要实现一个功能，通常需要两个或者更多的类协同来实现，这个时候一个类就必须包含与之合作的类（我们称之为依赖类）的实例。通常的做法是这个类自己去获取依赖对象，这样做无疑会导致程序的高度耦合。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>68</span></div><div class="l"><span style="margin-left:25px"></span><span >而控制反转（也称为&quot;依赖倒置原理&rdquo;）是通过构建一个能够调控系统对象的组件，这个组件能够在某个系统组件或者类需要某一个依赖对象时， </span><a href="../sentence_detail/217.htm" target="right" class="orange">将一个实例化后的依赖对象的引用传递给这个组件。</a><a href="../sentence_detail/218.htm" target="right" class="orange">通常我们认为，这个依赖对象是被我们构建的这个&quot;调控组件&rdquo;注入到了需要的类中。</a><span >而控制反转的&quot;反转&rdquo;在于系统组件获取依赖对象的过程被反转了，它不再需要类和组件自己创建依赖对象，从而削减了系统的耦合度。 </span></div><div class="modify" align="right" paraseq="67"><span class="btn btn-blue" onclick="submitPart('而控制反转（也称为&quot;依赖倒置原理&rdquo;）是通过构建一个能够调控系统对象的组件，这个组件能够在某个系统组件或者类需要某一个依赖对象时，将一个实例化后的依赖对象的引用传递给这个组件。通常我们认为，这个依赖对象是被我们构建的这个&quot;调控组件&rdquo;注入到了需要的类中。而控制反转的&quot;反转&rdquo;在于系统组件获取依赖对象的过程被反转了，它不再需要类和组件自己创建依赖对象，从而削减了系统的耦合度。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>69</span></div><div class="l"><span style="margin-left:25px"></span><span >在本文介绍的物业服务APP的开发中，我们通过控制反转技术，实现了页面内容视图的自动注入和页面中各个控件对象的注入。 </span><span >并通过Java的动态代理机制，实现了控件点击事件等多种事件的动态代理，节省了很多代码，而且提高了代码的质量和可阅读性。 </span></div><div class="modify" align="right" paraseq="68"><span class="btn btn-blue" onclick="submitPart('在本文介绍的物业服务APP的开发中，我们通过控制反转技术，实现了页面内容视图的自动注入和页面中各个控件对象的注入。并通过Java的动态代理机制，实现了控件点击事件等多种事件的动态代理，节省了很多代码，而且提高了代码的质量和可阅读性。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>70</span></div><div class="l"><span style="margin-left:25px"></span><span >2.4 C/S模式概念 </span></div></div><div class="para"><div class="duanluo"><span>71</span></div><div class="l"><span style="margin-left:25px"></span><span >本文中开发的小区物业服务APP，是一个典型的C/S架构的软件系统，其数据的交互是由一台远端Apache服务器来提供的。 </span><span >这里我来阐述一下什么是C/S架构。 </span></div><div class="modify" align="right" paraseq="70"><span class="btn btn-blue" onclick="submitPart('本文中开发的小区物业服务APP，是一个典型的C/S架构的软件系统，其数据的交互是由一台远端Apache服务器来提供的。这里我来阐述一下什么是C/S架构。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>72</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/225.htm" target="right" class="orange">C/S是客户端/服务器（Client/Server）的缩写，在客户端/服务端网络中，服务器处于核心地位，它为客户端提供所需要的网络资源，</a><span >而客户端是系统的基础，客户端的所有数据都需要通过HTTP请求从服务端获取。 </span><a href="../sentence_detail/227.htm" target="right" class="orange">一个C/S架构的软件系统最核心的就是由两部分组成，即客户端应用程序和服务端应用程序。</a><span >与B/S（浏览器/服务器）架构相比，C/S架构中客户端程序通常需要安装到特定的终端，其主要的特点是能够减轻服务端的压力，而且安全性和稳定性更高。 </span></div><div class="modify" align="right" paraseq="71"><span class="btn btn-blue" onclick="submitPart('C/S是客户端/服务器（Client/Server）的缩写，在客户端/服务端网络中，服务器处于核心地位，它为客户端提供所需要的网络资源，而客户端是系统的基础，客户端的所有数据都需要通过HTTP请求从服务端获取。一个C/S架构的软件系统最核心的就是由两部分组成，即客户端应用程序和服务端应用程序。与B/S（浏览器/服务器）架构相比，C/S架构中客户端程序通常需要安装到特定的终端，其主要的特点是能够减轻服务端的压力，而且安全性和稳定性更高。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>73</span></div><div class="l"><span style="margin-left:25px"></span><span >图2-2 C/S模式二层体系结构 </span></div></div><div class="para"><div class="duanluo"><span>74</span></div><div class="l"><span style="margin-left:25px"></span><span >2.5OKHttp框架介绍 </span></div></div><div class="para"><div class="duanluo"><span>75</span></div><div class="l"><span style="margin-left:25px"></span><span >如上文所述，本文中开发的小区物业服务APP，是一个典型的C/S架构软件系统的客户端应用程序。 </span><span >C/S架构体系中， </span><span >客户端与服务端的交互一般是通过HTTP请求来获取JSON（一种以键值对为基础的数据格式）格式数据，并进行解析来进行的。 </span><span >本文中开发的小区物业服务APP，在数据交互上面使用了当前最流行的OKHttp框架。 </span></div><div class="modify" align="right" paraseq="74"><span class="btn btn-blue" onclick="submitPart('如上文所述，本文中开发的小区物业服务APP，是一个典型的C/S架构软件系统的客户端应用程序。C/S架构体系中，客户端与服务端的交互一般是通过HTTP请求来获取JSON（一种以键值对为基础的数据格式）格式数据，并进行解析来进行的。本文中开发的小区物业服务APP，在数据交互上面使用了当前最流行的OKHttp框架。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>76</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/235.htm" target="right" class="red">一般在Java平台上，我们会使用Apache HttpClient作为Http客户端，用于发送 HTTP 请求，并对响应进行处理。</a><a href="../sentence_detail/236.htm" target="right" class="red">比如可以使用HTTP客户端与第三方服务(如SSO服务)进行集成，当然还可以爬取网上的数据等。</a><a href="../sentence_detail/237.htm" target="right" class="red">OKHttp与HttpClient类似，也是一个HTTP客户端，提供了对 HTTP/2 和 SPDY 的支持，并提供了连接池，</a><a href="../sentence_detail/238.htm" target="right" class="red">GZIP 压缩和 HTTP 响应缓存功能。</a></div><div class="modify" align="right" paraseq="75"><span class="btn btn-blue" onclick="submitPart('一般在Java平台上，我们会使用Apache HttpClient作为Http客户端，用于发送 HTTP 请求，并对响应进行处理。比如可以使用HTTP客户端与第三方服务(如SSO服务)进行集成，当然还可以爬取网上的数据等。OKHttp与HttpClient类似，也是一个HTTP客户端，提供了对 HTTP/2 和 SPDY 的支持，并提供了连接池，GZIP 压缩和 HTTP 响应缓存功能。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>77</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/239.htm" target="right" class="red">当通过OkHttp 来请求某个 URL 时，OkHttp 首先从 URL 中得到地址信息，再从连接池中根据地址来获取连接。</a><a href="../sentence_detail/240.htm" target="right" class="red">如果在连接池中没有找到连接，则选择一个路由来尝试连接。</a><a href="../sentence_detail/241.htm" target="right" class="red">尝试连接需要通过 DNS 查询来得到服务器的 IP 地址，也会用到代理服务器和 TLS 版本等信息。</a><a href="../sentence_detail/242.htm" target="right" class="red">当实际的连接建立之后，OkHttp 发送HTTP请求并获取响应。</a><a href="../sentence_detail/243.htm" target="right" class="red">当连接出现问题时，OkHttp会自动选择另外的路由进行尝试。</a><a href="../sentence_detail/244.htm" target="right" class="red">这使得OkHttp可以自动处理可能出现的网络问题。</a><a href="../sentence_detail/245.htm" target="right" class="red">当成功获取到HTTP请求的响应之后，当前的连接会被放回到连接池中，提供给后续的请求来复用。</a><a href="../sentence_detail/246.htm" target="right" class="red">连接池会定期把闲置的连接关闭以释放资源。</a></div><div class="modify" align="right" paraseq="76"><span class="btn btn-blue" onclick="submitPart('当通过OkHttp 来请求某个 URL 时，OkHttp 首先从 URL 中得到地址信息，再从连接池中根据地址来获取连接。如果在连接池中没有找到连接，则选择一个路由来尝试连接。尝试连接需要通过 DNS 查询来得到服务器的 IP 地址，也会用到代理服务器和 TLS 版本等信息。当实际的连接建立之后，OkHttp 发送HTTP请求并获取响应。当连接出现问题时，OkHttp会自动选择另外的路由进行尝试。这使得OkHttp可以自动处理可能出现的网络问题。当成功获取到HTTP请求的响应之后，当前的连接会被放回到连接池中，提供给后续的请求来复用。连接池会定期把闲置的连接关闭以释放资源。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>78</span></div><div class="l"><span style="margin-left:25px"></span><span >3系统需求分析 </span></div></div><div class="para"><div class="duanluo"><span>79</span></div><div class="l"><span style="margin-left:25px"></span><span >3.1开发环境 </span></div></div><div class="para"><div class="duanluo"><span>80</span></div><div class="l"><span style="margin-left:25px"></span><span >在进行基于手机的物业服务APP的开发中，项目主要使用到的软件开发环境如下： </span></div><div class="modify" align="right" paraseq="79"><span class="btn btn-blue" onclick="submitPart('在进行基于手机的物业服务APP的开发中，项目主要使用到的软件开发环境如下：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>81</span></div><div class="l"><span style="margin-left:25px"></span><span >操作系统：windows 10 </span></div></div><div class="para"><div class="duanluo"><span>82</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/251.htm" target="right" class="red">开发工具：Android Studio 2.2</a></div></div><div class="para"><div class="duanluo"><span>83</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/252.htm" target="right" class="red">Android SDK：Android 6.0 （API Level 23.0）</a></div><div class="modify" align="right" paraseq="82"><span class="btn btn-blue" onclick="submitPart('Android SDK：Android 6.0 （API Level 23.0）',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>84</span></div><div class="l"><span style="margin-left:25px"></span><span >测试机：小米5 Android 7.0，模拟器 Android 6.0 </span></div><div class="modify" align="right" paraseq="83"><span class="btn btn-blue" onclick="submitPart('测试机：小米5 Android 7.0，模拟器 Android 6.0',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>85</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/254.htm" target="right" class="red">建模工具：Rational Rose 2007</a></div></div><div class="para"><div class="duanluo"><span>86</span></div><div class="l"><span style="margin-left:25px"></span><span >作图工具：Visio 2010 </span></div></div><div class="para"><div class="duanluo"><span>87</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/256.htm" target="right" class="orange">服务器：阿里云 Windows Server 2008（搭载Apache 6.0）</a></div><div class="modify" align="right" paraseq="86"><span class="btn btn-blue" onclick="submitPart('服务器：阿里云 Windows Server 2008（搭载Apache 6.0）',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>88</span></div><div class="l"><span style="margin-left:25px"></span><span >3.2可行性分析 </span></div></div><div class="para"><div class="duanluo"><span>89</span></div><div class="l"><span style="margin-left:25px"></span><span >1.经济可行性 </span></div></div><div class="para"><div class="duanluo"><span>90</span></div><div class="l"><span style="margin-left:25px"></span><span >在经济上，客户使用基于手机的物业服务APP，一方面做到了信息的及时性，完整性，大大节省了小区住户在缴费，投诉，获取社区通知，报修等等流程的时间， </span><span >给人们的生活带来极大的便利； </span><span >另一方面，物业公司也能因此节省大量人力，同时因为提供了更好的服务，让小区住户享受该有的权利，收到的投诉更少，消费水平也得到改善， </span><span >这样能大大降低运营成本。 </span></div><div class="modify" align="right" paraseq="89"><span class="btn btn-blue" onclick="submitPart('在经济上，客户使用基于手机的物业服务APP，一方面做到了信息的及时性，完整性，大大节省了小区住户在缴费，投诉，获取社区通知，报修等等流程的时间，给人们的生活带来极大的便利；另一方面，物业公司也能因此节省大量人力，同时因为提供了更好的服务，让小区住户享受该有的权利，收到的投诉更少，消费水平也得到改善，这样能大大降低运营成本。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>91</span></div><div class="l"><span style="margin-left:25px"></span><span >2.技术可行性 </span></div></div><div class="para"><div class="duanluo"><span>92</span></div><div class="l"><span style="margin-left:25px"></span><span >在技术上， </span><span >开发一款基于Android手机的物业服务APP需要的核心技术一个是对安卓架构和API的熟悉和了解，另外一个就是实现数据交互和缴费。 </span><span >对于Android技术已经有了一定的开发经验，数据交互上面使用OKHttp和Gson进行JSON数据解析，而缴费上我们可以使用支付宝支付SDK来实现。 </span><span >所以，在技术上是可行的。 </span></div><div class="modify" align="right" paraseq="91"><span class="btn btn-blue" onclick="submitPart('在技术上，开发一款基于Android手机的物业服务APP需要的核心技术一个是对安卓架构和API的熟悉和了解，另外一个就是实现数据交互和缴费。对于Android技术已经有了一定的开发经验，数据交互上面使用OKHttp和Gson进行JSON数据解析，而缴费上我们可以使用支付宝支付SDK来实现。所以，在技术上是可行的。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>93</span></div><div class="l"><span style="margin-left:25px"></span><span >3.运行可行性 </span></div></div><div class="para"><div class="duanluo"><span>94</span></div><div class="l"><span style="margin-left:25px"></span><span >由于我们基于最新版本的Android Studio2.2来开发和调试，使用稳定的Android6.0SDK，并使用真机进行测试，保障了程序的正确性。 </span><span >由于Android是向上兼容的，所以APP可以在Android 2.3以上的所有安卓手机上面正常运行。 </span></div><div class="modify" align="right" paraseq="93"><span class="btn btn-blue" onclick="submitPart('由于我们基于最新版本的Android Studio2.2来开发和调试，使用稳定的Android6.0SDK，并使用真机进行测试，保障了程序的正确性。由于Android是向上兼容的，所以APP可以在Android 2.3以上的所有安卓手机上面正常运行。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>95</span></div><div class="l"><span style="margin-left:25px"></span><span >4.法律可行性 </span></div></div><div class="para"><div class="duanluo"><span>96</span></div><div class="l"><span style="margin-left:25px"></span><span >本文开发的APP是一个为小区住户提供物业服务的APP，方便住户的社区生活，不会恶意盗取用户的隐私信息，用户的缴费，投诉， </span><span >报修等等都有相应的历史记录可以查询。 </span></div><div class="modify" align="right" paraseq="95"><span class="btn btn-blue" onclick="submitPart('本文开发的APP是一个为小区住户提供物业服务的APP，方便住户的社区生活，不会恶意盗取用户的隐私信息，用户的缴费，投诉，报修等等都有相应的历史记录可以查询。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>97</span></div><div class="l"><span style="margin-left:25px"></span><span >3.3物业服务APP的功能性需求 </span></div></div><div class="para"><div class="duanluo"><span>98</span></div><div class="l"><span style="margin-left:25px"></span><span >3.3.1物业服务APP需求概述 </span></div></div><div class="para"><div class="duanluo"><span>99</span></div><div class="l"><span style="margin-left:25px"></span><span >基于手机的物业服务APP是物业管理部门提供给小区住户使用的，能够方便的搭建小区住户和物业管理公司之间信息的桥梁，并将传统的物业服务于移动互联网相结合， </span><span >方便双方物业公司的管理，也方便住户的生活的一款APP。 </span><span >根据需求， </span><span >这款APP要能够方便小区住户在手机上实时查阅物业公司或者其他同一个社区的用户发送的通知和动态。 </span><span >用户能够在APP上办理交房验房的初步手续，并保障信息的合法性和正确性。 </span><span >同时，物业公司将各个物业的缴费接口提供给APP，使得小区住户能够通过APP实时缴物业费，水电费等等费用，并能够有详细的历史记录可以查询。 </span><span >物业管理部门能够通过APP的后台管理系统了解用户的投诉，报修等等图文并茂的信息，并统一处理。 </span></div><div class="modify" align="right" paraseq="98"><span class="btn btn-blue" onclick="submitPart('基于手机的物业服务APP是物业管理部门提供给小区住户使用的，能够方便的搭建小区住户和物业管理公司之间信息的桥梁，并将传统的物业服务于移动互联网相结合，方便双方物业公司的管理，也方便住户的生活的一款APP。根据需求，这款APP要能够方便小区住户在手机上实时查阅物业公司或者其他同一个社区的用户发送的通知和动态。用户能够在APP上办理交房验房的初步手续，并保障信息的合法性和正确性。同时，物业公司将各个物业的缴费接口提供给APP，使得小区住户能够通过APP实时缴物业费，水电费等等费用，并能够有详细的历史记录可以查询。物业管理部门能够通过APP的后台管理系统了解用户的投诉，报修等等图文并茂的信息，并统一处理。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>100</span></div><div class="l"><span style="margin-left:25px"></span><span >经过收集资料和分析，最终确定该物业服务APP的主要功能模块有APP首页，邻里圈和个人中心，其中APP首页的主要功能有小区动态，报修，交房验房， </span><span >投诉和缴费。 </span><span >邻里圈主要是同一个社区的住户发表的动态，能够发表文字和图片，发表的动态只要是同一个小区的用户都能够浏览到。 </span><span >个人中心的主要功能有查看缴费的历史记录、意见反馈，修改密码，登录和注册等。 </span><span >下面是APP的功能需求图： </span></div><div class="modify" align="right" paraseq="99"><span class="btn btn-blue" onclick="submitPart('经过收集资料和分析，最终确定该物业服务APP的主要功能模块有APP首页，邻里圈和个人中心，其中APP首页的主要功能有小区动态，报修，交房验房，投诉和缴费。邻里圈主要是同一个社区的住户发表的动态，能够发表文字和图片，发表的动态只要是同一个小区的用户都能够浏览到。个人中心的主要功能有查看缴费的历史记录、意见反馈，修改密码，登录和注册等。下面是APP的功能需求图：',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>101</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/288.htm" target="right" class="red">图3-1APP功能需求图</a></div></div><div class="para"><div class="duanluo"><span>102</span></div><div class="l"><span style="margin-left:25px"></span><span >3.3.2物业服务APP功能描述 </span></div></div><div class="para"><div class="duanluo"><span>103</span></div><div class="l"><span style="margin-left:25px"></span><span >（1）小区动态：小区动态主要是由物业管理和居委会等发布的社区周边新闻和公告等信息，包含文字和图片。 </span><span >用户可以在小区动态页面查看，并支持下拉刷新和上拉加载。 </span></div><div class="modify" align="right" paraseq="102"><span class="btn btn-blue" onclick="submitPart('（1）小区动态：小区动态主要是由物业管理和居委会等发布的社区周边新闻和公告等信息，包含文字和图片。用户可以在小区动态页面查看，并支持下拉刷新和上拉加载。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>104</span></div><div class="l"><span style="margin-left:25px"></span><span >（2）报修：用户发现自家或者公共的设施出现异常，可以在APP的报修界面申请报修。 </span><span >申请时需填入用户姓名和电话，报修设施类型（公共设施或者私人设施），以及描述等信息，并可上传图片最多3张图片方便维修人员了解情况。 </span><span >一旦报修信息提交成功，后台人员确认之后，便会安排维修人员上门维修。并可以查看历史报修记录。 </span></div><div class="modify" align="right" paraseq="103"><span class="btn btn-blue" onclick="submitPart('（2）报修：用户发现自家或者公共的设施出现异常，可以在APP的报修界面申请报修。申请时需填入用户姓名和电话，报修设施类型（公共设施或者私人设施），以及描述等信息，并可上传图片最多3张图片方便维修人员了解情况。一旦报修信息提交成功，后台人员确认之后，便会安排维修人员上门维修。并可以查看历史报修记录。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>105</span></div><div class="l"><span style="margin-left:25px"></span><span >（3）交房验房：在交房验房模块，用户可以了解收楼手续，装修手续的流程，并了解装修管理协议等信息，并能根据需要在线提交收楼需要的家庭情况登记表， </span><span >装修申请表，和业主收楼确认表等。 </span></div><div class="modify" align="right" paraseq="104"><span class="btn btn-blue" onclick="submitPart('（3）交房验房：在交房验房模块，用户可以了解收楼手续，装修手续的流程，并了解装修管理协议等信息，并能根据需要在线提交收楼需要的家庭情况登记表，装修申请表，和业主收楼确认表等。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>106</span></div><div class="l"><span style="margin-left:25px"></span><span >（4）投诉：当业主需要投诉时，可以在APP的投诉页面发表投诉，投诉可以输入遇到的问题和上传图片证据，物业部门在后台收到业主投诉， </span><span >经过查实会采取相应措施。 </span></div><div class="modify" align="right" paraseq="105"><span class="btn btn-blue" onclick="submitPart('（4）投诉：当业主需要投诉时，可以在APP的投诉页面发表投诉，投诉可以输入遇到的问题和上传图片证据，物业部门在后台收到业主投诉，经过查实会采取相应措施。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>107</span></div><div class="l"><span style="margin-left:25px"></span><span >（5）缴费：用户可以在APP首页缴费页面通过支付宝缴纳物业费，水电费，燃气费，宽带费等等费用，所有的缴费都会有历史清单，用户可以在缴费记录查看。 </span></div><div class="modify" align="right" paraseq="106"><span class="btn btn-blue" onclick="submitPart('（5）缴费：用户可以在APP首页缴费页面通过支付宝缴纳物业费，水电费，燃气费，宽带费等等费用，所有的缴费都会有历史清单，用户可以在缴费记录查看。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>108</span></div><div class="l"><span style="margin-left:25px"></span><span >（6）查看邻里圈动态：查看社区住户发表的图文动态。 </span></div></div><div class="para"><div class="duanluo"><span>109</span></div><div class="l"><span style="margin-left:25px"></span><span >（7）发表邻里圈动态：编辑动态并发表。 </span></div></div><div class="para"><div class="duanluo"><span>110</span></div><div class="l"><span style="margin-left:25px"></span><span >（8）查看缴费记录：用户可以查看自己的历史缴费清单，所有的账单一目了然。 </span></div><div class="modify" align="right" paraseq="109"><span class="btn btn-blue" onclick="submitPart('（8）查看缴费记录：用户可以查看自己的历史缴费清单，所有的账单一目了然。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>111</span></div><div class="l"><span style="margin-left:25px"></span><span >（9）完善资料：有一些敏感操作需要用户完善自己的信息，比如缴费和验收房。 </span><span >用户可以在完善资料页面填写并提交。物业公司后台收到后会更新改用户的资料。 </span></div><div class="modify" align="right" paraseq="110"><span class="btn btn-blue" onclick="submitPart('（9）完善资料：有一些敏感操作需要用户完善自己的信息，比如缴费和验收房。用户可以在完善资料页面填写并提交。物业公司后台收到后会更新改用户的资料。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>112</span></div><div class="l"><span style="margin-left:25px"></span><span >（10）意见反馈：用户可以向物业公司反馈意见。 </span></div></div><div class="para"><div class="duanluo"><span>113</span></div><div class="l"><span style="margin-left:25px"></span><span >（11）修改密码：用户可以修改登录密码，修改密码时需要输入6位数的短信验证码，验证通过并且输入的密码合理才可修改。 </span></div><div class="modify" align="right" paraseq="112"><span class="btn btn-blue" onclick="submitPart('（11）修改密码：用户可以修改登录密码，修改密码时需要输入6位数的短信验证码，验证通过并且输入的密码合理才可修改。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>114</span></div><div class="l"><span style="margin-left:25px"></span><span >（12）登录注册：用户可以登录APP或者注册为新用户。 </span></div></div><div class="para"><div class="duanluo"><span>115</span></div><div class="l"><span style="margin-left:25px"></span><a href="../sentence_detail/308.htm" target="right" class="orange">基于手机的物业服务APP的功能设计如下图所示：</a></div></div><div class="para"><div class="duanluo"><span>116</span></div><div class="l"><span style="margin-left:25px"></span><span >图3-2 物业服务APP功能模块结构图 </span></div></div><div class="para"><div class="duanluo"><span>117</span></div><div class="l"><span style="margin-left:25px"></span><span >3.4物业服务APP功能用例分析 </span></div></div><div class="para"><div class="duanluo"><span>118</span></div><div class="l"><span style="margin-left:25px"></span><span >APP的功能模块主要分为缴费模块，用户模块，邻里圈和个人中心模块。 </span></div><div class="modify" align="right" paraseq="117"><span class="btn btn-blue" onclick="submitPart('APP的功能模块主要分为缴费模块，用户模块，邻里圈和个人中心模块。',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>119</span></div><div class="l"><span style="margin-left:25px"></span><span >其中用户管理模块是本APP的核心模块之一，用户未注册之前视为&quot;游客&rdquo;，游客只能查看小区动态、查看邻友圈的权限，注册用户享受大部分权限， </span><span >而交房验房、缴费功能只有完善资料的用户才可以使用。 </span><span >具体的用例如下 </span></div><div class="modify" align="right" paraseq="118"><span class="btn btn-blue" onclick="submitPart('其中用户管理模块是本APP的核心模块之一，用户未注册之前视为&quot;游客&rdquo;，游客只能查看小区动态、查看邻友圈的权限，注册用户享受大部分权限，而交房验房、缴费功能只有完善资料的用户才可以使用。具体的用例如下',this)" class="modify">段落修改</div></div><div class="para"><div class="duanluo"><span>120</span></div><div class="l"><span style="margin-left:25px"></span><span >图3-3 物业服务APP系统用例图 </span></div></div><div align="center" class="navigation"><a href="paper_1.htm"><span class="btn_gray">首页</span></a><a  href="#"><span class="btn_gray">上一页</span></a><a href="paper_2.htm"><span class="btn_gray">下一页</span></a><a href="paper_3.htm">	<span class="btn_gray">尾页</span></a><span>页码：1/3页</span></div><div class="footer"><div align="center" class="a666" style="font-size:14px;padding-top:50px;padding-bottom:30px;"><div>检测报告由 <a class="nounderline" href="http://www.ptcheck.com" target="_blank">PTcheck</a>文献相似度检测系统生成 </div><div>Copyright © 2007-2017 PTcheck </div></div></div></div></body></html>

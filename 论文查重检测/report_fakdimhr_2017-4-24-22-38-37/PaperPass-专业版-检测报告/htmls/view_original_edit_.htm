@@ -1,0 +1,1009 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>PaperPass 最权威论文抄袭检测系统</title>
+<style type="text/css">
+<!--
+user_icon {
+color: #FFFFFF;
+}
+html
+{
+overflow-x:hidden;
+overflow-y:auto;
+}
+body,td,th {
+font-family: "微软雅黑";
+font-size: 12px;
+}
+h1,h2,h3,h4,h5,h6 {
+font-family: "宋体";
+}
+p{
+margin-bottom:10px;
+}
+demo_padding {
+line-height: 30px;
+}
+.zhengwen {
+padding-right: 15px;
+padding-left: 5px;
+padding-bottom:100px;
+font-size: 13px;
+line-height: 20px;
+color: #666666;
+}
+.zhengwencenter {
+padding-right: 15px;
+padding-left: 0px;
+margin-bottom:10px;
+font-size: 13px;
+line-height: 20px;
+color: #666666;
+text-align:center
+}
+.neikuang {
+background-color: #EBEBEB;
+border: 1px solid #999999;
+padding-right: 10px;
+padding-left: 10px;
+margin-top:10px;
+margin-left:25px;
+width:300px;
+}
+.shubu{
+height: 20px;
+width: 20px;
+margin-left:25px;
+background-color: #FFFFFF;
+border: 1px solid #999999;
+text-align: center;
+vertical-align: middle;
+display: block;
+color: #666666;
+}
+a.red:link {color:#FF0000}
+a.red:visited {color:#FF0000}
+a.red:hover {color:#000000}
+a.red:active {color:#000000}
+
+a.orange:link {color:#FF6600}
+a.orange:visited {color:#FF6600}
+a.orange:hover {color:#000000}
+a.orange:active {color:#000000}
+
+a.dark:link {color:#666666}
+a.dark:visited {color:#666666}
+a.dark:hover {color:#000000}
+a.dark:active {color:#000000}
+
+a.pagelink:hover {color:#000000}
+a.pagelink:active {color:#000000}
+
+.green{color:#008000}
+.gray{color:#666666}
+.red{color:#FF0000}
+.orange{color:#FF6600}
+a{TEXT-DECORATION:none}
+
+-->
+</style>
+</head>
+<body>
+
+
+<div class="zhengwen">
+
+<span style="margin-left:25px"></span><font size=3 color=red>蓝色文字是系统自动修改的结果，仅供参考，如需使用请加工润色！</font><br><br><span style="margin-left:25px"></span>基于手机的小区物业服务APP的设计与开发作者：
+<br><br>
+<span style="margin-left:25px"></span>钱文军 指导教师：韩冰（海南师范大学信息科学技术学院软件工程系，海口，571158）
+<br><br>
+<span style="margin-left:25px"></span>摘 要：
+<br><br>
+<span style="margin-left:25px"></span>随着我国房地产行业的不断发展，人们对住宅的要求日益增高。人们已经不再满足于对于数量型的追求，而是更偏向于追求高质量的小区生活，更便利的功能和服务体验。物业服务作为一门学科，现在迫切的需要解决由传统的信息采集人工管理的方式，向智能化数据分析，自动化管理，人性化服务的方向发展。近些年来我国互联网和科学技术不断发展，互联网技术已经渗透到生活的方方面面。
+<br><br>
+<span style="margin-left:25px"></span>尤其是移动互联网技术的蓬勃发展，使得手机已经从原来的单纯的通讯工具，发展成为搭载独立的操作系统，能够安装各种应用，并极大地改变人们生活方式的设备。现在大部分的物业管理机制仍是传统的社区服务，尤其是在一些二线三线城市，物业管理的现状更是堪忧。人们迫切需要网络化信息传输，依托移动互联网蓬勃发展的大趋势，提高物业服务质量和效率。为了更好的整合资源，提高资源利用率，解决小区业主的痛点，我们要顺应时代发展的潮流，利用我们学习到的互联网相关的知识，在小区开发建设如火如荼的同时，开发基于手机的现代化的，集信息收集和处理，及时反馈，功能丰富的物业服务系统，以提高管理质量，改善人们的生活的目标。本篇论文将采用面向对象的软件设计思想，按照安卓手机APP的开发规范，系统分析手机物业服务系统的需求和业务逻辑，从而得出APP的详细设计。
+<br><br>
+<span style="margin-left:25px"></span>本APP系统主要面向安卓手机用户，APP的功能涵盖了物业信息采集、物业缴费、物业投诉、社区动态、交房装修等等方面的服务。论文主要完成安卓端APP的框架设计，页面的分析与设计，与后台服务端的数据调取和交互，性能的优化等等。论文采用IOC的设计思想，使用JSON作为接口数据交互格式，采用各种设计模式和第三方库等等设计与开发系统。后端采用 Java的 SSH框架编写，采用 MYSQL数据库作为后台数据系统，实现了对小区用户的信息和小区设备信息进行及时搜集和处理，同时在手机上操作，大大方便了小区业主的生活。本文开发的物业服务APP是将移动互联网与传统的物业缴费，管理模式结合在一起，在此基础上设计和实现的。
+<br><br>
+<span style="margin-left:25px"></span>为了使APP能够发挥出便携性、及时性、安全性的优势，我们以操作简便、界面友好为目标开发和完善。关键词：
+<br><br>
+<span style="margin-left:25px"></span>物业服务； 安卓； IOC；Design And Development of Residential Property Service System
+<br><br>
+<span style="margin-left:25px"></span>Based On Mobile APP
+<br><br>
+<span style="margin-left:25px"></span>Author:
+<br><br>
+<span style="margin-left:25px"></span> Qian Wen jun Tutor: Han Bing（Department of Software Engineering， School of Information Science and Technology， HaiNan Normal University， HaiKou， xxxxx）
+<br><br>
+<span style="margin-left:25px"></span>Abstract:
+<br><br>
+<span style="margin-left:25px"></span> With the incessant development of the Eeal Estate Industry in our nation， people have increasing desire of their house. And they turn their attention from the number to high- quality community life， more convenient functions and service experiences. As a subject， property service is going to solve the crying need that turning the development direction from the traditional information acquisition and labor management to Intelligent data analysis， automated management and people- oriented service. Recent years， the science and technology especially the internet technology are continuously developing， and the internet technology has penetrated every aspect of social life. Especially，
+<br><br>
+<span style="margin-left:25px"></span> the rapid development of Mobile Internet Technology has made mobile phones develop to equipment that can install an OS into it and can also install a lot of apps and greatly change the life- style of people， not just communication tools. Nowadays， most of the property management mechanism is still the traditional community services， especially in some second- tier third- tier cities， property management is even more worrying about the status quo. People urgently need networked information transmission， relying on the mobile Internet vigorous development trend， improve the quality of property services and efficiency. In order to better integrate resources， improve resource utilization， to solve the pain of community owners， we should follow the trend of the development of the times， we use the Internet to learn the knowledge， in the community development and construction in full swing at the same time， the development of mobile phone based on the modernization， Set the information collection and processing， timely feedback， feature- rich property service system to improve the quality of management and improve people’ s lives. This paper will use the object- oriented software design ideas， according to the development of Android mobile phone APP specification，
+<br><br>
+<span style="margin-left:25px"></span> system analysis of mobile phone property service system needs and business logic， resulting in the detailed design of APP. The APP system mainly for Andrews mobile phone users， APP’s function covers the property information collection， property payment， property complaints， community dynamics， delivery decoration and so on services. The paper mainly completes the framework design， the analysis and design of the page， the data retrieval and interaction， the optimization of the performance and so on. The paper adopts the design idea of IOC， uses JSON as the interface data interactive format， adopts various design patterns and third party library and so on design and development system. Back- end using Java’ s SSH framework， the use of MYSQL database as a back- end data system to achieve the community information and community equipment information for timely collection and processing， while operating on the phone， greatly facilitate the community owners of life.This paper develops the property service APP is the mobile Internet and the traditional property payment， management mode together， on the basis of design and implementation.
+<br><br>
+<span style="margin-left:25px"></span> In order to make APP to play a portability， timeliness， security advantages， we operate with simple， user-friendly development and improvement.Key words:
+<br><br>
+<span style="margin-left:25px"></span> the Property Service; Android;IOC1引言
+<br><br>
+<span style="margin-left:25px"></span>1.1课题背景
+<br><br>
+<span style="margin-left:25px"></span>随着我国房地产行业日渐成熟，再加上近年来我国的科学技术水平和经济发展状况都有显著的提高，
+<br><br>
+<span style="margin-left:25px"></span>我国城市化进程不断加快，物业服务的质量直接反映出我国的社会发展状况和人民的生活水平质量。目前互联网技术不断成熟，当前社会正处于信息技术的研究和应用的中间点，移动互联网技术已经发展到了一定的阶段，但是移动互联网技术的应用还处在初期，很多传统行业还没有被普及。有研究表明，目前我们国家的小区物业管理由于近十年来的不断发展，正处于蓬勃发展的态势。由于IS09002国际质量管理体系等在物业管理与服务中的应用，我国的物业服务整体上朝着正规化，人性化的方向发展。从另一个角度看，我国的居住物业服务行业并没有快速地跟上互联网发展的步伐，整体上还是以传统的人工服务的形式为主。
+<br><br>
+<span style="margin-left:25px"></span>其一，社区公告还是以纸质的公告为主，住户无法及时了解最新的信息。其二，由于缴费接口没有统一，物业缴费形式仍然以传统的现金缴费方式为主，住户必须到缴费地点排队缴费，浪费了大量的时间和人力物力。其三，用户的投诉，房产的交接等等也没有办法方便地得到及时处理和反馈。为解决上述问题，基于手机的小区物业服务系统的设计与开发很有必要。1.2研究的意义和目的
+<br><br>
+<span style="margin-left:25px"></span>近几年移动互联网蓬勃发展，网络技术的应用已经逐渐改变人们的生活方式。
+<br><br>
+<span style="margin-left:25px"></span>而作为直接影响人们社区生活的小区物业服务行业，其服务质量和效率尤为重要，传统的服务形式早已无法满足现代人们的需求。基于以上出现的问题，结合当前手机APP蓬勃发展的大背景，基于手机的小区物业服务系统的设计与开发很有意义。物业服务APP，顾名思义是一款能够给小区的住户提供物业服务的手机APP。
+<br><br>
+<span style="margin-left:25px"></span>它在物业公司和小区住户之间搭建起了一个服务提供的桥梁。开发这样一款APP，能够解决一下的问题：第一：
+<br><br>
+<span style="margin-left:25px"></span>原有的物业服务形式多采用人工方式，效率低下，无论从及时性，正确率还是智能手机几乎人手一部，本文中开发的 APP方便业主及时接收和查阅社区的各种信息，自动进行数据处理和统计，用户动动手指就能处理业务，查看和反馈各种信息，最大限度的节省了业主们的宝贵时间。第二：
+<br><br>
+<span style="margin-left:25px"></span>方便物业服务公司的工作。物业公司可以使用APP，利用现在强大的第三方支付平台，自动收取物业费，水费，电费等等费用，节省了大量的人力物力，同时能很大程度上保障数据的正确性。物业公司也可以通过我们的APP及时收取业主的交房验房信息、投诉等等，这样就方便物业合理安排人员，及时处理问题。同时，传统的贴公告的方式，不仅浪费人力，而且用户能及时收到信息的概率很低。APP上面的小区动态能够方便物业公司快速的发送通知到各个小区的每一个用户，拓宽了信息渠道。1.3物业服务的现状
+<br><br>
+<span style="margin-left:25px"></span>物业管理既是房地产行业经营和管理的重要组成部分，又是现代城市管理不可缺少的一部分。
+<br><br>
+<span style="margin-left:25px"></span>物业服务行业虽然发展势头良好，但是仍然存在以下的问题：1.业主知情权问题
+<br><br>
+<span style="margin-left:25px"></span>目前我国的物业服务前期在程序管理和质量控制方面虽然还需要进一步的完善和不断改进，但是也已经开始了市场化的进程。
+<br><br>
+<span style="margin-left:25px"></span>后期物业管理却仍然大部分停留在指派或协议进驻阶段，广大业主的选择权甚至是知情权都没有办法发挥，相当于业主需要雇一个保姆，工资都定好了，而且干好干坏都得付钱，这样理所当然会引起业主的反感。究其原因，主要是因为消息的传递通道闭塞，业主无法及时收到各种社区服务的消息推送，因此建设一个社区服务平台很有必要，它能够将物业服务公司的消息直接推送到用户手机上，使得业主能够第一时间掌握第一手资料，充分发挥业主的知情权和选择权。收费精细化问题
+<br><br>
+<span style="margin-left:25px"></span>目前，我国大部分的物业服务在收费上面没有做到详细透明，不仅业主不清楚物业费用的收费项目，甚至对当前正在享受哪些物业服务也知之甚少。
+<br><br>
+<span style="margin-left:25px"></span>模糊的物业收费直接导致的后果就是，只要业主对物业有一点不满，不管其他的服务做得多好，都可以以此为由拒绝交费，这样也会造成物业公司的大量损失。报修投诉反馈问题
+<br><br>
+<span style="margin-left:25px"></span>目前大部分小区接收用户投诉主要采用人工接听电话的方式，不仅效率低下，而且很容易出现错误。
+<br><br>
+<span style="margin-left:25px"></span>导致住户反映的问题无法及时得到处理和解决，这样不仅使得小区业主的问题迟迟得不到反馈，而且也使得物业在处理业主问题时也因为无法及时准确获取到相应的信息而产生管理混乱，人力资源浪费很大的问题。1.4研究内容
+<br><br>
+<span style="margin-left:25px"></span>本篇论文主要是对基于手机的小区物业服务系统的开发与研究，在研究现代智能手机APP开发技术的同时，解决我国房地产行业物业服务中存在的一些问题。
+<br><br>
+<span style="margin-left:25px"></span>在研究了传统物业服务的方式和特点之后，进行深入的需求分析和系统设计，给出系统的各个功能模块和页面的详细设计。在此基础上本文详细介绍了如何利用Android Studio进行开发和调试，实现各个页面的编写和功能。在开发过程中采用了面向对象的设计思想，着重介绍项目架构设计中用到的IOC思想和各种设计模式。最后进行APP的测试，切实开发出一款基于安卓手机的小区物业服务APP。以下是本文的详细内容：引言，主要介绍了物业服务APP的研究背景，并论述研究的目的和意义，并分析目前我国的物业管理与服务的现状和痛点，由此确定了本文的研究重点和方向，要达到的效果。
+<br><br>
+<span style="margin-left:25px"></span>相关技术，介绍基于手机的物业服务APP运用的主要技术和架构。
+<br><br>
+<span style="margin-left:25px"></span>系统需求分析，包括物业服务系统 APP端的需求来源，进行可行性分析，并对 APP的各个功能模块和页面进行深入的功能性和非功能性需求分析，
+<br><br>
+<span style="margin-left:25px"></span>并论述 APP的设计思想。系统方案设计，在需求分析的基础上，对基于手机的物业服务 APP进行了架构设计，利用时序图，
+<br><br>
+<span style="margin-left:25px"></span>类图，程序流程图等等对 APP的各个功能模块进行分析，设计出各个页面的样式和功能。系统的实现，主要是在系统设计的基础上，通过相关的安卓手机APP开发工具和技术，实现各个页面的UI编写和功能逻辑，数据渲染等等，展示了系统实现的内容。
+<br><br>
+<span style="margin-left:25px"></span>结束语，本文的全面总结和在总结的基础上对未来的展望。
+<br><br>
+<span style="margin-left:25px"></span>2相关技术
+<br><br>
+<span style="margin-left:25px"></span>2.1Android平台介绍与系统框架
+<br><br>
+<span style="margin-left:25px"></span>Android是由谷歌开发的一款手机操作系统，它是一款开源的操作系统。
+<br><br>
+<span style="margin-left:25px"></span>Android系统的内核是Linux，所以无论在安全性还是可移植性上都有很大的保障。Android操作系统已经成为全球最大的智能手机操作系统。其系统架构如下图：图2-1安卓系统架构图
+<br><br>
+<span style="margin-left:25px"></span>在系统架构上，Android平台共分为五层，分别是：
+<br><br>
+<span style="margin-left:25px"></span>Linux内核（Linux Kernel）：
+<br><br>
+<span style="margin-left:25px"></span>Android系统是基于Linux内核的，这也是安卓系统具有高度可移植性和极高安全性的原因之一。安卓运行时环境是在 Linux 内核的基础上来执行其功能的，包括线程管理和内存管理等。在Linux内核层，Android系统提供了大量的硬件驱动，比如USB驱动、蓝牙驱动、电源管理、相机驱动、WiFi驱动等等。Android硬件抽象层（Hardware Abstraction Haler）：
+<br><br>
+<span style="margin-left:25px"></span>安卓硬件抽象层就是对系统底层驱动程序做一些封装，这样上层的应用访问系统的驱动程序就只需要调取硬件抽象层的接口，不需要知道系统底层的具体代码。原生C/C++库（Native C/C++ Libraries）和安卓运行时环境：
+<br><br>
+<span style="margin-left:25px"></span>许多核心 Android 系统组件和服务在构建自原生代码时，需要调用一些 C 和 C++ 编写的原生库。例如OpenGL 库提供给应用框架层API，能够实现2D和3D图形的绘制。安卓运行时环境为系统中的每一个应用都提供了单独的虚拟机实例和进程，实现了应用的独立性。应用框架层（Application Framework）：
+<br><br>
+<span style="margin-left:25px"></span>这一层是通过Java语言编写的一个API集合，包含了所有安卓系统的核心功能集。它为系统的四大组件和其他核心组件都提供了相应的管理器，APP通过调用这些管理器可以访问许多系统服务。应用层（Application）：
+<br><br>
+<span style="margin-left:25px"></span>系统应用和第三方开发的应用都处于这一层。2.2控制反转（IOC）技术
+<br><br>
+<span style="margin-left:25px"></span>控制反转（Inversion of Control），是一种为了降低程序中的耦合度而产生的技术，在现代的软件开发中，它的使用十分广泛。
+<br><br>
+<span style="margin-left:25px"></span>在Java后端框架中，控制反转技术是Spring框架的核心。IOC一般分为两种类型，一种是依赖注入（Dependency Injection），另一种是依赖查找（Dependency Lookup），其中，依赖注入运用的更加广泛。在面向对象的编程中，要实现一个功能，通常需要两个或者更多的类协同来实现，这个时候一个类就必须包含与之合作的类（我们称之为依赖类）的实例。通常的做法是这个类自己去获取依赖对象，这样做无疑会导致程序的高度耦合。而控制反转（也称为依赖倒置原理）是通过构建一个能够调控系统对象的组件，这个组件能够在某个系统组件或者类需要某一个依赖对象时，
+<br><br>
+<span style="margin-left:25px"></span>将一个实例化后的依赖对象的引用传递给这个组件。通常我们认为，这个依赖对象是被我们构建的这个调控组件注入到了需要的类中。而控制反转的反转在于系统组件获取依赖对象的过程被反转了，它不再需要类和组件自己创建依赖对象，从而削减了系统的耦合度。在本文介绍的物业服务APP的开发中，我们通过控制反转技术，实现了页面内容视图的自动注入和页面中各个控件对象的注入。
+<br><br>
+<span style="margin-left:25px"></span>并通过Java的动态代理机制，实现了控件点击事件等多种事件的动态代理，节省了很多代码，而且提高了代码的质量和可阅读性。2.4 C/S模式概念
+<br><br>
+<span style="margin-left:25px"></span>本文中开发的小区物业服务APP，是一个典型的C/S架构的软件系统，其数据的交互是由一台远端Apache服务器来提供的。
+<br><br>
+<span style="margin-left:25px"></span>这里我来阐述一下什么是C/S架构。 C/ S是客户端/服务器（ Client/ Server）的缩写，在客户端/服务端网络中，
+<br><br>
+<span style="margin-left:25px"></span>服务器处于核心地位，它为客户端提供所需要的网络资源，而客户端是系统的基础，客户端的所有数据都需要通过 HTTP请求从服务端获取。一个C/S架构的软件系统最核心的就是由两部分组成，即客户端应用程序和服务端应用程序。与 B/ S（浏览器/服务器）架构相比， C/ S架构中客户端程序通常需要安装到特定的终端，其主要的特点是能够减轻服务端的压力，而且安全性和稳定性更高。图2-2 C/S模式二层体系结构
+<br><br>
+<span style="margin-left:25px"></span>2.5OKHttp框架介绍
+<br><br>
+<span style="margin-left:25px"></span>如上文所述，本文中开发的小区物业服务APP，是一个典型的C/S架构软件系统的客户端应用程序。
+<br><br>
+<span style="margin-left:25px"></span>C/S架构体系中，客户端与服务端的交互一般是通过HTTP请求来获取JSON（一种以键值对为基础的数据格式）格式数据，并进行解析来进行的。本文中开发的小区物业服务APP，在数据交互上面使用了当前最流行的OKHttp框架。OkHttp是和Apache的HttpClient一样，用户发送一个Http请求，并将请求到的数据做相应的处理的一个Http客户端框架。
+<br><br>
+<span style="margin-left:25px"></span>使用这种框架，我们可以轻松的访问互联网上的资源。OkHttp通过连接池来做Http请求，大大提升了Http请求的速度，并且当网络请求出现问题时，OkHttp会自动检测和处理。
+<br><br>
+<span style="margin-left:25px"></span>3系统需求分析
+<br><br>
+<span style="margin-left:25px"></span>3.1开发环境
+<br><br>
+<span style="margin-left:25px"></span>在进行基于手机的物业服务APP的开发中，项目主要使用到的软件开发环境如下：
+<br><br>
+<span style="margin-left:25px"></span>操作系统：
+<br><br>
+<span style="margin-left:25px"></span>windows 10开发工具：
+<br><br>
+<span style="margin-left:25px"></span>Android Studio 2.2Android SDK：
+<br><br>
+<span style="margin-left:25px"></span>Android 6.0测试机：
+<br><br>
+<span style="margin-left:25px"></span>小米5 Android 7.0，模拟器 Android 6.0建模工具：
+<br><br>
+<span style="margin-left:25px"></span>Rational Rose 2007作图工具：
+<br><br>
+<span style="margin-left:25px"></span>Visio 2010服务器：
+<br><br>
+<span style="margin-left:25px"></span>阿里云 Windows Server 20083.2可行性分析
+<br><br>
+<span style="margin-left:25px"></span>经济可行性
+<br><br>
+<span style="margin-left:25px"></span>在经济上，客户使用基于手机的物业服务 APP，一方面做到了信息的及时性，完整性，大大节省了小区住户在缴费，
+<br><br>
+<span style="margin-left:25px"></span>投诉，获取社区通知，报修等等流程的时间，给人们的生活带来极大的便利；另一方面，物业公司也能因此节省大量人力，同时因为提供了更好的服务，让小区住户享受该有的权利，收到的投诉更少，消费水平也得到改善，这样能大大降低运营成本。技术可行性
+<br><br>
+<span style="margin-left:25px"></span>在技术上，开发一款基于Android手机的物业服务APP需要的核心技术一个是对安卓架构和API的熟悉和了解，另外一个就是实现数据交互和缴费。
+<br><br>
+<span style="margin-left:25px"></span>对于Android技术已经有了一定的开发经验，数据交互上面使用OKHttp和Gson进行JSON数据解析，而缴费上我们可以使用支付宝支付SDK来实现。所以，在技术上是可行的。运行可行性
+<br><br>
+<span style="margin-left:25px"></span>由于我们基于最新版本的Android Studio2.2来开发和调试，使用稳定的Android6.0SDK，并使用真机进行测试，保障了程序的正确性。
+<br><br>
+<span style="margin-left:25px"></span>由于Android是向上兼容的，所以APP可以在Android 2.3以上的所有安卓手机上面正常运行。法律可行性
+<br><br>
+<span style="margin-left:25px"></span>本文开发的APP是一个为小区住户提供物业服务的APP，方便住户的社区生活，不会恶意盗取用户的隐私信息，用户的缴费，投诉，报修等等都有相应的历史记录可以查询。
+<br><br>
+<span style="margin-left:25px"></span>3.3物业服务APP的功能性需求
+<br><br>
+<span style="margin-left:25px"></span>3.3.1物业服务APP需求概述
+<br><br>
+<span style="margin-left:25px"></span>基于手机的物业服务 APP是物业管理部门提供给小区住户使用的，能够方便的搭建小区住户和物业管理公司之间信息的桥梁，
+<br><br>
+<span style="margin-left:25px"></span>并将传统的物业服务于移动互联网相结合，方便双方物业公司的管理，也方便住户的生活的一款 APP。根据需求，这款APP要能够方便小区住户在手机上实时查阅物业公司或者其他同一个社区的用户发送的通知和动态。用户能够在APP上办理交房验房的初步手续，并保障信息的合法性和正确性。同时，物业公司将各个物业的缴费接口提供给APP，使得小区住户能够通过APP实时缴物业费，水电费等等费用，并能够有详细的历史记录可以查询。物业管理部门能够通过APP的后台管理系统了解用户的投诉，报修等等图文并茂的信息，并统一处理。经过收集资料和分析，最终确定该物业服务APP的主要功能模块有APP首页，邻里圈和个人中心，其中APP首页的主要功能有小区动态，报修，交房验房，投诉和缴费。
+<br><br>
+<span style="margin-left:25px"></span>邻里圈主要是同一个社区的住户发表的动态，能够发表文字和图片，发表的动态只要是同一个小区的用户都能够浏览到。个人中心的主要功能有查看缴费的历史记录、意见反馈，修改密码，登录和注册等。APP的所有功能需求如图3-1所示：图3-1APP的功能需求
+<br><br>
+<span style="margin-left:25px"></span>3.3.2物业服务APP功能描述
+<br><br>
+<span style="margin-left:25px"></span>小区动态：
+<br><br>
+<span style="margin-left:25px"></span>小区动态主要是由物业管理和居委会等发布的社区周边新闻和公告等信息，包含文字和图片。用户可以在小区动态页面查看，并支持下拉刷新和上拉加载。报修：
+<br><br>
+<span style="margin-left:25px"></span>用户发现自家或者公共的设施出现异常，可以在APP的报修界面申请报修。申请时需填入用户姓名和电话，报修设施类型（公共设施或者私人设施），以及描述等信息，并可上传图片最多3张图片方便维修人员了解情况。一旦报修信息提交成功，后台人员确认之后，便会安排维修人员上门维修。并可以查看历史报修记录。交房验房：
+<br><br>
+<span style="margin-left:25px"></span>在交房验房模块，用户可以了解收楼手续，装修手续的流程，并了解装修管理协议等信息，并能根据需要在线提交收楼需要的家庭情况登记表，装修申请表，和业主收楼确认表等。投诉：
+<br><br>
+<span style="margin-left:25px"></span>当业主需要投诉时，可以在APP的投诉页面发表投诉，投诉可以输入遇到的问题和上传图片证据，物业部门在后台收到业主投诉，经过查实会采取相应措施。缴费：
+<br><br>
+<span style="margin-left:25px"></span>用户可以在APP首页缴费页面通过支付宝缴纳物业费，水电费，燃气费，宽带费等等费用，所有的缴费都会有历史清单，用户可以在缴费记录查看。查看邻里圈动态：
+<br><br>
+<span style="margin-left:25px"></span>查看社区住户发表的图文动态。发表邻里圈动态：
+<br><br>
+<span style="margin-left:25px"></span>编辑动态并发表。查看缴费记录：
+<br><br>
+<span style="margin-left:25px"></span>用户可以查看自己的历史缴费清单，所有的账单一目了然。完善资料：
+<br><br>
+<span style="margin-left:25px"></span>有一些敏感操作需要用户完善自己的信息，比如缴费和验收房。用户可以在完善资料页面填写并提交。物业公司后台收到后会更新改用户的资料。意见反馈：
+<br><br>
+<span style="margin-left:25px"></span>用户可以向物业公司反馈意见。修改密码：
+<br><br>
+<span style="margin-left:25px"></span>用户可以修改登录密码，修改密码时需要输入6位数的短信验证码，验证通过并且输入的密码合理才可修改。登录注册：
+<br><br>
+<span style="margin-left:25px"></span>用户可以登录APP或者注册为新用户。基于手机的物业服务APP的功能设计如下图所示：
+<br><br>
+<span style="margin-left:25px"></span>图3-2 物业服务APP功能模块结构图
+<br><br>
+<span style="margin-left:25px"></span>3.4物业服务APP功能用例分析
+<br><br>
+<span style="margin-left:25px"></span>APP的功能模块主要分为缴费模块，用户模块，邻里圈和个人中心模块。
+<br><br>
+<span style="margin-left:25px"></span>其中用户管理模块是本 APP的核心模块之一，用户未注册之前视为游客，游客只能查看小区动态、查看邻友圈的权限，
+<br><br>
+<span style="margin-left:25px"></span>注册用户享受大部分权限，而交房验房、缴费功能只有完善资料的用户才可以使用。具体的用例如下图：图3-3 物业服务APP系统用例图
+<br><br>
+<span style="margin-left:25px"></span>针对APP的系统用例，下面的各个表中给出了详细的用例分析。
+<br><br>
+<span style="margin-left:25px"></span>用户注册
+<br><br>
+<span style="margin-left:25px"></span>用户注册的用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-1注册用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>注册
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>001
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户点击登录页注册按钮进入注册页，输入手机号，获取验证码并输入密码，点击提交，完成注册。
+<br><br>
+<span style="margin-left:25px"></span>前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户进入登录页
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>注册成功跳转到登录页
+<br><br>
+<span style="margin-left:25px"></span>用户登录
+<br><br>
+<span style="margin-left:25px"></span>用户登录的用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-2登录用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>登录
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>002
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户注册完成后，进入登录页，输入手机号和密码，点击登录按钮完成登录。
+<br><br>
+<span style="margin-left:25px"></span>前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户完成注册
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>登录成功跳转到APP首页
+<br><br>
+<span style="margin-left:25px"></span>用户报修
+<br><br>
+<span style="margin-left:25px"></span>用户报修的用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-3用户报修用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>报修
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>003
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户进入首页，点击报修按钮进入报修页面，选择报修类型，输入姓名和电话以及报修描述，并添加图片（最多3张），点击提交按钮完成报修。
+<br><br>
+<span style="margin-left:25px"></span>前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户已登录
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>报修成功跳转到首页
+<br><br>
+<span style="margin-left:25px"></span>用户投诉
+<br><br>
+<span style="margin-left:25px"></span>用户投诉的用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-4用户投诉用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>登录
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>004
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户进入首页，点击投诉按钮进入投诉页面，输入投诉的文字内容，选择要上传你的图片（最多3张，也可不选择），点击提交按钮完成投诉。
+<br><br>
+<span style="margin-left:25px"></span>前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户完成注册
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>投诉成功跳转到APP首页
+<br><br>
+<span style="margin-left:25px"></span>用户新增缴费地址
+<br><br>
+<span style="margin-left:25px"></span>用户新增缴费地址的用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-5用户新增缴费地址用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>新增缴费地址
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>005
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户进入首页，点击任意一个缴费按钮，进入缴费地址页面，点击新增地址，进入新增缴费地址页面，填入地址信息。
+<br><br>
+<span style="margin-left:25px"></span>前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户已登录
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>缴费地址列表新增一条地址
+<br><br>
+<span style="margin-left:25px"></span>物业缴费
+<br><br>
+<span style="margin-left:25px"></span>用户物业缴费的用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-6用户物业缴费用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>物业缴费
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>006
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户进入首页，点击任意一个缴费按钮，进入缴费地址页面，选择一个缴费地址，并进入缴费清单界面，
+<br><br>
+<span style="margin-left:25px"></span>选择缴费的月份，并核对金额，确认后输入支付密码进行缴费。前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户已登录且完善资料
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>用户缴费成功，回到首页
+<br><br>
+<span style="margin-left:25px"></span>用户完善个人资料
+<br><br>
+<span style="margin-left:25px"></span>用户完善个人资料的用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-7用户完善个人资料用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>完善个人资料
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>007
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户进入首页，点击个人中心完善资料条目，进入完善资料页面，按照要求填入各项信息，并点击提交按钮。
+<br><br>
+<span style="margin-left:25px"></span>前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户已登录
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>完善资料成功，回到首页
+<br><br>
+<span style="margin-left:25px"></span>用户查看小区动态
+<br><br>
+<span style="margin-left:25px"></span>用户查看小区动态的用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-8用户查看小区动态用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>查看小区动态
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>008
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户进入首页，点击小区动态按钮，进入小区动态页面，查看小区动态。
+<br><br>
+<span style="margin-left:25px"></span>前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户已登录
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>查看完点击返回键回到APP首页
+<br><br>
+<span style="margin-left:25px"></span>用户查看邻里圈动态
+<br><br>
+<span style="margin-left:25px"></span>用户查看邻里圈动态的用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-9用户查看邻里圈动态用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>用户查看邻里圈动态
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>009
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户和游客
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户进入首页，点击邻里圈，进入邻里圈页面，查看当前邻里圈动态。
+<br><br>
+<span style="margin-left:25px"></span>前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户点击邻里圈
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>用户发表邻里圈动态
+<br><br>
+<span style="margin-left:25px"></span>用户发表邻里圈动态的用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-10用户发表邻里圈动态用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>用户发表邻里圈动态
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>010
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户进入首页，点击邻里圈，进入邻里圈页面，点击右上角的添加按钮，进入发表邻里圈页面，输入文字，选择图片，点击发表按钮。
+<br><br>
+<span style="margin-left:25px"></span>前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户已登录
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>发表完成进入邻里圈页面
+<br><br>
+<span style="margin-left:25px"></span>用户意见反馈
+<br><br>
+<span style="margin-left:25px"></span>用户意见反馈的用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-11用户意见反馈用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>用户意见反馈
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>011
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户进入首页，点击个人中心，点击 意见反馈条目，进入意见反馈页面，输入反馈内容，点击提交按钮。
+<br><br>
+<span style="margin-left:25px"></span>前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户已登录
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>反馈成功，返回个人中心
+<br><br>
+<span style="margin-left:25px"></span>用户修改手机号
+<br><br>
+<span style="margin-left:25px"></span>用户修改手机号用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-12用户修改手机号用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>用户修改手机号
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>012
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户进入首页，点击个人中心，点击修改手机号条目，进入修改手机号页面，输入新手机号和收到的短信验证码与密码，点击确认按钮进行修改。
+<br><br>
+<span style="margin-left:25px"></span>前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户已登录
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>修改成功，进入登录页重新登录
+<br><br>
+<span style="margin-left:25px"></span>用户修改密码
+<br><br>
+<span style="margin-left:25px"></span>用户修改密码用例分析如下表所示：
+<br><br>
+<span style="margin-left:25px"></span>表3-13用户修改密码用例分析
+<br><br>
+<span style="margin-left:25px"></span>用例名称
+<br><br>
+<span style="margin-left:25px"></span>用户修改密码
+<br><br>
+<span style="margin-left:25px"></span>用例ID
+<br><br>
+<span style="margin-left:25px"></span>013
+<br><br>
+<span style="margin-left:25px"></span>角色
+<br><br>
+<span style="margin-left:25px"></span>用户
+<br><br>
+<span style="margin-left:25px"></span>用例描述
+<br><br>
+<span style="margin-left:25px"></span>用户进入首页，点击个人中心，点击修改密码条目，进入修改密码页面，选择密码修改或者短信验证码修改，进入修改页面，输入正确的信息修改密码。
+<br><br>
+<span style="margin-left:25px"></span>前置条件
+<br><br>
+<span style="margin-left:25px"></span>用户已登录
+<br><br>
+<span style="margin-left:25px"></span>后置
+<br><br>
+<span style="margin-left:25px"></span>修改成功，进入登录页重新登录
+<br><br>
+<span style="margin-left:25px"></span>3.5物业服务APP的非功能性需求
+<br><br>
+<span style="margin-left:25px"></span>首先，APP的页面美观友好，操作方便。
+<br><br>
+<span style="margin-left:25px"></span>作为一款给小区住户使用的手机APP，用户直接操作的就是各个页面。页面的美观性和功能逻辑的合理性能带给用户更好的体验，同时也能获得更多用户的青睐。其次，APP的反应速度快，优化合理。
+<br><br>
+<span style="margin-left:25px"></span>在数据或者页面加载时能够通过一些缓存机制或者其他优化手段，并结合合理的设计使得页面操作流畅，数据加载速度快。再次，APP的安全性高。
+<br><br>
+<span style="margin-left:25px"></span>由于涉及到缴费，还有小区住户的个人信息等，在设计时要考虑网络安全问题，通过一些加密算法或者其他手段保障用户数据的安全性。最后，良好的可维护性。
+<br><br>
+<span style="margin-left:25px"></span>APP的设计应当考虑到，当发展到一定阶段，APP需要提供更丰富的功能来满足用户的需求。当APP出现问题时，维护方便。物业服务APP详细设计
+<br><br>
+<span style="margin-left:25px"></span>4.1系统总体架构
+<br><br>
+<span style="margin-left:25px"></span>系统的总体架构图如下：
+<br><br>
+<span style="margin-left:25px"></span>图4-1 APP的系统架构图
+<br><br>
+<span style="margin-left:25px"></span>上图是从整个软件系统来考虑，不仅仅局限于APP的设计。
+<br><br>
+<span style="margin-left:25px"></span>从整体上来看，整个系统共分为4层，分别是数据层、服务层、控制层和访问层。我们开发的APP属于访问层。小区用户通过APP注册成为客户端用户，并通过接口与Web服务器进行交互，实现缴费、投诉、发表邻友圈动态、报修、反馈意见，接收消息等等功能。而物业公司管理人员通过浏览器注册登录系统，成为系统管理员。登录之后可以实现缴费管理、会员管理、投诉管理、报修管理、消息管理等等功能。而所有的交互数据都是由WEB服务器处理后反馈给APP用户和系统管理员的。Web服务器所需要的数据存储在数据库中，web服务器通过增删改查等等操作，与数据库进行交互。4.2APP功能模块设计
+<br><br>
+<span style="margin-left:25px"></span>4.2.1用户模块设计
+<br><br>
+<span style="margin-left:25px"></span>APP的用户模块主要有用户的登录和注册，投诉，报修，查看社区通知动态，办理交房验房手续等等功能。
+<br><br>
+<span style="margin-left:25px"></span>上述功能只有登录用户才可以使用。APP用户的唯一标识是手机号，在APP中只有通过手机号注册才可登录，只有登录成功之后才可以进行投诉、报修、验收房等等操作。1.
+<br><br>
+<span style="margin-left:25px"></span>APP用户注册的时序图如下图所示：图4-1 APP用户注册时序图
+<br><br>
+<span style="margin-left:25px"></span>用户注册的时序图中我们可以看出，用户点击进入 APP首页之后才有注册页面的入口，进入注册页面之后，
+<br><br>
+<span style="margin-left:25px"></span>首先需要填入手机号、密码、确认密码、验证码等信息，填入之后通过 API接口提交给后台服务器进行验证，服务器验证通过，则会将此用户信息加密后存储到数据库表中，并返回给 APP注册成功的信息。同样，用户的登录过程的时序图是相同的，这里不再重复阐述。用户报修时序图如下图所示：
+<br><br>
+<span style="margin-left:25px"></span>图4-2 APP用户报修时序图
+<br><br>
+<span style="margin-left:25px"></span>从时序图中我们可以知道，用户进入首页后， APP会先验证当前登录信息是否有效，如果当前登录信息无效（可能是超过15天未登录导致过期，
+<br><br>
+<span style="margin-left:25px"></span>或者未登录），则会先调取登录流程进行登录。登录成功之后，点击报修进入报修页面，并填入报修相关信息，访问接口将数据提交给服务器验证，验证通过则存储到数据库表中，并返回报修成功的信息。用户投诉的时序图和报修的时序图几乎是一样的，这里不再重复阐述。用户缴费时序图如下所示：
+<br><br>
+<span style="margin-left:25px"></span>图4-3APP用户缴费时序图
+<br><br>
+<span style="margin-left:25px"></span>从时序图中我们可以知道，用户在缴费之前需要先选择缴费的类型和缴费地址，这是因为考虑到用户可能有多套房子，拥有多个缴费地址的情况。
+<br><br>
+<span style="margin-left:25px"></span>如果没有缴费地址，可以在缴费地址页面添加缴费地址之后进行缴费。缴费的类型有物业费、水费、电费、燃气费、宽带费等等。缴费是通过调用支付宝支付的接口，当缴费成功之后，会提交数据到服务端，并存储到数据库中。4.2.2邻里圈模块设计
+<br><br>
+<span style="margin-left:25px"></span>邻里圈模块主要是一个社区动态功能，用户在登录之后可以发表心情动态，发表心情时可以输入文字，图片，表情等等内容。
+<br><br>
+<span style="margin-left:25px"></span>用户在邻里圈可以发表动态和浏览动态，随时随地掌握周边发生的生活趣闻，也可以将自己的生活点滴与小区的其他住户分享。用户浏览邻里圈的时序图如下图所示：图4-4用户浏览邻里圈时序图
+<br><br>
+<span style="margin-left:25px"></span>从时序图可以了解到，邻里圈属于 APP中的一个主要模块，用户在点击邻里圈之后，需要调用 API获取当前的邻里圈数据，
+<br><br>
+<span style="margin-left:25px"></span>在调取的同时需要给服务端发送当前用户的验证信息，服务端获取这个信息之后经过处理，从数据库中加载到可用的邻里圈动态列表数据，并通过接口返回给 APP，经过解析显示到 Activity界面上。同样，用户发表邻里圈的时序图如下图所示：
+<br><br>
+<span style="margin-left:25px"></span>图4-5用户发表邻里圈时序图
+<br><br>
+<span style="margin-left:25px"></span>从上图可以看出，登录用户发表邻里圈时，需要先填写要发表的内容，这些心情动态数据可以是图片，文字和表情等等。
+<br><br>
+<span style="margin-left:25px"></span>如果有图片，需要先调用一个接口将图片上传到服务器，当上传成功时，在上传文字等信息。服务器处理后存储到数据库中。4.2.3个人中心模块设计
+<br><br>
+<span style="margin-left:25px"></span>个人中心是APP的第三个主要模块，在APP的首页底栏点击个人中心即可进入个人中心页面。
+<br><br>
+<span style="margin-left:25px"></span>在个人中心中，如果当前用户已登录并且登录验证没有过期，则会现实当前用户的手机号和头像等信息。如果未登录，则会显示登录注册的按钮，用户点击可以进行登录或者注册为新的用户。登录之后可以查看缴费记录，完善用户资料，反馈意见，修改手机号，修改密码，清除缓存，以及退出当前账号等操作。APP用户查看缴费记录
+<br><br>
+<span style="margin-left:25px"></span>用户缴费之后，可以在个人中心模块查看缴费记录，缴费记录会按照缴费时间降序排序，每一个缴费记录都会有缴费金额，
+<br><br>
+<span style="margin-left:25px"></span>缴费类型，缴费时间，缴费地址，缴费状态等信息，点击条目可以查看详情。用户查看缴费记录的时序图如下所示：图4-6用户查看缴费记录时序图
+<br><br>
+<span style="margin-left:25px"></span>从上图可以看出，查看缴费记录是比较敏感的操作，APP会先进行登录信息验证，如果验证通过，才会将用户的最近缴费情况的数据通过API调用返回给用户查看。
+<br><br>
+<span style="margin-left:25px"></span>APP用户修改登录信息
+<br><br>
+<span style="margin-left:25px"></span>用户修改登录信息分为修改手机号和修改密码，修改手机号需要验证新手机号的验证码，修改密码可以通过旧密码修改或者短信验证码修改。
+<br><br>
+<span style="margin-left:25px"></span>时序图如下所示：图4-7用户修改手机号时序图
+<br><br>
+<span style="margin-left:25px"></span>从上图可以看出，用户修改手机号需要第三方平台的短信验证码，用户首先调用接口获取短信验证码，
+<br><br>
+<span style="margin-left:25px"></span>手机收到短信验证码之后，输入短信验证码和新的密码，并将数据通过接口提交到服务器，服务器验证没有问题后，更新数据库中的记录，并返回提示信息。个人中心的其他功能的时序图均和用户查看缴费记录的时序图是相同的，这里不再重复阐述。
+<br><br>
+<span style="margin-left:25px"></span>基于手机的物业服务APP的实现
+<br><br>
+<span style="margin-left:25px"></span>5.1开发平台介绍
+<br><br>
+<span style="margin-left:25px"></span>本文的物业服务APP是基于安卓的一款APP，在开发的过程中主要使用了Android Studio2.2作为开发工具。
+<br><br>
+<span style="margin-left:25px"></span>早在2013年，以Eclipse为开发工具，集成ADT插件和Android SDK的开发形式就逐渐被淘汰，这是由于Android Studio的推出。它是一款更为强大的，专门提供给安卓开发使用的开发工具。Android Studio的代码编辑器是基于IntelliJ IDEA的，并集成了gradle工具，使得项目的集成更方便。与Eclipse ADT相比，Android Studio无论从编译器的编译速度，对性能的损耗，代码编辑的方便性还是项目集成的方便性上面都有了质的飞跃。在开发过程中，主要使用了Android6.0SDK进行开发，这个版本是去年推出的，市场上新机型的自带系统版本大部分都是6.0。
+<br><br>
+<span style="margin-left:25px"></span>Android6.0可以保障一定的稳定性，同时也提供了大量的新特性供开发者调用。项目开发中调用接口，主要使用OKHttp框架作为接口请求的框架，并使用一些设计模式进行了封装。
+<br><br>
+<span style="margin-left:25px"></span> JSON数据解析主要使用了 Gson框架， Gson框架是 Google推出的一款非常方便的 JSON数据解析框架，能够很方便的将 JSON字符串或者 JSON数组解析成为 Java对象，反过来，也能很方便的将一个 Java对象解析成 JSON字符串。项目开发的主要思想是面向对象的软件设计思想（OOP），在开发过程中使用了控制反转（IOC）技术，同时在设计的过程中也用到了一些基于OOP的设计模式。
+<br><br>
+<span style="margin-left:25px"></span>5.2APP的架构设计
+<br><br>
+<span style="margin-left:25px"></span>5.2.1基于IOC实现依赖注入
+<br><br>
+<span style="margin-left:25px"></span>为什么要使用IOC技术
+<br><br>
+<span style="margin-left:25px"></span>IOC是控制反转的英文缩写，IOC的核心思想是能够实现代码的解耦，同时使用IOC也能提高代码的可读性和可扩展性。
+<br><br>
+<span style="margin-left:25px"></span>在Android开发中，页面的实现过程一般是通过在资源文件夹中定义一个xml格式的资源文件，并在xml中定义这个页面的各个视图组件以及这些组件的关系还有各种属性等等。在页面生成过程中，xml中定义的每一个组件都会被解析成一个视图对象（View类的子类对象），这些对象可以绑定给Activity的布局，并实现相应的业务逻辑。对于Activity组件来说，页面中的每个控件对象都是一个依赖对象，传统的方式是通过Activity调用自身的findViewById方法将这些获取到。
+<br><br>
+<span style="margin-left:25px"></span>而给这些控件绑定各种事件监听也需要Activity自身来完成。这样就造成了大量的冗余代码，并且使代码的可阅读性大大降低。上文中提到，IOC的思想就是将一个组件获取其依赖对象的实现过程反转，通过一个第三方组件完成，从而大大降低了程序的耦合性。
+<br><br>
+<span style="margin-left:25px"></span>在本文中，我们就通过编写一个IOC的容器，来实现所有页面视图控件的绑定，页面内容视图的绑定以及事件监听的绑定。基于IOC的依赖注入具体实现
+<br><br>
+<span style="margin-left:25px"></span>首先包结构和主要的类如下图所示：
+<br><br>
+<span style="margin-left:25px"></span>图5-1 IOC系统主要类设计
+<br><br>
+<span style="margin-left:25px"></span>为了更方便的了解这些注解和类的关系，其类图如下图所示：
+<br><br>
+<span style="margin-left:25px"></span>图5-2 IOC依赖注入类图
+<br><br>
+<span style="margin-left:25px"></span>从上图中我们可以知道，在设计中主要有四个包和3个核心类。
+<br><br>
+<span style="margin-left:25px"></span>这三个和核心类分别是BaseAnnoInjectActivity、AnnoInjectUtils和MyEventInvocationHandler，下面分别介绍这三个类的作用：BaseAnnoInjectActivity，所有页面的父类，在页面创建的OnCreate函数通过调用AnnoInjectUtils中的函数，实现页面布局和事件监听以及控件对象的注入。
+<br><br>
+<span style="margin-left:25px"></span>AnnoInjectUtils，IOC的核心，这个类首先反射获取具体页面Activity对象的各个控件属性和方法，并获取其中注解的值，并根据获取到的值，通过反射机制将具体的依赖对象赋值给当前引用。
+<br><br>
+<span style="margin-left:25px"></span>MyEventInvocationHandler，通过Java动态代理机制实现的一个类，这个类继承自Java的InvocationHandler类，并实现其invoke方法。
+<br><br>
+<span style="margin-left:25px"></span>其作用是能够动态代理控件的点击事件，长按事件，触摸事件等等常用事件的监听。通过IOC框架实现的效果如下：
+<br><br>
+<span style="margin-left:25px"></span>图5-3 IOC实现控件以及页面布局的绑定
+<br><br>
+<span style="margin-left:25px"></span>从上图我们可以看出，使用 IOC架构设计，在一个 Activity类上方使用我们定义的注解 ContentView，
+<br><br>
+<span style="margin-left:25px"></span>并将资源文件 Id传入，便可实现页面布局文件的注入，同理，我们使用 ViewId注解，并传入控件 Id，便可给页面需要的控件制动绑定控件对象。使用上面非常的方便，在节省了大量代码的同时，也让代码更加整洁美观。图5-4 IOC架构实现事件的动态绑定
+<br><br>
+<span style="margin-left:25px"></span>从上图我们可以看出，我们可以在 Activity中定义一个方法，并通过 OnClick注解来实现点击事件的动态绑定，同理，
+<br><br>
+<span style="margin-left:25px"></span>在图5-1中出现的其他事件类，如 OnLongClick， OnTouch等等事件均可用同样的方式实现事件的动态绑定。5.2.2Http请求的架构设计
+<br><br>
+<span style="margin-left:25px"></span>上文介绍，APP采用OkHttp框架来实现客户端与服务端的数据交互。
+<br><br>
+<span style="margin-left:25px"></span>由于所有的页面几乎都需要调取接口，所以我们对Http请求做了架构上的设计，使APP的网络请求更方便快捷。其类图如下图所示：图5-5 Http请求的架构设计类图
+<br><br>
+<span style="margin-left:25px"></span>从上图可以知道，MyOkHttpClient类使用了单例模式，提供OkHttpClient的单例对象给HttpRequest类。
+<br><br>
+<span style="margin-left:25px"></span>HttpRequest类封装了6个方法实现互联网请求，并通过反射HttpParam对象来获取请求参数。而所有页面的父类BaseActivity中获取了HttpRequest类的实例，从而保证所有的页面都可以直接调用HttpRequest的6和方法之一请求接口。请求的参数只需要新建一个类继承自HttpParam类即可。响应的数据只需要创建一个类继承自ResultCallback，并指定接口将会返回的数据类型，框架会自动解析为相应的相应数据。5.3APP的页面功能实现
+<br><br>
+<span style="margin-left:25px"></span>5.3.1首页各页面的实现
+<br><br>
+<span style="margin-left:25px"></span>APP首页
+<br><br>
+<span style="margin-left:25px"></span>APP首页上部分为轮播图，首页有缴费的入口和小区动态、报修、交房验房、投诉等功能的入口。
+<br><br>
+<span style="margin-left:25px"></span>APP首页下面有热门邻里圈列表，用户可以浏览访问量最大的邻里圈动态。图5-6 APP首页
+<br><br>
+<span style="margin-left:25px"></span>小区动态页面
+<br><br>
+<span style="margin-left:25px"></span>小区动态页面可以浏览物业和居委会发布的各种消息，并可以点击阅读全文查看全文信息。
+<br><br>
+<span style="margin-left:25px"></span>图5-7 小区动态页面
+<br><br>
+<span style="margin-left:25px"></span>用户投诉页面
+<br><br>
+<span style="margin-left:25px"></span>用户投诉页面可以上传图片，输入投诉的内容，并提交进行投诉。
+<br><br>
+<span style="margin-left:25px"></span>图5-8用户投诉上传图片
+<br><br>
+<span style="margin-left:25px"></span>图5-9用户投诉
+<br><br>
+<span style="margin-left:25px"></span>用户报修
+<br><br>
+<span style="margin-left:25px"></span>用户报修前需要登录，报修可进入APP相册选取图片，并可输入文字说明。
+<br><br>
+<span style="margin-left:25px"></span>图5-10用户报修选取图片
+<br><br>
+<span style="margin-left:25px"></span>图5-11用户报修页面
+<br><br>
+<span style="margin-left:25px"></span>交房验房的页面如下图所示：
+<br><br>
+<span style="margin-left:25px"></span>图5-12 交房验房
+<br><br>
+<span style="margin-left:25px"></span>用户缴费
+<br><br>
+<span style="margin-left:25px"></span>用户在登录成功后，APP首页点击缴费的类型可以进行缴费，缴费调用支付宝支付接口，相应的界面如下：
+<br><br>
+<span style="margin-left:25px"></span>图5-13获取缴费列表
+<br><br>
+<span style="margin-left:25px"></span>图5-14 缴费
+<br><br>
+<span style="margin-left:25px"></span>5.3.2邻里圈各页面的实现
+<br><br>
+<span style="margin-left:25px"></span>邻里圈首页
+<br><br>
+<span style="margin-left:25px"></span>邻里圈可以浏览周边动态，点击右上角的添加按钮可以发表动态，其页面效果如图5-15所示：
+<br><br>
+<span style="margin-left:25px"></span>图5-15 邻里圈
+<br><br>
+<span style="margin-left:25px"></span>发表邻里圈
+<br><br>
+<span style="margin-left:25px"></span>发表邻里圈和投诉的操作类似，相应的页面效果如图5-16所示：
+<br><br>
+<span style="margin-left:25px"></span>图5-16发表邻里圈
+<br><br>
+<span style="margin-left:25px"></span>5.3.3个人中心各页面的实现
+<br><br>
+<span style="margin-left:25px"></span>个人中心首页
+<br><br>
+<span style="margin-left:25px"></span>当用户未登录时，个人中心有按钮提示用户登录，当前用户显示您好，游客，相应的效果如图5-17所示：
+<br><br>
+<span style="margin-left:25px"></span>图5-17未登录状态下的个人中心
+<br><br>
+<span style="margin-left:25px"></span>当用户已经登录，则提示登录的文字消失，当前登录用户的头像右边显示登录用户的手机号，如图5-18所示：
+<br><br>
+<span style="margin-left:25px"></span>图5-18登录状态下的个人中心
+<br><br>
+<span style="margin-left:25px"></span>当用户向上滑动页面时，个人中心头部标题栏变为白色，相应的页面如图5-19所示：
+<br><br>
+<span style="margin-left:25px"></span>图5-19个人中心滑动显示效果
+<br><br>
+<span style="margin-left:25px"></span>用户注册
+<br><br>
+<span style="margin-left:25px"></span>用户可以通过手机号注册为新用户，相应的页面如图5-20所示：
+<br><br>
+<span style="margin-left:25px"></span>图5-20APP用户注册
+<br><br>
+<span style="margin-left:25px"></span>用户登录
+<br><br>
+<span style="margin-left:25px"></span>个人中心所有的操作只有在用户登录的情况下才可以使用，相应的页面如下图所示：
+<br><br>
+<span style="margin-left:25px"></span>图5-21APP用户登录
+<br><br>
+<span style="margin-left:25px"></span>个人中心查看缴费记录
+<br><br>
+<span style="margin-left:25px"></span>登录用户可以在个人中心查看最近几个月的缴费记录，缴费记录可以查看日期，缴费金额，缴费类型，缴费状态等等，相应的页面如图5-22所示：
+<br><br>
+<span style="margin-left:25px"></span>图5-22缴费记录页面
+<br><br>
+<span style="margin-left:25px"></span>APP用户完善资料
+<br><br>
+<span style="margin-left:25px"></span>APP用户只有在完善资料的前提下，才可以进行缴费，交房验房等操作。
+<br><br>
+<span style="margin-left:25px"></span>用户完善资料需要填入真实姓名、身份证号、性别、出生年月、家庭人口数、婚姻状况、工作单位、职业、联系方式、小区名称、楼栋、单元和房号等信息，点击右上角的完成按钮会提交数据到服务器。相应的页面如图5-23所示：图5-23APP用户完善资料
+<br><br>
+<span style="margin-left:25px"></span>用户意见反馈，相应的页面如图5-24所示：
+<br><br>
+<span style="margin-left:25px"></span>图5-24APP用户意见反馈
+<br><br>
+<span style="margin-left:25px"></span>6结束语
+<br><br>
+<span style="margin-left:25px"></span>本文通过分析国内物业管理行业的现状，由此找到了目前我国大部分小区物业服务的缺陷和不足。
+<br><br>
+<span style="margin-left:25px"></span>经过细致的研究，从多个方面探讨，最终确定了APP的需求。在需求分析的基础上，利用UML建模工具进行细致的分析，确定了整个APP用户各个功能模块的时序图和流程，并设计出APP的页面原型。在得到APP详细设计之后，本文分析并实现了APP的架构设计。 APP的架构设计整体上采用了控制反转（ Inversion Of Control）的思想，实现了 APP页面内容视图、各个页面控件对象的依赖注入，架构中使用到了很多 Java反射和注解的知识。通过Java的动态代理机制，实现了页面内各个控件的监听事件代理。架构设计的第二个重点是对 OKHttp框架的封装，在设计的过程中主要使用面向对象（ OOP）的思想和单例模式等设计模式，设置了一些接口和超类，并利用反射实现了万能的 Http请求类，大大简化了 APP请求网络的代码。最后通过对各个页面的分析和实现，快捷地完成了各个页面的功能。整体上来看，本APP有以下一些优点：
+<br><br>
+<span style="margin-left:25px"></span>界面设计合理，简洁，方便用户的操作。
+<br><br>
+<span style="margin-left:25px"></span>本APP通过使用加密算法对数据进行加密操作，大大提高了APP用户的数据安全性。
+<br><br>
+<span style="margin-left:25px"></span>本APP通过支付宝缴费，缴费安全系数高，并且各项支出都有详细的清单，用户一目了然。
+<br><br>
+<span style="margin-left:25px"></span>本APP通过小区动态和邻里圈模块的设计，在物业公司和住户，小区住户之间搭建了信息互通的渠道，提升了APP的趣味性和交互性。
+<br><br>
+<span style="margin-left:25px"></span>与此同时，由于开发周期不长，开发模块较多等问题，本APP还存在运行不够流畅，数据比较单一等等问题，希望在日后的开发中能够逐步完善。
+<br><br>
+<span style="margin-left:25px"></span>参考文献
+<br><br>
+<span style="margin-left:25px"></span>[1] 李宁.Android开发完全讲义（第三版）.北京：
+<br><br>
+<span style="margin-left:25px"></span>水利水电出版社，2015 30-325[2] 郭霖.第一行代码 Android 第2版.北京：
+<br><br>
+<span style="margin-left:25px"></span>人民邮电出版社，2016 50-221[3] 毕小朋.精通Android Studio.北京：
+<br><br>
+<span style="margin-left:25px"></span>清华大学出版社，2016 15-125[4] (美)迈耶.Android4高级编程第3版.北京：
+<br><br>
+<span style="margin-left:25px"></span>清华清华大学出版社，2013 110-340[5] Bill Phillips.Android编程权威指南(第2版).北京：
+<br><br>
+<span style="margin-left:25px"></span>人民邮电出版社，2017 70-210[6] 罗升阳.Android系统源代码情景分析修订版.北京：
+<br><br>
+<span style="margin-left:25px"></span>电子工业出版社，2017 15-100[7] 何红辉 关爱民.Android源码设计模式解析与实战.北京：
+<br><br>
+<span style="margin-left:25px"></span>人民邮电出版社，2017 50-110[8] 张元亮.深入理解Android系统.北京：
+<br><br>
+<span style="margin-left:25px"></span>清华清华大学出版社，2015 10-120[9] 赵久建.中国物业管理行业发展现状与对策研究--以F物业管理公司为例.北京交通大学，2011
+<br><br>
+<span style="margin-left:25px"></span>[10] 张竹婷.基于互联网+的住宅小区物业管理模式研究与创新.浙江工业大学，2015
+<br><br>
+<span style="margin-left:25px"></span>[11] 张农科.关于我国物业管理模式的反思与再造.北京市住房和城乡建设委员会，2012
+<br><br>
+<span style="margin-left:25px"></span>[12] 谷晓宁.A物业管理企业物业服务创新研究.吉林大学，2014
+<br><br>
+<span style="margin-left:25px"></span>[13] 张焱.互联网+背景下物业管理模式研究与创新.城市建设理论研究，2016
+<br><br>
+<span style="margin-left:25px"></span>
+
+<br>
+<div style="margin-left:8px">
+
+<div style="text-align:center;background-color:#CA122C;margin-top:30px;overflow:hidden;">
+<a href="http://www.paperpass.com/publish/index?from=ppreport_banner" target="_blank" style="display:block;"><img height="180" src="http://file.paperpass.com/images/fabiao.jpg"></a>
+</div>
+
+</div>
+</div>
+
+
+<div class="zhengwencenter">
+<p>
+检测报告由<a href="http://www.paperpass.com/" target="_blank">PaperPass</a>文献相似度检测系统生成
+</p>
+<p>
+Copyright © 2007-2017 PaperPass
+</p>
+</div>
+<div style="margin-bottom:400px"></div>
+</body>
+</html>

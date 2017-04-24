@@ -1,0 +1,856 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>PaperPass 最权威论文抄袭检测系统</title>
+<style type="text/css">
+<!--
+user_icon {
+color: #FFFFFF;
+}
+html
+{
+overflow-x:hidden;
+overflow-y:auto;
+}
+body,td,th {
+font-family: "微软雅黑";
+font-size: 12px;
+}
+h1,h2,h3,h4,h5,h6 {
+font-family: "宋体";
+}
+p{
+margin-bottom:10px;
+}
+demo_padding {
+line-height: 30px;
+}
+.zhengwen {
+padding-right: 15px;
+padding-left: 5px;
+padding-bottom:100px;
+font-size: 13px;
+line-height: 20px;
+color: #666666;
+}
+.zhengwencenter {
+padding-right: 15px;
+padding-left: 0px;
+margin-bottom:10px;
+font-size: 13px;
+line-height: 20px;
+color: #666666;
+text-align:center
+}
+.neikuang {
+background-color: #EBEBEB;
+border: 1px solid #999999;
+padding-right: 10px;
+padding-left: 10px;
+margin-top:10px;
+margin-left:25px;
+width:300px;
+}
+.shubu{
+height: 20px;
+width: 20px;
+margin-left:25px;
+background-color: #FFFFFF;
+border: 1px solid #999999;
+text-align: center;
+vertical-align: middle;
+display: block;
+color: #666666;
+}
+a.red:link {color:#FF0000}
+a.red:visited {color:#FF0000}
+a.red:hover {color:#000000}
+a.red:active {color:#000000}
+
+a.orange:link {color:#FF6600}
+a.orange:visited {color:#FF6600}
+a.orange:hover {color:#000000}
+a.orange:active {color:#000000}
+
+a.dark:link {color:#666666}
+a.dark:visited {color:#666666}
+a.dark:hover {color:#000000}
+a.dark:active {color:#000000}
+
+a.pagelink:hover {color:#000000}
+a.pagelink:active {color:#000000}
+
+.green{color:#008000}
+.gray{color:#666666}
+.red{color:#FF0000}
+.orange{color:#FF6600}
+a{TEXT-DECORATION:none}
+
+-->
+</style>
+</head>
+<body>
+
+
+<div class="zhengwen">
+<div>
+<span style="margin-left:25px"></span>
+[
+<a class="pagelink" href="paper_1.htm">首页</a>
+<a class="pagelink" href="paper_5.htm">上一页</a>
+<a class="pagelink" href="paper_7.htm">下一页</a>
+<a class="pagelink" href="paper_7.htm">尾页</a>
+页码：6/7页
+]
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">317</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>图4-1 APP用户注册时序图</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">318</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><a href='../sentence_detail/496/496.htm' target='right' class='orange' >用户注册的时序图中我们可以看出，用户点击进入 APP首页之后才有注册页面的入口，进入注册页面之后，</a><a href='../sentence_detail/497/497.htm' target='right' class='orange' >首先需要填入手机号、密码、确认密码、验证码等信息，填入之后通过 API接口提交给后台服务器进行验证，</a><a href='../sentence_detail/498/498.htm' target='right' class='orange' >服务器验证通过，则会将此用户信息加密后存储到数据库表中，并返回给 APP注册成功的信息。</a><a href='../sentence_detail/499/499.htm' target='right' class='orange' >同样，用户的登录过程的时序图是相同的，这里不再重复阐述。</a>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">319</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>用户报修时序图如下图所示：</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">320</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>图4-2 APP用户报修时序图</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">321</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>从时序图中我们可以知道，用户进入首页后， APP会先验证当前登录信息是否有效，如果当前登录信息无效（可能是超过15天未登录导致过期，</span><span class='green'>或者未登录），则会先调取登录流程进行登录。</span><span class='green'>登录成功之后，点击报修进入报修页面，并填入报修相关信息，访问接口将数据提交给服务器验证，</span><span class='green'>验证通过则存储到数据库表中，并返回报修成功的信息。</span><span class='green'>用户投诉的时序图和报修的时序图几乎是一样的，这里不再重复阐述。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">322</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>用户缴费时序图如下所示：</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">323</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>图4-3APP用户缴费时序图</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">324</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>从时序图中我们可以知道，用户在缴费之前需要先选择缴费的类型和缴费地址，这是因为考虑到用户可能有多套房子，拥有多个缴费地址的情况。</span><span class='green'>如果没有缴费地址，可以在缴费地址页面添加缴费地址之后进行缴费。</span><a href='../sentence_detail/511/511.htm' target='right' class='orange' >缴费的类型有物业费、水费、电费、燃气费、宽带费等等。</a><span class='green'>缴费是通过调用支付宝支付的接口，当缴费成功之后，会提交数据到服务端，并存储到数据库中。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">325</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>4.2.2邻里圈模块设计</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">326</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>邻里圈模块主要是一个社区动态功能，用户在登录之后可以发表心情动态，发表心情时可以输入文字，图片，表情等等内容。</span><span class='green'>用户在邻里圈可以发表动态和浏览动态，随时随地掌握周边发生的生活趣闻，也可以将自己的生活点滴与小区的其他住户分享。</span><a href='../sentence_detail/516/516.htm' target='right' class='orange' >用户浏览邻里圈的时序图如下图所示：</a>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">327</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>图4-4用户浏览邻里圈时序图</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">328</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>从时序图可以了解到，邻里圈属于 APP中的一个主要模块，用户在点击邻里圈之后，需要调用 API获取当前的邻里圈数据，</span><span class='green'>在调取的同时需要给服务端发送当前用户的验证信息，服务端获取这个信息之后经过处理，从数据库中加载到可用的邻里圈动态列表数据，</span><span class='green'>并通过接口返回给 APP，经过解析显示到 Activity界面上。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">329</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><a href='../sentence_detail/521/521.htm' target='right' class='orange' >同样，用户发表邻里圈的时序图如下图所示：</a>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">330</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>图4-5用户发表邻里圈时序图</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">331</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>从上图可以看出，登录用户发表邻里圈时，需要先填写要发表的内容，这些心情动态数据可以是图片，文字和表情等等。</span><a href='../sentence_detail/524/524.htm' target='right' class='orange' >如果有图片，需要先调用一个接口将图片上传到服务器，当上传成功时，在上传文字等信息。</a><a href='../sentence_detail/525/525.htm' target='right' class='orange' >服务器处理后存储到数据库中。</a>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">332</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>4.2.3个人中心模块设计</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">333</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>个人中心是APP的第三个主要模块，在APP的首页底栏点击个人中心即可进入个人中心页面。</span><span class='green'>在个人中心中，如果当前用户已登录并且登录验证没有过期，则会现实当前用户的手机号和头像等信息。</span><a href='../sentence_detail/529/529.htm' target='right' class='orange' >如果未登录，则会显示登录注册的按钮，用户点击可以进行登录或者注册为新的用户。</a><span class='green'>登录之后可以查看缴费记录，完善用户资料，反馈意见，修改手机号，修改密码，清除缓存，以及退出当前账号等操作。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">334</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>APP用户查看缴费记录</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">335</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>用户缴费之后，可以在个人中心模块查看缴费记录，缴费记录会按照缴费时间降序排序，每一个缴费记录都会有缴费金额，</span><a href='../sentence_detail/533/533.htm' target='right' class='orange' >缴费类型，缴费时间，缴费地址，缴费状态等信息，点击条目可以查看详情。</a><span class='green'>用户查看缴费记录的时序图如下所示：</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">336</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>图4-6用户查看缴费记录时序图</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">337</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>从上图可以看出，查看缴费记录是比较敏感的操作，APP会先进行登录信息验证，如果验证通过，才会将用户的最近缴费情况的数据通过API调用返回给用户查看。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">338</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>APP用户修改登录信息</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">339</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>用户修改登录信息分为修改手机号和修改密码，修改手机号需要验证新手机号的验证码，修改密码可以通过旧密码修改或者短信验证码修改。</span><span class='green'>时序图如下所示：</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">340</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><a href='../sentence_detail/540/540.htm' target='right' class='orange' >图4-7用户修改手机号时序图</a>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">341</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>从上图可以看出，用户修改手机号需要第三方平台的短信验证码，用户首先调用接口获取短信验证码，</span><a href='../sentence_detail/542/542.htm' target='right' class='orange' >手机收到短信验证码之后，输入短信验证码和新的密码，并将数据通过接口提交到服务器，</a><a href='../sentence_detail/543/543.htm' target='right' class='orange' >服务器验证没有问题后，更新数据库中的记录，并返回提示信息。</a>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">342</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>个人中心的其他功能的时序图均和用户查看缴费记录的时序图是相同的，这里不再重复阐述。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">343</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>基于手机的物业服务APP的实现</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">344</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>5.1开发平台介绍</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">345</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>本文的物业服务APP是基于安卓的一款APP，在开发的过程中主要使用了Android Studio2.2作为开发工具。</span><span class='green'>早在2013年，以Eclipse为开发工具，集成ADT插件和Android SDK的开发形式就逐渐被淘汰，这是由于Android Studio的推出。</span><span class='green'>它是一款更为强大的，专门提供给安卓开发使用的开发工具。</span><span class='green'>Android Studio的代码编辑器是基于IntelliJ IDEA的，并集成了gradle工具，使得项目的集成更方便。</span><span class='green'>与Eclipse ADT相比，Android Studio无论从编译器的编译速度，对性能的损耗，代码编辑的方便性还是项目集成的方便性上面都有了质的飞跃。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">346</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>在开发过程中，主要使用了Android6.0SDK进行开发，这个版本是去年推出的，市场上新机型的自带系统版本大部分都是6.0。</span><span class='green'>Android6.0可以保障一定的稳定性，同时也提供了大量的新特性供开发者调用。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">347</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>项目开发中调用接口，主要使用OKHttp框架作为接口请求的框架，并使用一些设计模式进行了封装。</span><span class='green'>JSON数据解析主要使用了 Gson框架， Gson框架是 Google推出的一款非常方便的 JSON数据解析框架，能够很方便的将 JSON字符串或者 JSON数组解析成为 Java对象，</span><a href='../sentence_detail/556/556.htm' target='right' class='orange' >反过来，也能很方便的将一个 Java对象解析成 JSON字符串。</a>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">348</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>项目开发的主要思想是面向对象的软件设计思想（OOP），在开发过程中使用了控制反转（IOC）技术，同时在设计的过程中也用到了一些基于OOP的设计模式。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">349</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>5.2APP的架构设计</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">350</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>5.2.1基于IOC实现依赖注入</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">351</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>为什么要使用IOC技术</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">352</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>IOC是控制反转的英文缩写，IOC的核心思想是能够实现代码的解耦，同时使用IOC也能提高代码的可读性和可扩展性。</span><span class='green'>在Android开发中，页面的实现过程一般是通过在资源文件夹中定义一个xml格式的资源文件，并在xml中定义这个页面的各个视图组件以及这些组件的关系还有各种属性等等。</span><span class='green'>在页面生成过程中，xml中定义的每一个组件都会被解析成一个视图对象（View类的子类对象），这些对象可以绑定给Activity的布局，并实现相应的业务逻辑。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">353</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>对于Activity组件来说，页面中的每个控件对象都是一个依赖对象，传统的方式是通过Activity调用自身的findViewById方法将这些获取到。</span><span class='green'>而给这些控件绑定各种事件监听也需要Activity自身来完成。</span><a href='../sentence_detail/566/566.htm' target='right' class='orange' >这样就造成了大量的冗余代码，并且使代码的可阅读性大大降低。</a>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">354</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>上文中提到，IOC的思想就是将一个组件获取其依赖对象的实现过程反转，通过一个第三方组件完成，从而大大降低了程序的耦合性。</span><span class='green'>在本文中，我们就通过编写一个IOC的容器，来实现所有页面视图控件的绑定，页面内容视图的绑定以及事件监听的绑定。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">355</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>基于IOC的依赖注入具体实现</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">356</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>首先包结构和主要的类如下图所示：</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">357</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>图5-1 IOC系统主要类设计</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">358</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><a href='../sentence_detail/572/572.htm' target='right' class='orange' >为了更方便的了解这些注解和类的关系，其类图如下图所示：</a>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">359</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>图5-2 IOC依赖注入类图</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">360</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>从上图中我们可以知道，在设计中主要有四个包和3个核心类。</span><span class='green'>这三个和核心类分别是BaseAnnoInjectActivity、AnnoInjectUtils和MyEventInvocationHandler，下面分别介绍这三个类的作用：</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">361</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>BaseAnnoInjectActivity，所有页面的父类，在页面创建的OnCreate函数通过调用AnnoInjectUtils中的函数，实现页面布局和事件监听以及控件对象的注入。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">362</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>AnnoInjectUtils，IOC的核心，这个类首先反射获取具体页面Activity对象的各个控件属性和方法，并获取其中注解的值，并根据获取到的值，通过反射机制将具体的依赖对象赋值给当前引用。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">363</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>MyEventInvocationHandler，通过Java动态代理机制实现的一个类，这个类继承自Java的InvocationHandler类，并实现其invoke方法。</span><a href='../sentence_detail/579/579.htm' target='right' class='orange' >其作用是能够动态代理控件的点击事件，长按事件，触摸事件等等常用事件的监听。</a>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">364</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>通过IOC框架实现的效果如下：</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">365</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>图5-3 IOC实现控件以及页面布局的绑定</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">366</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>从上图我们可以看出，使用 IOC架构设计，在一个 Activity类上方使用我们定义的注解 ContentView，</span><span class='green'>并将资源文件 Id传入，便可实现页面布局文件的注入，同理，我们使用 ViewId注解，</span><span class='green'>并传入控件 Id，便可给页面需要的控件制动绑定控件对象。</span><span class='green'>使用上面非常的方便，在节省了大量代码的同时，也让代码更加整洁美观。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">367</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>图5-4 IOC架构实现事件的动态绑定</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">368</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>从上图我们可以看出，我们可以在 Activity中定义一个方法，并通过 OnClick注解来实现点击事件的动态绑定，同理，</span><span class='green'>在图5-1中出现的其他事件类，如 OnLongClick， OnTouch等等事件均可用同样的方式实现事件的动态绑定。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">369</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>5.2.2Http请求的架构设计</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">370</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><a href='../sentence_detail/590/590.htm' target='right' class='orange' >上文介绍，APP采用OkHttp框架来实现客户端与服务端的数据交互。</a><span class='green'>由于所有的页面几乎都需要调取接口，所以我们对Http请求做了架构上的设计，使APP的网络请求更方便快捷。</span><span class='green'>其类图如下图所示：</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">371</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>图5-5 Http请求的架构设计类图</span>
+</p>
+</div>
+
+
+<div>
+<span style="margin-left:25px"></span>
+[
+<a class="pagelink" href="paper_1.htm">首页</a>
+<a class="pagelink" href="paper_5.htm">上一页</a>
+<a class="pagelink" href="paper_7.htm">下一页</a>
+<a class="pagelink" href="paper_7.htm">尾页</a>
+页码：6/7页
+]
+</div>
+
+<br>
+<div style="margin-left:8px">
+
+<div style="text-align:center;background-color:#CA122C;margin-top:30px;overflow:hidden;">
+<a href="http://www.paperpass.com/publish/index?from=ppreport_banner" target="_blank" style="display:block;"><img height="180" src="http://file.paperpass.com/images/fabiao.jpg"></a>
+</div>
+
+</div>
+</div>
+
+
+<div class="zhengwencenter">
+<p>
+检测报告由<a href="http://www.paperpass.com/" target="_blank">PaperPass</a>文献相似度检测系统生成
+</p>
+<p>
+Copyright © 2007-2017 PaperPass
+</p>
+</div>
+<div style="margin-bottom:400px"></div>
+</body>
+</html>
