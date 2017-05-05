@@ -1,0 +1,12 @@
+摘要：随着我国房地产行业的不断发展，人们对住宅的要求日益增高。人们已经不再满足于对于“数量型”的追求，而是更偏向于追求高质量的小区生活，
+更便利的功能和服务体验。物业服务作为一门学科，现在迫切的需要解决由传统的信息采集人工管理的方式，向智能化数据分析，自动化管理，人性化服务的方向发展的问题。
+
+   近些年来我国科学技术，尤其是互联网技术不断发展，互联网技术已经渗透到生活的方方面面。尤其是移动互联网技术的蓬勃发展，使得手机已经从原来的单纯的通讯工具，发展成为搭载独立的操作系统，能够安装各种应用，并极大地改变人们生活方式的设备。现在大部分的物业管理机制仍是传统的社区服务，尤其是在一些二线三线城市，物业管理的现状更是堪忧。人们迫切需要网络化信息传输，依托移动互联网蓬勃发展的大趋势，提高物业服务质量和效率。为了更好的整合资源，提高资源利用率，解决小区业主的痛点，我们要顺应时代发展的潮流，利用我们学习到的互联网相关的知识，在小区开发建设如火如荼的同时，开发基于手机的现代化的，集信息收集和处理，及时反馈，功能丰富的物业服务系统，已达到提高管理质量，改善人们的生活的目标。
+   
+    本篇论文将采用面向对象的软件设计思想，按照安卓手机APP的开发规范，系统分析手机物业服务系统的需求和业务逻辑，从而得出APP的详细设计。本APP系统主要面向安卓手机用户，APP的功能涵盖了物业信息采集、物业缴费、物业投诉、社区动态、交房装修等等方面的服务。论文主要完成安卓端APP的框架设计，页面的分析与设计，与后台服务端的数据调取和交互，性能的优化等等。论文采用IOC的设计思想，使用JSON作为接口数据交互格式，采用各种设计模式和第三方库等等设计与开发系统。后端采用Java的SSH框架编写，采用MYSQL数据库作为后台数据系统，实现了对小区用户的信息和小区设备信息进行及时搜集和处理，同时在手机上操作，大大方便了小区业主的生活。
+    本APP系统是将移动互联网与传统的物业缴费，管理模式结合在一起，在此基础上设计和实现的。为了使APP能够发挥出便携性、及时性、安全性的优势，我们以操作简便、界面友好为目标开发系统。
+
+    关键词： 物业服务property service  物业服务APP IOC 信息处理
+
+      With the incessant development of the Eeal Estate Industry in our nation,people have increasing desire of their house.And they turn their attention from the number to high-quality community life,more convenient functions and service experiences.As a subject,property service is going to solve the crying need that turning the development direction from the traditional information acquisition and labor management to Intelligent data analysis,automated management and people-oriented service.
+      Recent years,the science and technology especially the internet technology are continuously developing, and the internet technology has penetrated every aspect of social life.Especially, the rapid development of Mobile Internet Technology has made mobile phones develope to equipments that can install an OS into it and can also install a lot of apps and  greatly change the life-style of people, not just communication tools.
